@@ -1,4 +1,7 @@
-import { getPrivateTokenHeaders, getStorefrontApiUrl } from './shopify'
+import {
+	getPrivateTokenHeaders,
+	getStorefrontApiUrl,
+} from '../../shared/shopify'
 
 export const gqlShopify = async (query: string, variables?: {}) =>
 	await fetch(getStorefrontApiUrl(), {
