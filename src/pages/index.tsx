@@ -3,9 +3,14 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.scss'
 
+import { getStorefrontApiUrl, getPrivateTokenHeaders } from './api/shopify'
+import { gqlShopify } from './api/graphql'
+import { GET_SHOP_NAME } from '@/shared/queries'
+
 const inter = Inter({ subsets: ['latin'] })
 
-const Home = () => {
+const Home = ({ data }: any) => {
+	console.log(data)
 	return (
 		<>
 			<Head>
@@ -40,14 +45,7 @@ const Home = () => {
 				</div>
 
 				<div className={styles.center}>
-					<Image
-						className={styles.logo}
-						src='/next.svg'
-						alt='Next.js Logo'
-						width={180}
-						height={37}
-						priority
-					/>
+					<h1>{data?.shop?.name}</h1>
 				</div>
 
 				<div className={styles.grid}>
@@ -111,6 +109,12 @@ const Home = () => {
 			</main>
 		</>
 	)
+}
+
+export const getServerSideProps = async () => {
+	const data = await gqlShopify(GET_SHOP_NAME)
+
+	return { props: { data } }
 }
 
 export default Home
