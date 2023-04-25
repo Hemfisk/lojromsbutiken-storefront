@@ -1,7 +1,13 @@
 import React from 'react'
+import { Poppins } from 'next/font/google'
 
 import Navbar from './Navbar'
 import Footer from './Footer'
+
+const poppins = Poppins({
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+	subsets: ['latin'],
+})
 
 interface Props {
 	children: React.ReactNode
@@ -10,9 +16,9 @@ interface Props {
 const Layout = ({ children }: Props) => {
 	return (
 		<>
-			<Navbar />
-			<main>{children}</main>
-			<Footer />
+			<Navbar fontFamily={poppins} />
+			<main className={poppins.className}>{children}</main>
+			<Footer fontFamily={poppins} />
 		</>
 	)
 }

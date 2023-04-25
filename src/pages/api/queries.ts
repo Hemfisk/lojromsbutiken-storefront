@@ -5,3 +5,13 @@ export const GET_SHOP_NAME = `
     }
   }
 `
+
+export const GET_PAGE_CONTENT = `
+query getPageByHandle($handle: String!) {
+  page(handle: $handle) {
+    id
+    title
+    body
+  }
+}
+`

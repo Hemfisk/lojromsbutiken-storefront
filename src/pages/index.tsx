@@ -1,12 +1,9 @@
 import Head from 'next/head'
 // import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.scss'
 
 import { gqlShopify } from './api/graphql'
-import { GET_SHOP_NAME } from './api/queries'
-
-const inter = Inter({ subsets: ['latin'] })
+import { GET_PAGE_CONTENT } from './api/queries'
 
 const Home = ({ data }: any) => {
 	console.log(data)
@@ -18,7 +15,7 @@ const Home = ({ data }: any) => {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				{/* <link rel='icon' href='/favicon.ico' /> */}
 			</Head>
-			<main className={`${styles.main} ${inter.className}`}>
+			<main className={`${styles.main}`}>
 				<div className={styles.description}>
 					<p>
 						Get started by editing&nbsp;
@@ -26,9 +23,8 @@ const Home = ({ data }: any) => {
 					</p>
 				</div>
 
-				<div className={styles.center}>
-					<h1>{data?.shop?.name}</h1>
-				</div>
+				<h2>{data.page.title}</h2>
+				<p dangerouslySetInnerHTML={{ __html: data.page.body }}></p>
 
 				<div className={styles.grid}>
 					<a
@@ -94,7 +90,9 @@ const Home = ({ data }: any) => {
 }
 
 export const getServerSideProps = async () => {
-	const data = await gqlShopify(GET_SHOP_NAME)
+	const data = await gqlShopify(GET_PAGE_CONTENT, {
+		handle: 'hero',
+	})
 
 	return { props: { data } }
 }

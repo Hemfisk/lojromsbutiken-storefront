@@ -1,7 +1,12 @@
+import { NextFont } from 'next/dist/compiled/@next/font'
 import React from 'react'
 
-function Navbar() {
-	return <div>Navbar</div>
+interface Props {
+	fontFamily: NextFont
+}
+
+function Navbar({ fontFamily }: Props) {
+	return <div className={fontFamily.className}>Navbar</div>
 }
 
 export default Navbar

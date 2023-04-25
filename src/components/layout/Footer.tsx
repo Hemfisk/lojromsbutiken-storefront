@@ -1,7 +1,12 @@
+import { NextFont } from 'next/dist/compiled/@next/font'
 import React from 'react'
 
-function Footer() {
-	return <div>Footer</div>
+interface Props {
+	fontFamily: NextFont
+}
+
+function Footer({ fontFamily }: Props) {
+	return <div className={fontFamily.className}>Footer</div>
 }
 
 export default Footer
