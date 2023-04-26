@@ -48,7 +48,7 @@ const Navbar = ({ fontFamily }: Props) => {
 		<div className={`${styles.navigation_container} ${fontFamily.className}`}>
 			<div className={styles.navigation_content}>
 				<div className={styles.logo_container}>
-					<Image src='/LOGO_skylt.png' alt='Dalafisk logotyp' fill />
+					<Image src='/LOGO_dalafisk.png' alt='Dalafisk logotyp' fill />
 				</div>
 				<nav className={styles.navigation}>
 					{navLinks.map((link) => (
