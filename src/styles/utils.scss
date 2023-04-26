@@ -1,0 +1,13 @@
+$breakpoint-laptop: 1024px;
+$breakpoint-tabletBig: 860px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobileBig: 580px;
+$breakpoint-mobile: 480px;
+
+@mixin contentPadding {
+	padding: 0 max(4rem, env(safe-area-inset-left), env(safe-area-inset-right));
+	width: 100vw;
+	@media screen and (max-width: $breakpoint-tablet) {
+		padding: 0 2.5em;
+	}
+}

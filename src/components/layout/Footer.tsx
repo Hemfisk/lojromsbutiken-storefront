@@ -5,7 +5,7 @@ interface Props {
 	fontFamily: NextFont
 }
 
-function Footer({ fontFamily }: Props) {
+const Footer = ({ fontFamily }: Props) => {
 	return <div className={fontFamily.className}>Footer</div>
 }
 

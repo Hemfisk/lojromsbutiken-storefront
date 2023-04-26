@@ -1,12 +1,14 @@
 :root {
-	--max-width: 1100px;
+	--max-width: 1600px;
 	--border-radius: 12px;
 	--font-standard: 'Poppins', sans-serif;
+
+	--menu-height: 60px;
 
 	--background: hsl(0, 0%, 100%);
 	--text: hsl(0, 0%, 18%);
 	--text-variant: hsl(0, 0%, 38%);
-	--primay: hsl(220, 54%, 33%);
+	--primary: hsl(220, 54%, 33%);
 	--accent: hsl(220, 33%, 93%);
 	--accent-variant: hsl(220, 32%, 93%);
 }
@@ -26,12 +28,14 @@
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	-webkit-text-size-adjust: none;
 }
 
 html,
 body {
 	max-width: 100vw;
 	overflow-x: hidden;
+	min-height: 100vh;
 }
 
 body {
@@ -64,6 +68,7 @@ a {
 }
 
 p {
+	font-size: 1rem;
 	font-weight: 400;
 }
 
