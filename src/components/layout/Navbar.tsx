@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { NextFont } from 'next/dist/compiled/@next/font'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 
 import styles from '@/styles/Navbar.module.scss'
 
@@ -47,6 +48,15 @@ const Navbar = ({ fontFamily }: Props) => {
 	return (
 		<div className={`${styles.navigation_container} ${fontFamily.className}`}>
 			<div className={styles.navigation_content}>
+				<div className={styles.mobile_menu_container}>
+					<div
+						tabIndex={0}
+						onClick={() => console.log('mobile menu click')}
+						className={styles.mobile_menu_button}
+					>
+						<MenuOutlinedIcon />
+					</div>
+				</div>
 				<div className={styles.logo_container}>
 					<Image src='/LOGO_dalafisk.png' alt='Dalafisk logotyp' fill />
 				</div>

@@ -5,17 +5,44 @@
 	position: fixed;
 	background-color: var(--accent-variant);
 	height: var(--menu-height);
-
 	.navigation_content {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
 		max-width: var(--max-width);
+		.mobile_menu_container {
+			display: none;
+			justify-content: flex-start;
+			align-items: center;
+			position: relative;
+			height: var(--menu-height);
+			height: 60px;
+			width: clamp(96px, 10vw, 118px);
+			@media screen and (max-width: $breakpoint-tabletBig) {
+				display: flex;
+			}
+			.mobile_menu_button {
+				height: 24px;
+				outline: none;
+				cursor: pointer;
+				color: inherit;
+				&:hover,
+				&:focus {
+					color: var(--primary);
+				}
+			}
+		}
 		.logo_container {
 			position: relative;
 			flex-shrink: 0;
 			aspect-ratio: 59 / 50;
 			width: clamp(96px, 10vw, 118px);
+			img {
+				transform: translateX(-0.15em);
+				@media screen and (max-width: $breakpoint-tabletBig) {
+					transform: translateX(-0em);
+				}
+			}
 		}
 		.navigation {
 			flex-shrink: 0;
@@ -62,6 +89,7 @@
 			height: 60px;
 			width: clamp(96px, 10vw, 118px);
 			.cart_button {
+				height: 24px;
 				outline: none;
 				cursor: pointer;
 				color: inherit;
