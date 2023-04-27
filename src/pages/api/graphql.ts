@@ -1,4 +1,4 @@
-import { getPrivateTokenHeaders, getStorefrontApiUrl } from './shopify'
+import { getPublicTokenHeaders, getStorefrontApiUrl } from './shopify'
 
 export const gqlShopify = async (query: string, variables?: {}) =>
 	await fetch(getStorefrontApiUrl(), {
@@ -6,7 +6,7 @@ export const gqlShopify = async (query: string, variables?: {}) =>
 			query,
 			variables,
 		}),
-		headers: getPrivateTokenHeaders(),
+		headers: getPublicTokenHeaders(),
 		method: 'POST',
 	})
 		.then((response) => response.json())

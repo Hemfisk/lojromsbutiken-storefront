@@ -2,6 +2,7 @@
 
 .navigation_container {
 	@include contentPadding;
+	z-index: 50;
 	position: fixed;
 	background-color: var(--accent-variant);
 	height: var(--menu-height);

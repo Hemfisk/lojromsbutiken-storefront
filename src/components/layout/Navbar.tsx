@@ -37,12 +37,12 @@ const NavLink = ({
 
 const Navbar = ({ fontFamily }: Props) => {
 	const navLinks = [
-		{ title: 'Hem', handle: 'link', active: true },
-		{ title: 'Om oss', handle: 'link' },
-		{ title: 'Vårt sortiment', handle: 'link' },
-		{ title: 'Recept', handle: 'link' },
-		{ title: 'Jobba hos oss', handle: 'link' },
-		{ title: 'Kontakt', handle: 'link' },
+		{ title: 'Hem', handle: 'link1', active: true },
+		{ title: 'Om oss', handle: 'link2' },
+		{ title: 'Vårt sortiment', handle: 'link3' },
+		{ title: 'Recept', handle: 'link4' },
+		{ title: 'Jobba hos oss', handle: 'link5' },
+		{ title: 'Kontakt', handle: 'link6' },
 	]
 
 	return (

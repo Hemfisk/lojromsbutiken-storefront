@@ -1,0 +1,43 @@
+@import './utils.scss';
+
+.hero_section {
+	width: 100vw;
+	display: flex;
+	.hero_content {
+		h1 {
+			font-size: clamp(1.6rem, 2.5vw, 2rem);
+			font-weight: 600;
+			text-transform: uppercase;
+			line-height: 1.14;
+			color: var(--primary);
+			margin-bottom: 1em;
+		}
+		padding-top: calc(var(--menu-height) * 2);
+		padding-bottom: var(--menu-height);
+		@include contentPadding;
+		width: 100%;
+		background-color: var(--accent);
+	}
+	.hero_image {
+		flex-shrink: 0;
+		position: relative;
+		width: 60%;
+	}
+	@media screen and (max-width: $breakpoint-tabletBig) {
+		.hero_image {
+			flex-shrink: 0;
+			position: relative;
+			width: 50%;
+		}
+	}
+	@media screen and (max-width: $breakpoint-mobileBig) {
+		flex-direction: column-reverse;
+		.hero_image {
+			height: calc(30vh + var(--menu-height));
+			width: 100%;
+		}
+		.hero_content {
+			padding-top: var(--menu-height);
+		}
+	}
+}

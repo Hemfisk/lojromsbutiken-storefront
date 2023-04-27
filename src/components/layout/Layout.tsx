@@ -1,7 +1,6 @@
 import React from 'react'
 import { Poppins } from 'next/font/google'
 
-import styles from '@/styles/Layout.module.scss'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
@@ -18,9 +17,7 @@ const Layout = ({ children }: Props) => {
 	return (
 		<>
 			<Navbar fontFamily={poppins} />
-			<main className={`${styles.main_container} ${poppins.className}`}>
-				{children}
-			</main>
+			<main className={poppins.className}>{children}</main>
 			<Footer fontFamily={poppins} />
 		</>
 	)
