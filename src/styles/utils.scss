@@ -15,7 +15,6 @@ $breakpoint-mobile: 480px;
 		env(safe-area-inset-left),
 		env(safe-area-inset-right)
 	);
-	width: 100vw;
 	@media screen and (max-width: $breakpoint-tablet) {
 		padding-left: 2.5em;
 		padding-right: 2.5em;

@@ -2,6 +2,7 @@
 
 .navigation_container {
 	@include contentPadding;
+	width: 100%;
 	z-index: 50;
 	position: fixed;
 	background-color: var(--accent-variant);
