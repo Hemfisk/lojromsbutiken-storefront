@@ -1,0 +1,29 @@
+@import './utils.scss';
+
+.button {
+	@include roundedElement;
+	flex-grow: 0;
+	flex-shrink: 0;
+	font-size: var(--menu-font-size);
+	letter-spacing: var(--menu-font-spacing);
+	line-height: 1;
+	color: var(--text-variant);
+	font-weight: 600;
+	text-transform: uppercase;
+	padding: 0 2em;
+	cursor: pointer;
+	border: 1px solid var(--accent-variant);
+	background: none;
+	outline: none;
+	&.primary {
+		color: var(--background);
+		background-color: var(--primary);
+	}
+	&:hover,
+	&:focus {
+		border-color: var(--accent);
+		&.primary {
+			background-color: var(--primary-variant);
+		}
+	}
+}

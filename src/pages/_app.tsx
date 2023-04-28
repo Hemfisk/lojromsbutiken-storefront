@@ -12,6 +12,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 					name='viewport'
 					content='width=device-width, initial-scale=1.0, viewport-fit=cover'
 				/>
+				<link rel='shortcut icon' href='favicons/favicon.ico' />
 				<link
 					rel='apple-touch-icon'
 					sizes='180x180'
@@ -35,7 +36,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 					href='favicons/safari-pinned-tab.svg'
 					color='#264480'
 				/>
-				<link rel='shortcut icon' href='favicons/favicon.ico' />
 				<meta name='msapplication-TileColor' content='#ffffff' />
 				<meta
 					name='msapplication-config'

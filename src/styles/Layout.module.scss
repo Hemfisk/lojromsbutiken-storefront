@@ -1,0 +1,28 @@
+@import './utils.scss';
+
+.main {
+	min-height: 100vh;
+}
+
+.container {
+	margin: var(--menu-height) auto;
+	@include contentPadding;
+}
+
+.flex_row {
+	display: flex;
+	gap: var(--gap-horizontal);
+	&.gap_large {
+		gap: var(--gap-vertical);
+	}
+	@media screen and (max-width: $breakpoint-tabletBig) {
+		&.collapse_mobile {
+			display: block;
+			margin: 0 auto;
+		}
+		&.gap_large {
+			gap: var(--gap-horizontal);
+		}
+		flex-direction: column-reverse;
+	}
+}

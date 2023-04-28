@@ -20,3 +20,8 @@ $breakpoint-mobile: 480px;
 		padding-right: 2.5em;
 	}
 }
+
+@mixin roundedElement {
+	height: 3em;
+	border-radius: 1.5em;
+}

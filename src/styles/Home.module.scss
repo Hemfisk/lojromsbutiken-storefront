@@ -1,6 +1,0 @@
-@import './utils.scss';
-
-.main {
-	@include contentPadding;
-	max-width: var(--max-width);
-}

@@ -18,6 +18,10 @@ const Hero = ({ heroContent, heroImage }: any) => {
 						alt={heroImage.alt}
 						fill
 						style={{ objectFit: 'cover' }}
+						sizes='(min-width: 60em) 24vw,
+					(min-width: 28em) 45vw,
+					100vw'
+						priority
 					/>
 				</div>
 			) : null}

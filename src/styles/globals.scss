@@ -4,11 +4,17 @@
 	--font-standard: 'Poppins', sans-serif;
 
 	--menu-height: 60px;
+	--gap-horizontal: 20px;
+	--gap-vertical: 60px;
+
+	--menu-font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+	--menu-font-spacing: 0.15em;
 
 	--background: hsl(0, 0%, 100%);
 	--text: hsl(0, 0%, 18%);
 	--text-variant: hsl(0, 0%, 38%);
 	--primary: hsl(220, 54%, 33%);
+	--primary-variant: hsl(220, 64%, 23%);
 	--accent: hsl(220, 16%, 76%);
 	--accent-variant: hsl(220, 32%, 93%);
 }
