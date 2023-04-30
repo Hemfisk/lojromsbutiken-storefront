@@ -3,17 +3,29 @@
 .hero_section {
 	width: 100vw;
 	display: flex;
-	.hero_content {
-		h1 {
-			font-size: clamp(1.6rem, 2.5vw, 2rem);
+	.delivery_content {
+		h2 {
+			font-size: clamp(1.4rem, 2vw, 1.8rem);
 			font-weight: 600;
 			text-transform: uppercase;
 			line-height: 1.14;
 			color: var(--primary);
 			margin-bottom: 1em;
 		}
+		p {
+			margin-bottom: 2em;
+		}
+		input {
+			@include inputStyles;
+			color: var(--text);
+			border-color: var(--text-variant);
+			&:hover,
+			&:focus {
+				border-color: var(--text);
+			}
+		}
 		padding-top: calc(var(--menu-height) * 2);
-		padding-bottom: var(--menu-height);
+		padding-bottom: var(--gap-vertical);
 		@include contentPadding;
 		width: 100%;
 		background-color: var(--accent);
@@ -33,11 +45,30 @@
 	@media screen and (max-width: $breakpoint-mobileBig) {
 		flex-direction: column-reverse;
 		.hero_image {
-			height: calc(30vh + var(--menu-height));
+			height: calc(30vh + var(--gap-vertical));
 			width: 100%;
 		}
-		.hero_content {
-			padding-top: var(--menu-height);
+		.delivery_content {
+			padding-top: var(--gap-vertical);
 		}
 	}
+}
+
+.hero_content {
+	text-align: center;
+	h1 {
+		font-size: clamp(1.6rem, 2.5vw, 2rem);
+		font-weight: 600;
+		text-transform: uppercase;
+		line-height: 1.14;
+		color: var(--primary);
+		margin-bottom: 1em;
+	}
+	p {
+		max-width: $breakpoint-laptop;
+		margin: 0 auto;
+	}
+	padding-top: var(--gap-vertical);
+	@include contentPadding;
+	width: 100%;
 }

@@ -76,6 +76,12 @@ a {
 p {
 	font-size: 1rem;
 	font-weight: 400;
+	a {
+		color: inherit;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
 
 @media (prefers-color-scheme: dark) {

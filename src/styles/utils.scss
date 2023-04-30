@@ -25,3 +25,22 @@ $breakpoint-mobile: 480px;
 	height: 3em;
 	border-radius: 1.5em;
 }
+
+@mixin inputStyles {
+	font-size: calc(var(--menu-font-size) * 1.25);
+	border: 1px solid var(--accent-variant);
+	color: var(--text-variant);
+	background: none;
+	outline: 0;
+	width: 100%;
+	padding: 0 calc(1.5em * 0.8);
+	height: calc(3em * 0.8);
+	border-radius: calc(1.5em * 0.8);
+	&:hover,
+	&:focus {
+		border-color: var(--accent);
+	}
+	&::placeholder {
+		opacity: 0.5;
+	}
+}
