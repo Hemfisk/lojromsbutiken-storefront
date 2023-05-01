@@ -16,6 +16,7 @@
 	background: none;
 	outline: none;
 	&.primary {
+		border: none;
 		color: var(--background);
 		background-color: var(--primary);
 	}

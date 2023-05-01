@@ -3,43 +3,59 @@
 .hero_section {
 	width: 100vw;
 	display: flex;
-	.delivery_content {
-		h2 {
-			font-size: clamp(1.4rem, 2vw, 1.8rem);
-			font-weight: 600;
-			text-transform: uppercase;
-			line-height: 1.14;
-			color: var(--primary);
-			margin-bottom: 1em;
-		}
-		p {
-			margin-bottom: 2em;
-		}
-		input {
-			@include inputStyles;
-			color: var(--text);
-			border-color: var(--text-variant);
-			&:hover,
-			&:focus {
-				border-color: var(--text);
-			}
-		}
-		padding-top: calc(var(--menu-height) * 2);
-		padding-bottom: var(--gap-vertical);
-		@include contentPadding;
+	.delivery_container {
 		width: 100%;
 		background-color: var(--accent);
+		.delivery_content {
+			margin-left: auto;
+			@include contentPadding;
+			width: 100%;
+			padding-top: calc(var(--menu-height) * 2);
+			padding-bottom: var(--gap-vertical);
+			h2 {
+				font-size: clamp(1.4rem, 2vw, 1.8rem);
+				font-weight: 600;
+				text-transform: uppercase;
+				line-height: 1.14;
+				color: var(--primary);
+				margin-bottom: 1em;
+			}
+			p {
+				margin-bottom: 2em;
+			}
+			.delivery_search {
+				display: flex;
+			}
+			input {
+				@include inputStyles;
+				border-color: var(--text-variant);
+				&:hover,
+				&:focus {
+					border-color: var(--text);
+				}
+				margin-right: var(--gap-horizontal);
+			}
+			max-width: calc(
+				(var(--max-width) * 0.5) - 6em +
+					max(4rem, env(safe-area-inset-left), env(safe-area-inset-right))
+			);
+		}
 	}
 	.hero_image {
 		flex-shrink: 0;
 		position: relative;
-		width: 60%;
+		width: calc(50% + 6em);
 	}
 	@media screen and (max-width: $breakpoint-tabletBig) {
 		.hero_image {
 			flex-shrink: 0;
 			position: relative;
 			width: 50%;
+		}
+		.delivery_container {
+			.delivery_content {
+				max-width: calc(var(--max-width) * 0.5);
+			}
 		}
 	}
 	@media screen and (max-width: $breakpoint-mobileBig) {
@@ -48,8 +64,11 @@
 			height: calc(30vh + var(--gap-vertical));
 			width: 100%;
 		}
-		.delivery_content {
-			padding-top: var(--gap-vertical);
+		.delivery_container {
+			.delivery_content {
+				max-width: 100%;
+				padding-top: var(--gap-vertical);
+			}
 		}
 	}
 }

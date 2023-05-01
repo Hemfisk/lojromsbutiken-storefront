@@ -10,6 +10,8 @@
 }
 
 .flex_row {
+	max-width: var(--max-width);
+	margin: 0 auto;
 	display: flex;
 	gap: var(--gap-horizontal);
 	&.gap_large {

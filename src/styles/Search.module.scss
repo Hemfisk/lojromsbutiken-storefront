@@ -5,12 +5,6 @@
 	position: relative;
 	.search {
 		@include inputStyles;
-		&::-webkit-search-decoration,
-		&::-webkit-search-cancel-button,
-		&::-webkit-search-results-button,
-		&::-webkit-search-results-decoration {
-			display: none;
-		}
 	}
 	.search_button {
 		cursor: pointer;

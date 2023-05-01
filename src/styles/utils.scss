@@ -30,7 +30,7 @@ $breakpoint-mobile: 480px;
 	font-size: calc(var(--menu-font-size) * 1.25);
 	border: 1px solid var(--accent-variant);
 	color: var(--text-variant);
-	background: none;
+	background: var(--background);
 	outline: 0;
 	width: 100%;
 	padding: 0 calc(1.5em * 0.8);
@@ -42,5 +42,12 @@ $breakpoint-mobile: 480px;
 	}
 	&::placeholder {
 		opacity: 0.5;
+	}
+	&::-webkit-search-decoration,
+	&::-webkit-search-cancel-button,
+	&::-webkit-search-results-button,
+	&::-webkit-search-results-decoration,
+	&::-webkit-inner-spin-button {
+		display: none;
 	}
 }
