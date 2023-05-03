@@ -4,6 +4,7 @@
 	@include roundedElement;
 	flex-grow: 0;
 	flex-shrink: 0;
+	width: fit-content;
 	font-size: var(--menu-font-size);
 	letter-spacing: var(--menu-font-spacing);
 	line-height: 1;

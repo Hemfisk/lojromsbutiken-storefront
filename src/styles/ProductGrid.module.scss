@@ -7,20 +7,15 @@
 	grid-template-columns: repeat(4, 1fr);
 	grid-column-gap: var(--gap-horizontal);
 	grid-row-gap: var(--gap-vertical);
-	@media screen and (max-width: $breakpoint-tabletBig) {
+	@media screen and (max-width: $breakpoint-laptopSmall) {
 		grid-template-columns: repeat(3, 1fr);
 	}
-	@media screen and (max-width: $breakpoint-mobileBig) {
+	@media screen and (max-width: $breakpoint-tablet) {
 		grid-template-columns: repeat(2, 1fr);
 	}
 	@media screen and (max-width: $breakpoint-mobile) {
 		grid-template-columns: repeat(1, 1fr);
 	}
-}
-
-.product_container {
-	background-color: blue;
-	width: 100%;
 }
 
 .no_products_message {

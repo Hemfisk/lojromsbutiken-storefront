@@ -9,6 +9,8 @@
 
 	--menu-font-size: clamp(0.7rem, 1.2vw, 0.8rem);
 	--menu-font-spacing: 0.15em;
+	--font-size: clamp(1rem, 1.4vw, 1.2rem);
+	--font-spacing: 0.08em;
 
 	--background: hsl(0, 0%, 100%);
 	--text: hsl(0, 0%, 18%);
@@ -17,6 +19,7 @@
 	--primary-variant: hsl(220, 64%, 23%);
 	--accent: hsl(220, 16%, 76%);
 	--accent-variant: hsl(220, 32%, 93%);
+	--price: hsl(0, 54%, 56%);
 }
 
 @media (prefers-color-scheme: dark) {

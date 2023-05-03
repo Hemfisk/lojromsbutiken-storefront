@@ -42,6 +42,27 @@ query getProducts ($amount: Int!, $cursor: String) {
       node {
         handle
         title
+        images(first: 1) {
+          edges {
+            node {
+              transformedSrc
+            }
+          }
+        }
+        priceRange {
+          minVariantPrice {
+            amount
+          }
+        }
+        variants(first: 1) {
+          edges {
+            node {
+              id
+              weight
+              weightUnit
+            }
+          }
+        }
         collections(first: 1) {
           nodes{
             handle

@@ -5,6 +5,7 @@ import styles from '@/styles/ProductGrid.module.scss'
 import { useWindowSize } from '@/utils/hooks'
 import Button from './Button'
 import Search from './Search'
+import Product from './Product'
 
 const ProductGrid = ({ collections, allProducts }: any) => {
 	const [width] = useWindowSize()
@@ -26,9 +27,7 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 	const productsGrid = (productsToDisplay: any[]) => (
 		<div className={styles.products_container}>
 			{productsToDisplay.map((product: any) => (
-				<div key={product.node.handle} className={styles.product_container}>
-					{product.node.title}
-				</div>
+				<Product key={product.node.handle} product={product} />
 			))}
 		</div>
 	)
