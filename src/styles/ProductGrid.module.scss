@@ -1,0 +1,35 @@
+@import './utils.scss';
+
+.products_container {
+	@include maxWidthContainer;
+	margin-top: var(--gap-vertical);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: var(--gap-horizontal);
+	grid-row-gap: var(--gap-vertical);
+	@media screen and (max-width: $breakpoint-tabletBig) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media screen and (max-width: $breakpoint-mobileBig) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media screen and (max-width: $breakpoint-mobile) {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+.product_container {
+	background-color: blue;
+	width: 100%;
+}
+
+.no_products_message {
+	text-align: center;
+	h5 {
+		color: var(--primary);
+		font-weight: 500;
+	}
+	padding-top: var(--gap-vertical);
+	@include contentPadding;
+	width: 100%;
+}

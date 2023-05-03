@@ -1,13 +1,25 @@
 import Head from 'next/head'
 
-import { gqlShopify } from './api/graphql'
-import { GET_PAGE_CONTENT, GET_SHOP_NAME } from './api/queries'
+import { getAllGqlShopify, gqlShopify } from './api/graphql'
+import {
+	GET_COLLECTIONS,
+	GET_PAGE_CONTENT,
+	GET_PRODUCTS,
+	GET_SHOP_NAME,
+} from './api/queries'
 
 import { generateImageSrcFromString } from '@/utils/utils'
 import Hero from '@/components/Hero'
 import ProductGrid from '@/components/ProductGrid'
 
-const Home = ({ shopName, deliveryContent, heroContent, heroImage }: any) => {
+const Home = ({
+	shopName,
+	deliveryContent,
+	heroContent,
+	heroImage,
+	collections,
+	allProducts,
+}: any) => {
 	return (
 		<>
 			<Head>
@@ -19,7 +31,7 @@ const Home = ({ shopName, deliveryContent, heroContent, heroImage }: any) => {
 				heroContent={heroContent}
 				heroImage={heroImage}
 			/>
-			<ProductGrid />
+			<ProductGrid collections={collections} allProducts={allProducts} />
 		</>
 	)
 }
@@ -39,11 +51,19 @@ export const getServerSideProps = async () => {
 		handle: 'hero-image',
 	})
 
+	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 3 })
+
+	const allProducts = await getAllGqlShopify('products', GET_PRODUCTS, {
+		amount: 20,
+	})
+
 	const gqlData = {
 		shopName: shop.shop.name,
 		deliveryContent: delivery.page,
 		heroContent: hero.page,
 		heroImage: generateImageSrcFromString(heroImage.page.body),
+		collections: allCollections.collections.edges,
+		allProducts: allProducts,
 	}
 
 	return {

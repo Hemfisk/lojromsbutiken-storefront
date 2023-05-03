@@ -8,11 +8,10 @@
 	background-color: var(--accent-variant);
 	height: var(--menu-height);
 	.navigation_content {
+		@include maxWidthContainer;
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-		max-width: var(--max-width);
-		margin: 0 auto;
 		.mobile_menu_container {
 			display: none;
 			justify-content: flex-start;

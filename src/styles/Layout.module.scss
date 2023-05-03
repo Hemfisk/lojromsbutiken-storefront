@@ -10,8 +10,7 @@
 }
 
 .flex_row {
-	max-width: var(--max-width);
-	margin: 0 auto;
+	@include maxWidthContainer;
 	display: flex;
 	gap: var(--gap-horizontal);
 	&.gap_large {

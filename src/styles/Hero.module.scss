@@ -28,10 +28,10 @@
 			}
 			input {
 				@include inputStyles;
-				border-color: var(--text-variant);
+				border-color: transparent;
 				&:hover,
 				&:focus {
-					border-color: var(--text);
+					border-color: var(--text-variant);
 				}
 				margin-right: var(--gap-horizontal);
 			}

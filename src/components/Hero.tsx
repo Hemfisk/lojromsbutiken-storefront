@@ -5,7 +5,6 @@ import styles from '@/styles/Hero.module.scss'
 import Button from './Button'
 
 const Hero = ({ deliveryContent, heroContent, heroImage }: any) => {
-	console.log(heroContent, heroImage)
 	return (
 		<>
 			<section className={styles.hero_section}>

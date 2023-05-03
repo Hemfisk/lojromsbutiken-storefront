@@ -21,6 +21,11 @@ $breakpoint-mobile: 480px;
 	}
 }
 
+@mixin maxWidthContainer {
+	max-width: var(--max-width);
+	margin: 0 auto;
+}
+
 @mixin roundedElement {
 	height: 3em;
 	border-radius: 1.5em;
