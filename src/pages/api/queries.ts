@@ -63,6 +63,14 @@ query getProducts ($amount: Int!, $cursor: String) {
             }
           }
         }
+        addonType: metafield(namespace: "addon", key: "type") {
+          value
+          key
+        }
+        addonText: metafield(namespace: "addon", key: "text") {
+          value
+          key
+        }
         collections(first: 1) {
           nodes{
             handle

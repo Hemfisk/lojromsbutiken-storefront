@@ -9,6 +9,28 @@ interface Props {
 	product: any
 }
 
+const addonRound = (addon: { type: string; text: string } | null) => {
+	if (addon && addon.type === 'round') {
+		return (
+			<div className={`${styles.product_addon} ${styles.round}`}>
+				{addon.text}
+			</div>
+		)
+	}
+	return null
+}
+
+const addonBanner = (addon: { type: string; text: string } | null) => {
+	if (addon && addon.type === 'banner') {
+		return (
+			<div className={`${styles.product_addon} ${styles.banner}`}>
+				{addon.text}
+			</div>
+		)
+	}
+	return null
+}
+
 const Product = ({ product }: Props) => {
 	const productData = product.node
 
@@ -20,14 +42,18 @@ const Product = ({ product }: Props) => {
 	)
 	const weight = parseWeight(productData.variants.edges[0].node)
 	const imageSrc = productData.images.edges[0].node.transformedSrc
+	const addon = product.node.addonType
+		? { type: product.node.addonType.value, text: product.node.addonText.value }
+		: null
 
 	return (
 		<div className={styles.product}>
+			{addonRound(addon)}
 			<div className={styles.product_container}>
 				<div className={styles.product_image_container}>
 					<Image
 						src={imageSrc}
-						alt={product.title}
+						alt={productData.title}
 						fill
 						style={{ objectFit: 'cover' }}
 						sizes='(min-width: 60em) 24vw,
@@ -36,8 +62,15 @@ const Product = ({ product }: Props) => {
 					/>
 				</div>
 				<div className={styles.product_info_container}>
-					<h3>{productData.title}</h3>
+					<h3
+						style={
+							addon && addon.type === 'round' ? { width: '65%' } : undefined
+						}
+					>
+						{productData.title}
+					</h3>
 					{collection !== 'paket' ? <h4>{weight}</h4> : null}
+					{addonBanner(addon)}
 				</div>
 			</div>
 			<h4 className={styles.product_price}>{price}</h4>
