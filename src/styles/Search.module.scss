@@ -6,8 +6,8 @@
 	.search {
 		@include inputStyles;
 	}
-	.search_button {
-		cursor: pointer;
+	.search_icon {
+		color: var(--text-variant);
 		font-size: calc(2 * var(--menu-font-size));
 		position: absolute;
 		right: 0.5em;

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { debounce } from 'lodash'
 
 import layout from '@/styles/Layout.module.scss'
 import styles from '@/styles/ProductGrid.module.scss'
@@ -12,6 +13,7 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 	const [selectedCollection, setSelectedCollection] = useState<string | null>(
 		null
 	)
+	const [productSearch, setProductSearch] = useState<string>('')
 
 	const productsByCollection = collections.map((collection: any) => {
 		collection.products = allProducts?.filter((product: any) => {
@@ -32,30 +34,71 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 		</div>
 	)
 
+	const productSearchHandler = useRef(
+		debounce((e) => {
+			setProductSearch(e?.target?.value)
+		}, 300)
+	)
+
 	const renderProducts = () => {
 		if (selectedCollection) {
-			const filteredProducts = productsByCollection.find(
-				(collection: any) => collection.node.handle === selectedCollection
-			).products
+			if (productSearch) {
+				const filteredProducts = productsByCollection
+					.find(
+						(collection: any) => collection.node.handle === selectedCollection
+					)
+					.products.filter((product: any) =>
+						product.node.title.toLowerCase().includes(productSearch)
+					)
 
-			if (filteredProducts?.length) {
-				return productsGrid(filteredProducts)
+				if (filteredProducts?.length) {
+					return productsGrid(filteredProducts)
+				} else {
+					return (
+						<div className={styles.no_products_message}>
+							<h5>Tyvärr, inga produkter matchade din sökning</h5>
+						</div>
+					)
+				}
 			} else {
-				return (
-					<div className={styles.no_products_message}>
-						<h5>Tyvärr gick det inte att hitta några produkter</h5>
-					</div>
-				)
+				const filteredProducts = productsByCollection.find(
+					(collection: any) => collection.node.handle === selectedCollection
+				).products
+
+				if (filteredProducts?.length) {
+					return productsGrid(filteredProducts)
+				} else {
+					return (
+						<div className={styles.no_products_message}>
+							<h5>Tyvärr gick det inte att hitta några produkter</h5>
+						</div>
+					)
+				}
 			}
 		} else {
-			if (allProducts?.length) {
-				return productsGrid(allProducts)
-			} else {
-				return (
-					<div className={styles.no_products_message}>
-						<h5>Tyvärr gick det inte att hitta några produkter</h5>
-					</div>
+			if (productSearch) {
+				const filteredProducts = allProducts.filter((product: any) =>
+					product.node.title.toLowerCase().includes(productSearch)
 				)
+				if (filteredProducts.length) {
+					return productsGrid(filteredProducts)
+				} else {
+					return (
+						<div className={styles.no_products_message}>
+							<h5>Tyvärr, inga produkter matchade din sökning</h5>
+						</div>
+					)
+				}
+			} else {
+				if (allProducts?.length) {
+					return productsGrid(allProducts)
+				} else {
+					return (
+						<div className={styles.no_products_message}>
+							<h5>Tyvärr gick det inte att hitta några produkter</h5>
+						</div>
+					)
+				}
 			}
 		}
 	}
@@ -86,7 +129,7 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 						</>
 					)}
 				</div>
-				<Search />
+				<Search changeCallback={(e: any) => productSearchHandler.current(e)} />
 			</div>
 			{renderProducts()}
 		</div>
