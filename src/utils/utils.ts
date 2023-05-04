@@ -45,11 +45,14 @@ export const parsePrice = (
 				case 'KILOGRAMS':
 					return `${parseAmount(amount / weightData.weight)} KR/KG`
 
-				case 'GRAMS':
+				default:
+					return `${parseAmount(amount)} KR/ST`
+
+				/* case 'GRAMS':
 					return `${parseAmount(amount)} KR/${weightData.weight} g`
 
 				default:
-					return `${parseAmount(amount / weightData.weight)} KR/KG`
+					return `${parseAmount(amount / weightData.weight)} KR/KG` */
 			}
 	}
 }

@@ -30,7 +30,7 @@
 				@include inputStyles;
 				border-color: transparent;
 				&:hover,
-				&:focus {
+				&:focus-visible {
 					border-color: var(--text-variant);
 				}
 				margin-right: var(--gap-horizontal);

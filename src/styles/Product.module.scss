@@ -81,7 +81,8 @@ $padding: calc(var(--font-size) * 0.8);
 			}
 		}
 	}
-	&:hover {
+	&:hover,
+	&:focus-visible {
 		.product_image_container {
 			opacity: 0.6;
 			filter: grayscale(0);

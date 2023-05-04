@@ -29,7 +29,7 @@
 				cursor: pointer;
 				color: inherit;
 				&:hover,
-				&:focus {
+				&:focus-visible {
 					color: var(--primary);
 				}
 			}
@@ -68,7 +68,7 @@
 					color: var(--primary);
 				}
 				&.active,
-				&:focus {
+				&:focus-visible {
 					position: relative;
 					color: var(--primary);
 					&::after {
@@ -96,7 +96,7 @@
 				cursor: pointer;
 				color: inherit;
 				&:hover,
-				&:focus {
+				&:focus-visible {
 					color: var(--primary);
 				}
 			}

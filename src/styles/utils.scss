@@ -43,7 +43,7 @@ $breakpoint-mobile: 480px;
 	height: calc(3em * 0.8);
 	border-radius: calc(1.5em * 0.8);
 	&:hover,
-	&:focus {
+	&:focus-visible {
 		border-color: var(--accent);
 	}
 	&::placeholder {

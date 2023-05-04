@@ -22,7 +22,7 @@
 		background-color: var(--primary);
 	}
 	&:hover,
-	&:focus {
+	&:focus-visible {
 		border-color: var(--accent);
 		&.primary {
 			background-color: var(--primary-variant);
