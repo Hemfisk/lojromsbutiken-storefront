@@ -6,7 +6,7 @@ import '@/styles/globals.scss'
 
 const App = ({ Component, pageProps }: AppProps) => {
 	return (
-		<Layout>
+		<Layout paymentMethods={pageProps.paymentMethods}>
 			<Head>
 				<meta
 					name='viewport'

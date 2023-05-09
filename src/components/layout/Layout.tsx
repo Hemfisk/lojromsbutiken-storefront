@@ -12,14 +12,34 @@ const poppins = Poppins({
 
 interface Props {
 	children: React.ReactNode
+	paymentMethods: any
 }
 
-const Layout = ({ children }: Props) => {
+const navigation = [
+	{ title: 'Hem', handle: 'link1', active: true },
+	{ title: 'Om oss', handle: 'link2' },
+	{ title: 'Vårt sortiment', handle: 'link3' },
+	{ title: 'Recept', handle: 'link4' },
+	{ title: 'Jobba hos oss', handle: 'link5' },
+	{ title: 'Kontakt', handle: 'link6' },
+]
+
+const footerNavigation = [
+	{ title: 'Integritetspolicy', handle: 'link7' },
+	{ title: 'Köpvillkor', handle: 'link8' },
+	{ title: 'Leveransvillkor', handle: 'link9' },
+]
+
+const Layout = ({ children, paymentMethods }: Props) => {
 	return (
 		<>
-			<Navbar fontFamily={poppins} />
+			<Navbar fontFamily={poppins} navigation={navigation} />
 			<main className={`${styles.main} ${poppins.className}`}>{children}</main>
-			<Footer fontFamily={poppins} />
+			<Footer
+				fontFamily={poppins}
+				navigation={footerNavigation}
+				paymentMethods={paymentMethods}
+			/>
 		</>
 	)
 }

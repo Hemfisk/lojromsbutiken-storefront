@@ -1,0 +1,38 @@
+@import './utils.scss';
+
+.footer_container {
+	@include contentPadding;
+	width: 100%;
+	height: var(--menu-height);
+	.footer_content {
+		@include maxWidthContainer;
+		border-top: 1px solid var(--accent-variant);
+		margin-top: calc(var(--gap-vertical) * 2);
+		padding-top: var(--gap-vertical);
+		padding-bottom: var(--gap-horizontal);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: calc(var(--gap-horizontal) * 1.5);
+		font-size: 0.7rem;
+		letter-spacing: var(--font-spacing);
+		font-weight: 500;
+		font-size: var(--menu-font-size);
+		color: var(--text-variant);
+		a:hover,
+		a:focus-visible {
+			color: var(--primary);
+			text-decoration: underline;
+			outline: none;
+		}
+		.footer_section,
+		.payment_section {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: calc(var(--gap-horizontal) / 2) var(--gap-horizontal);
+			flex-wrap: wrap;
+		}
+	}
+}

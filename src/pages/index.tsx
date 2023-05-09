@@ -4,6 +4,7 @@ import { getAllGqlShopify, gqlShopify } from './api/graphql'
 import {
 	GET_COLLECTIONS,
 	GET_PAGE_CONTENT,
+	GET_PAYMENT_METHODS,
 	GET_PRODUCTS,
 	GET_SHOP_NAME,
 } from './api/queries'
@@ -57,6 +58,8 @@ export const getServerSideProps = async () => {
 		amount: 20,
 	})
 
+	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
+
 	const gqlData = {
 		shopName: shop.shop.name,
 		deliveryContent: delivery.page,
@@ -64,6 +67,7 @@ export const getServerSideProps = async () => {
 		heroImage: generateImageSrcFromString(heroImage.page.body),
 		collections: allCollections.collections.edges,
 		allProducts: allProducts,
+		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {

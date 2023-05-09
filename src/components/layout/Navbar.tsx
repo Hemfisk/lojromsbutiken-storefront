@@ -9,6 +9,11 @@ import styles from '@/styles/Navbar.module.scss'
 
 interface Props {
 	fontFamily: NextFont
+	navigation: {
+		title: string
+		handle: string
+		active?: boolean
+	}[]
 }
 
 interface NavLinkProps {
@@ -35,16 +40,7 @@ const NavLink = ({
 	</Link>
 )
 
-const Navbar = ({ fontFamily }: Props) => {
-	const navLinks = [
-		{ title: 'Hem', handle: 'link1', active: true },
-		{ title: 'Om oss', handle: 'link2' },
-		{ title: 'Vårt sortiment', handle: 'link3' },
-		{ title: 'Recept', handle: 'link4' },
-		{ title: 'Jobba hos oss', handle: 'link5' },
-		{ title: 'Kontakt', handle: 'link6' },
-	]
-
+const Navbar = ({ fontFamily, navigation }: Props) => {
 	return (
 		<div className={`${styles.navigation_container} ${fontFamily.className}`}>
 			<div className={styles.navigation_content}>
@@ -69,7 +65,7 @@ const Navbar = ({ fontFamily }: Props) => {
 					/>
 				</div>
 				<nav className={styles.navigation}>
-					{navLinks.map((link) => (
+					{navigation.map((link) => (
 						<NavLink
 							key={link.handle}
 							title={link.title}

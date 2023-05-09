@@ -6,6 +6,17 @@ export const GET_SHOP_NAME = `
   }
 `
 
+export const GET_PAYMENT_METHODS = `
+  query {
+    shop {
+      paymentSettings {
+        acceptedCardBrands
+        supportedDigitalWallets
+      }
+    }
+  }
+`
+
 export const GET_PAGE_CONTENT = `
 query getPageByHandle($handle: String!) {
   page(handle: $handle) {

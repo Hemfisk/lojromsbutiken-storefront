@@ -40,7 +40,7 @@
 			aspect-ratio: 59 / 50;
 			width: clamp(96px, 10vw, 118px);
 			img {
-				transform: translateX(-0.2em);
+				transform: translateX(-0.3em);
 				@media screen and (max-width: $breakpoint-tabletBig) {
 					transform: translateX(-0em);
 				}
