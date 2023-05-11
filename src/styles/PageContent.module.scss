@@ -1,0 +1,33 @@
+@import './utils.scss';
+
+.page_section {
+	width: 100vw;
+	display: flex;
+	@include contentPadding;
+	background-repeat: no-repeat;
+	background-position: center calc(var(--gap-vertical) * 2);
+	background-size: 70% 60%;
+	min-height: 80vh;
+	.page_container {
+		padding-top: calc(var(--menu-height) * 2);
+		width: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		h1 {
+			text-align: center;
+			font-size: clamp(1.6rem, 2.5vw, 2rem);
+			font-weight: 600;
+			text-transform: uppercase;
+			line-height: 1.14;
+			color: var(--primary);
+			margin-bottom: 2em;
+		}
+		.page_content {
+			max-width: $breakpoint-laptop;
+			margin: 0 auto;
+			p {
+				margin-bottom: 1em;
+			}
+		}
+	}
+}

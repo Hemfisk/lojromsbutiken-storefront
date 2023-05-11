@@ -60,15 +60,17 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 					</div>
 				</div>
 				<div className={styles.logo_container}>
-					<Image
-						src='/LOGO_dalafisk.png'
-						alt='Dalafisk logotyp'
-						fill
-						sizes='(min-width: 60em) 24vw,
+					<Link href='/' title='Dalafisk.se'>
+						<Image
+							src='/LOGO_dalafisk.png'
+							alt='Dalafisk logotyp'
+							fill
+							sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
-						priority
-					/>
+							priority
+						/>
+					</Link>
 				</div>
 				<nav className={styles.navigation}>
 					{navigation.map((link) => (

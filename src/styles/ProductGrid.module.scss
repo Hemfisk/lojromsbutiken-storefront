@@ -16,6 +16,7 @@
 	@media screen and (max-width: $breakpoint-mobile) {
 		grid-template-columns: repeat(1, 1fr);
 	}
+	margin-bottom: calc(var(--gap-vertical) * 2);
 }
 
 .no_products_message {

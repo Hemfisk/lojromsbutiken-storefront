@@ -20,7 +20,7 @@
 				color: var(--primary);
 				margin-bottom: 1em;
 			}
-			p {
+			.content {
 				margin-bottom: 2em;
 			}
 			.delivery_search {
@@ -83,7 +83,7 @@
 		color: var(--primary);
 		margin-bottom: 1em;
 	}
-	p {
+	.content {
 		max-width: $breakpoint-laptop;
 		margin: 0 auto;
 	}

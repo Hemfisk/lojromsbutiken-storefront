@@ -11,7 +11,10 @@ const Hero = ({ deliveryContent, heroContent, heroImage }: any) => {
 				<div className={styles.delivery_container}>
 					<div className={styles.delivery_content}>
 						<h2>{deliveryContent.title}</h2>
-						<p dangerouslySetInnerHTML={{ __html: deliveryContent.body }}></p>
+						<div
+							className={styles.content}
+							dangerouslySetInnerHTML={{ __html: deliveryContent.body }}
+						/>
 						<div className={styles.delivery_search}>
 							<input type='number' placeholder='Fyll i ditt postnummer' />{' '}
 							<Button primary>Sök</Button>
@@ -35,7 +38,10 @@ const Hero = ({ deliveryContent, heroContent, heroImage }: any) => {
 			</section>
 			<section className={styles.hero_content}>
 				<h1>{heroContent.title}</h1>
-				<p dangerouslySetInnerHTML={{ __html: heroContent.body }}></p>
+				<div
+					className={styles.content}
+					dangerouslySetInnerHTML={{ __html: heroContent.body }}
+				/>
 			</section>
 		</>
 	)
