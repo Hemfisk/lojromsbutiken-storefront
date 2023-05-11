@@ -16,14 +16,17 @@ interface Props {
 }
 
 const Footer = ({ fontFamily, navigation, paymentMethods }: Props) => {
+	const paymentMethodsArray = paymentMethods
+		? [
+				...paymentMethods.acceptedCardBrands,
+				...paymentMethods.supportedDigitalWallets,
+		  ]
+		: []
 	return (
 		<div className={`${styles.footer_container} ${fontFamily.className}`}>
 			<div className={styles.footer_content}>
 				<div className={styles.payment_section}>
-					{[
-						...paymentMethods.acceptedCardBrands,
-						...paymentMethods.supportedDigitalWallets,
-					].map((paymentMethod) => (
+					{paymentMethodsArray.map((paymentMethod) => (
 						<Icon key={paymentMethod} icon={paymentMethod} />
 					))}
 				</div>
