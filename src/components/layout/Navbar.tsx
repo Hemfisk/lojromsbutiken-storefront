@@ -71,17 +71,14 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 					/>
 				</div>
 				<nav className={styles.navigation}>
-					{navigation.map((link) => {
-						console.log(active, link)
-						return (
-							<NavLink
-								key={link.handle}
-								title={link.title}
-								handle={link.handle}
-								active={active === link.handle}
-							/>
-						)
-					})}
+					{navigation.map((link) => (
+						<NavLink
+							key={link.handle}
+							title={link.title}
+							handle={link.handle}
+							active={active === link.handle}
+						/>
+					))}
 				</nav>
 				<div className={styles.cart_container}>
 					<div
