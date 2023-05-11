@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import styles from '@/styles/Hero.module.scss'
 import Button from './Button'
+import PageHeader from './PageHeader'
 
 const Hero = ({ deliveryContent, heroContent, heroImage }: any) => {
 	return (
@@ -37,7 +38,7 @@ const Hero = ({ deliveryContent, heroContent, heroImage }: any) => {
 				) : null}
 			</section>
 			<section className={styles.hero_content}>
-				<h1>{heroContent.title}</h1>
+				<PageHeader noPadding>{heroContent.title}</PageHeader>
 				<div
 					className={styles.content}
 					dangerouslySetInnerHTML={{ __html: heroContent.body }}

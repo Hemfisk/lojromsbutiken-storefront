@@ -19,7 +19,7 @@ interface Props {
 const navigation = [
 	{ title: 'Hem', handle: '/' },
 	{ title: 'Om oss', handle: '/om-oss' },
-	{ title: 'Vårt sortiment', handle: 'link3' },
+	{ title: 'Vårt sortiment', handle: '/vart-sortiment' },
 	{ title: 'Recept', handle: 'link4' },
 	{ title: 'Jobba hos oss', handle: 'link5' },
 	{ title: 'Kontakt', handle: 'link6' },

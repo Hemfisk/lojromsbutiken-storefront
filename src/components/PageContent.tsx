@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styles from '@/styles/PageContent.module.scss'
+import PageHeader from './PageHeader'
 
 interface Props {
 	content: any
@@ -15,7 +16,7 @@ const PageContent = ({ content }: Props) => {
 				style={{ backgroundImage: `url("/logo_dalafisk.svg")` }}
 			>
 				<div className={styles.page_container}>
-					<h1>{page.title}</h1>
+					<PageHeader>{page.title}</PageHeader>
 					<div
 						className={styles.page_content}
 						dangerouslySetInnerHTML={{ __html: page.body }}
