@@ -1,13 +1,13 @@
 import Head from 'next/head'
 
-import { getAllGqlShopify, gqlShopify } from './api/graphql'
+import { getAllGqlShopify, gqlShopify } from '@/pages/api/graphql'
 import {
 	GET_COLLECTIONS,
 	GET_PAGE_CONTENT,
 	GET_PAYMENT_METHODS,
 	GET_PRODUCTS,
 	GET_SHOP_NAME,
-} from './api/queries'
+} from '@/pages/api/queries'
 
 import { generateImageSrcFromString } from '@/utils/utils'
 import Hero from '@/components/Hero'

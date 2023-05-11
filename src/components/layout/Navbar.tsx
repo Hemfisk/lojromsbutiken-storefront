@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NextFont } from 'next/dist/compiled/@next/font'
@@ -12,8 +12,8 @@ interface Props {
 	navigation: {
 		title: string
 		handle: string
-		active?: boolean
 	}[]
+	currentPage: string
 }
 
 interface NavLinkProps {
@@ -40,7 +40,13 @@ const NavLink = ({
 	</Link>
 )
 
-const Navbar = ({ fontFamily, navigation }: Props) => {
+const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
+	const [active, setActive] = useState(currentPage || '')
+
+	useEffect(() => {
+		setActive(currentPage)
+	}, [currentPage])
+
 	return (
 		<div className={`${styles.navigation_container} ${fontFamily.className}`}>
 			<div className={styles.navigation_content}>
@@ -65,14 +71,17 @@ const Navbar = ({ fontFamily, navigation }: Props) => {
 					/>
 				</div>
 				<nav className={styles.navigation}>
-					{navigation.map((link) => (
-						<NavLink
-							key={link.handle}
-							title={link.title}
-							handle={link.handle}
-							active={link.active}
-						/>
-					))}
+					{navigation.map((link) => {
+						console.log(active, link)
+						return (
+							<NavLink
+								key={link.handle}
+								title={link.title}
+								handle={link.handle}
+								active={active === link.handle}
+							/>
+						)
+					})}
 				</nav>
 				<div className={styles.cart_container}>
 					<div

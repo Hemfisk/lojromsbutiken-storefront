@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { Poppins } from 'next/font/google'
 
 import styles from '@/styles/Layout.module.scss'
@@ -16,8 +17,8 @@ interface Props {
 }
 
 const navigation = [
-	{ title: 'Hem', handle: 'link1', active: true },
-	{ title: 'Om oss', handle: 'link2' },
+	{ title: 'Hem', handle: '/' },
+	{ title: 'Om oss', handle: '/om-oss' },
 	{ title: 'Vårt sortiment', handle: 'link3' },
 	{ title: 'Recept', handle: 'link4' },
 	{ title: 'Jobba hos oss', handle: 'link5' },
@@ -31,9 +32,15 @@ const footerNavigation = [
 ]
 
 const Layout = ({ children, paymentMethods }: Props) => {
+	const router = useRouter()
+
 	return (
 		<>
-			<Navbar fontFamily={poppins} navigation={navigation} />
+			<Navbar
+				fontFamily={poppins}
+				navigation={navigation}
+				currentPage={router.pathname}
+			/>
 			<main className={`${styles.main} ${poppins.className}`}>{children}</main>
 			<Footer
 				fontFamily={poppins}
