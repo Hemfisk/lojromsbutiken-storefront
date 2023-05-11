@@ -16,10 +16,12 @@ interface Props {
 }
 
 const Footer = ({ fontFamily, navigation, paymentMethods }: Props) => {
-	const paymentMethodsArray = [
-		...paymentMethods.acceptedCardBrands,
-		...paymentMethods.supportedDigitalWallets,
-	]
+	const paymentMethodsArray = paymentMethods
+		? [
+				...paymentMethods.acceptedCardBrands,
+				...paymentMethods.supportedDigitalWallets,
+		  ]
+		: []
 	return (
 		<div className={`${styles.footer_container} ${fontFamily.className}`}>
 			<div className={styles.footer_content}>
