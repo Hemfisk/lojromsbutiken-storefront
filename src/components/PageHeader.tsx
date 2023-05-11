@@ -4,7 +4,7 @@ import styles from '@/styles/PageHeader.module.scss'
 
 interface Props {
 	children: React.ReactNode
-	noPadding: boolean
+	noPadding?: boolean
 }
 
 const PageHeader = ({ children, noPadding = false }: Props) => {
