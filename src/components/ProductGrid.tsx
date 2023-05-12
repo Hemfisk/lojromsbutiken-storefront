@@ -48,7 +48,9 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 						(collection: any) => collection.node.handle === selectedCollection
 					)
 					.products.filter((product: any) =>
-						product.node.title.toLowerCase().includes(productSearch)
+						product.node.title
+							.toLowerCase()
+							.includes(productSearch.toLowerCase())
 					)
 
 				if (filteredProducts?.length) {
@@ -78,7 +80,7 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 		} else {
 			if (productSearch) {
 				const filteredProducts = allProducts.filter((product: any) =>
-					product.node.title.toLowerCase().includes(productSearch)
+					product.node.title.toLowerCase().includes(productSearch.toLowerCase())
 				)
 				if (filteredProducts.length) {
 					return productsGrid(filteredProducts)
