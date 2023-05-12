@@ -13,7 +13,7 @@
 	@media screen and (max-width: $breakpoint-tablet) {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	@media screen and (max-width: $breakpoint-mobile) {
+	@media screen and (max-width: $breakpoint-mobileSmall) {
 		grid-template-columns: repeat(1, 1fr);
 	}
 	margin-bottom: calc(var(--gap-vertical) * 2);

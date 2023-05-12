@@ -4,6 +4,7 @@ $breakpoint-tabletBig: 860px;
 $breakpoint-tablet: 768px;
 $breakpoint-mobileBig: 580px;
 $breakpoint-mobile: 480px;
+$breakpoint-mobileSmall: 380px;
 
 @mixin contentPadding {
 	padding-left: max(
