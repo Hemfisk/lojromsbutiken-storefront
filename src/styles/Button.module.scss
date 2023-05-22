@@ -21,8 +21,8 @@
 		color: var(--background);
 		background-color: var(--primary);
 	}
-	&:hover,
-	&:focus-visible {
+	&:hover:not(:disabled),
+	&:focus-visible:not(:disabled) {
 		border-color: var(--accent);
 		&.primary {
 			background-color: var(--primary-variant);

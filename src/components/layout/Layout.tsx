@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { Poppins } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
 
 import styles from '@/styles/Layout.module.scss'
 import Navbar from './Navbar'
@@ -36,6 +37,13 @@ const Layout = ({ children, paymentMethods }: Props) => {
 
 	return (
 		<>
+			<ToastContainer
+				style={{
+					fontSize: '0.9rem',
+					lineHeight: '1.5em',
+					fontFamily: 'inherit',
+				}}
+			/>
 			<Navbar
 				fontFamily={poppins}
 				navigation={navigation}
