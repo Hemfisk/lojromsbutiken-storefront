@@ -58,3 +58,24 @@ $breakpoint-mobileSmall: 380px;
 		display: none;
 	}
 }
+
+@mixin labeledInputStyles {
+	position: relative;
+	label {
+		position: absolute;
+		top: 0.9em;
+		padding: 0 1em;
+		background-color: var(--background);
+		font-size: calc(var(--menu-font-size) * 0.9);
+		text-transform: uppercase;
+		letter-spacing: calc(var(--menu-font-spacing) * 0.8);
+		color: var(--text-variant);
+		font-weight: 500;
+	}
+	input,
+	textarea {
+		margin-top: 1.5em;
+	}
+	width: 100%;
+	flex-grow: 0;
+}
