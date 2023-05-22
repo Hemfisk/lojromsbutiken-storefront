@@ -21,8 +21,8 @@ const navigation = [
 	{ title: 'Om oss', handle: '/om-oss' },
 	{ title: 'Vårt sortiment', handle: '/vart-sortiment' },
 	{ title: 'Recept', handle: 'link4' },
-	{ title: 'Jobba hos oss', handle: 'link5' },
-	{ title: 'Kontakt', handle: 'link6' },
+	{ title: 'Jobba hos oss', handle: '/jobba-hos-oss' },
+	{ title: 'Kontakt', handle: '/kontakt' },
 ]
 
 const footerNavigation = [

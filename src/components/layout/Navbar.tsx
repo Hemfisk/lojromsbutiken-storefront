@@ -59,7 +59,6 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 	}, [currentPage])
 
 	const mobileNavigation = () => {
-		console.log(mobileNavigationOpen)
 		if (!mobileNavigationOpen) {
 			return null
 		}

@@ -11,3 +11,17 @@ h1.page_header {
 		padding-top: 0;
 	}
 }
+
+h2.page_header {
+	padding-top: calc(var(--menu-height) * 2);
+	text-align: left;
+	font-size: clamp(1.3rem, 2vw, 1.7rem);
+	font-weight: 600;
+	text-transform: uppercase;
+	line-height: 1.14;
+	color: var(--primary);
+	margin-bottom: 2em;
+	&.no_padding {
+		padding-top: 0;
+	}
+}

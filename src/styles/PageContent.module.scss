@@ -15,8 +15,17 @@
 		.page_content {
 			max-width: $breakpoint-laptop;
 			margin: 0 auto;
+			padding-bottom: var(--gap-vertical);
 			p {
 				margin-bottom: 1em;
+				font-size: 1rem;
+				font-weight: 400;
+			}
+			a {
+				color: inherit;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 	}

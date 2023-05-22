@@ -1,5 +1,7 @@
 @import './utils.scss';
 
+$padding: calc(var(--font-size) * 0.8);
+
 .navigation_container {
 	@include contentPadding;
 	width: 100%;
@@ -115,6 +117,7 @@
 	min-width: fit-content;
 	color: var(--accent);
 	background-color: var(--primary);
+	border-bottom-right-radius: $padding;
 	@include contentPadding;
 	padding-top: 18px;
 	padding-bottom: calc(var(--gap-vertical) / 2);

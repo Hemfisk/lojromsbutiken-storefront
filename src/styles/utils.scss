@@ -34,15 +34,15 @@ $breakpoint-mobileSmall: 380px;
 }
 
 @mixin inputStyles {
-	font-size: calc(var(--menu-font-size) * 1.25);
+	font-size: calc(var(--menu-font-size) * 1.1);
 	border: 1px solid var(--accent-variant);
 	color: var(--text-variant);
 	background: var(--background);
 	outline: 0;
 	width: 100%;
-	padding: 0 calc(1.5em * 0.8);
-	height: calc(3em * 0.8);
-	border-radius: calc(1.5em * 0.8);
+	padding: 0 calc(1.5em * 0.9090909091);
+	height: calc(3em * 0.9090909091);
+	border-radius: calc(1.5em * 0.9090909091);
 	&:hover,
 	&:focus-visible {
 		border-color: var(--accent);
