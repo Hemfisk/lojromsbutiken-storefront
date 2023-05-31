@@ -6,6 +6,8 @@ $breakpoint-mobileBig: 580px;
 $breakpoint-mobile: 480px;
 $breakpoint-mobileSmall: 380px;
 
+$cardPadding: calc(var(--font-size) * 0.8);
+
 @mixin contentPadding {
 	padding-left: max(
 		4rem,

@@ -7,6 +7,9 @@
 .container {
 	margin: var(--menu-height) auto;
 	@include contentPadding;
+	&.no_top_margin {
+		margin-top: 0;
+	}
 }
 
 .flex_row {
@@ -25,5 +28,38 @@
 			gap: var(--gap-horizontal);
 		}
 		flex-direction: column-reverse;
+	}
+}
+
+.grid_container {
+	@include maxWidthContainer;
+	margin-top: var(--gap-vertical);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: var(--gap-horizontal);
+	grid-row-gap: var(--gap-vertical);
+	@media screen and (max-width: $breakpoint-laptopSmall) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media screen and (max-width: $breakpoint-tablet) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media screen and (max-width: $breakpoint-mobileSmall) {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	margin-bottom: calc(var(--gap-vertical) * 2);
+}
+
+.two_column_grid {
+	@include maxWidthContainer;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-column-gap: var(--gap-horizontal);
+	grid-row-gap: var(--gap-horizontal);
+	@media screen and (max-width: $breakpoint-mobileBig) {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	> div {
+		width: 100%;
 	}
 }

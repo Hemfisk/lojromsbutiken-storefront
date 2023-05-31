@@ -5,21 +5,26 @@ import PageHeader from './PageHeader'
 
 interface Props {
 	content: any
+	contentOnly?: boolean
 }
 
-const PageContent = ({ content }: Props) => {
+const PageContent = ({ content, contentOnly = false }: Props) => {
 	const { page } = content
 	return (
 		<>
 			<section
-				className={styles.page_section}
+				className={`${styles.page_section} ${
+					contentOnly ? styles.content_only : ''
+				}`}
 				style={{ backgroundImage: `url("/logo_dalafisk.svg")` }}
 			>
 				<div className={styles.page_container}>
-					<PageHeader>{page.title}</PageHeader>
+					{contentOnly ? null : <PageHeader>{page.title}</PageHeader>}
 					<div
 						className={styles.page_content}
-						dangerouslySetInnerHTML={{ __html: page.body }}
+						dangerouslySetInnerHTML={{
+							__html: contentOnly ? content : page.body,
+						}}
 					/>
 				</div>
 			</section>

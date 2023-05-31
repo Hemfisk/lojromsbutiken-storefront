@@ -1,0 +1,40 @@
+@import './utils.scss';
+
+.wrapped_container {
+	max-width: $breakpoint-laptop;
+	margin: 0 auto;
+}
+
+.additional_info {
+	background-color: var(--accent-variant);
+	border-top-right-radius: $cardPadding;
+	padding: $cardPadding;
+	overflow: hidden;
+	.product_price {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0 1em;
+		align-items: baseline;
+		h3 {
+			color: var(--price);
+			letter-spacing: var(--font-spacing);
+			font-size: calc(var(--font-size) * 1.5);
+		}
+		h4 {
+			color: var(--accent);
+			letter-spacing: var(--font-spacing);
+			font-size: var(--font-size);
+			text-decoration: line-through;
+		}
+		@media screen and (max-width: $breakpoint-mobileBig) {
+			h3 {
+				font-size: calc(var(--font-size) * 1.2);
+			}
+		}
+	}
+	h4 {
+		letter-spacing: var(--font-spacing);
+		font-size: var(--font-size);
+	}
+}

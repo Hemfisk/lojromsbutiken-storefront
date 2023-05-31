@@ -1,0 +1,38 @@
+@import './utils.scss';
+
+.image_viewer {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-horizontal);
+}
+
+.image_selector {
+	max-height: calc(var(--menu-height) * 1.5);
+	display: flex;
+	flex-direction: row;
+	gap: var(--gap-horizontal);
+	.image_container {
+		border-top-left-radius: 0;
+		cursor: pointer;
+		opacity: 0.4;
+		filter: grayscale(0.25);
+		&.selected {
+			opacity: 0.75;
+			filter: grayscale(0);
+		}
+		&:hover,
+		&:focus-visible {
+			opacity: 1;
+			filter: grayscale(0);
+		}
+	}
+}
+
+.image_container {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 4/3;
+	border-top-left-radius: $cardPadding;
+	overflow: hidden;
+}

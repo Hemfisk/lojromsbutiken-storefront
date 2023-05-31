@@ -1,34 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import styles from '@/styles/Product.module.scss'
 import { parsePrice, parseWeight } from '@/utils/utils'
 import Button from './Button'
+import { addonBanner, addonRound } from './Addons'
 
 interface Props {
 	product: any
-}
-
-const addonRound = (addon: { type: string; text: string } | null) => {
-	if (addon && addon.type === 'round') {
-		return (
-			<div className={`${styles.product_addon} ${styles.round}`}>
-				{addon.text}
-			</div>
-		)
-	}
-	return null
-}
-
-const addonBanner = (addon: { type: string; text: string } | null) => {
-	if (addon && addon.type === 'banner') {
-		return (
-			<div className={`${styles.product_addon} ${styles.banner}`}>
-				{addon.text}
-			</div>
-		)
-	}
-	return null
 }
 
 const Product = ({ product }: Props) => {
@@ -50,7 +30,10 @@ const Product = ({ product }: Props) => {
 		<div className={styles.product}>
 			{addonRound(addon)}
 			<div className={styles.product_container}>
-				<div className={styles.product_image_container}>
+				<Link
+					href={`produkter/${productData.handle}`}
+					className={styles.product_image_container}
+				>
 					<Image
 						src={imageSrc}
 						alt={productData.title}
@@ -60,7 +43,7 @@ const Product = ({ product }: Props) => {
 					(min-width: 28em) 45vw,
 					100vw'
 					/>
-				</div>
+				</Link>
 				<div className={styles.product_info_container}>
 					<h3
 						style={

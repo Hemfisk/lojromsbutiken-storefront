@@ -56,3 +56,38 @@ export const parsePrice = (
 			}
 	}
 }
+
+type HtmlNode = {
+	type: string
+	children: HtmlNode[]
+	listType?: string
+	value?: string
+}
+
+export const parseHtml = (data: HtmlNode): string => {
+	return data.children
+		?.map((node: HtmlNode) => {
+			switch (node.type) {
+				case 'text': {
+					return node.value
+				}
+				case 'paragraph': {
+					return `<p>${parseHtml(node)}</p>`
+				}
+				case 'list': {
+					if (node.listType === 'unordered') {
+						return `<ul>${parseHtml(node)}</ul>`
+					} else {
+						return `<ol>${parseHtml(node)}</ol>`
+					}
+				}
+				case 'list-item': {
+					return `<li>${parseHtml(node)}</li>`
+				}
+				default: {
+					return parseHtml(node)
+				}
+			}
+		})
+		.join('\n')
+}

@@ -21,7 +21,7 @@ const navigation = [
 	{ title: 'Hem', handle: '/' },
 	{ title: 'Om oss', handle: '/om-oss' },
 	{ title: 'Vårt sortiment', handle: '/vart-sortiment' },
-	{ title: 'Recept', handle: 'link4' },
+	{ title: 'Recept', handle: '/recept' },
 	{ title: 'Jobba hos oss', handle: '/jobba-hos-oss' },
 	{ title: 'Kontakt', handle: '/kontakt' },
 ]

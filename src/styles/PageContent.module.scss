@@ -8,6 +8,10 @@
 	background-position: center calc(var(--gap-vertical) * 2);
 	background-size: 150% 60%;
 	min-height: 80vh;
+	&.content_only {
+		background-position: center center;
+		min-height: auto;
+	}
 	.page_container {
 		width: 100%;
 		max-width: var(--max-width);

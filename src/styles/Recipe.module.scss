@@ -1,18 +1,18 @@
 @import './utils.scss';
 
-.product {
+.recipe {
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: var(--gap-horizontal);
-	.product_container {
+	.recipe_container {
 		position: relative;
 		width: 100%;
 		aspect-ratio: 3 / 2;
 		background-size: cover;
 		background-position: center;
-		.product_image_container {
+		.recipe_image_container {
 			z-index: 0;
 			position: absolute;
 			border-top-right-radius: $cardPadding;
@@ -24,20 +24,16 @@
 			opacity: 0.4;
 			filter: grayscale(0.25);
 		}
-		.product_info_container {
-			pointer-events: none;
+		.recipe_info_container {
 			z-index: 1;
 			position: relative;
 			border-top-right-radius: $cardPadding;
 			overflow: hidden;
 			padding: $cardPadding;
 			height: 100%;
-			h3,
-			h4 {
+			h3 {
 				line-height: 1;
 				letter-spacing: var(--font-spacing);
-			}
-			h3 {
 				font-size: var(--font-size);
 				color: var(--primary);
 				text-transform: uppercase;
@@ -49,11 +45,10 @@
 					font-size: var(--font-size);
 				}
 			}
-			h4 {
+			p {
 				margin-top: 0.5em;
 				font-size: calc(var(--font-size) * 0.8);
 				color: var(--text);
-				font-weight: 700;
 				@media screen and (max-width: $breakpoint-mobile) {
 					font-size: calc(var(--font-size) * 0.7);
 				}
@@ -65,12 +60,12 @@
 	}
 	&:hover,
 	&:focus-visible {
-		.product_image_container {
+		.recipe_image_container {
 			opacity: 0.6;
 			filter: grayscale(0);
 		}
 	}
-	.product_price {
+	.recipe_price {
 		text-align: center;
 		line-height: 1;
 		letter-spacing: var(--font-spacing);
