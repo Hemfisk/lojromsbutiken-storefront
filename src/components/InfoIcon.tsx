@@ -17,7 +17,12 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 	switch (type) {
 		case 'fangst':
 			return (
-				<Tooltip placement='bottom' title={`Fångstzon${titleText}`}>
+				<Tooltip
+					disableFocusListener
+					placement='bottom'
+					title={`Fångstzon${titleText}`}
+					arrow
+				>
 					<i>
 						<PublicOutlined />
 					</i>
@@ -25,7 +30,12 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			)
 		case 'hallbarhet':
 			return (
-				<Tooltip placement='bottom' title={`Hållbarhet${titleText}`}>
+				<Tooltip
+					disableFocusListener
+					placement='bottom'
+					title={`Hållbarhet${titleText}`}
+					arrow
+				>
 					<i>
 						<AccessTimeOutlined />
 					</i>
@@ -33,7 +43,12 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			)
 		case 'latin':
 			return (
-				<Tooltip placement='bottom' title={`Latinskt namn${titleText}`}>
+				<Tooltip
+					disableFocusListener
+					placement='bottom'
+					title={`Latinskt namn${titleText}`}
+					arrow
+				>
 					<i>
 						<LocalOfferOutlined />
 					</i>
@@ -41,7 +56,12 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			)
 		case 'storlek':
 			return (
-				<Tooltip placement='bottom' title={`Storlek${titleText}`}>
+				<Tooltip
+					disableFocusListener
+					placement='bottom'
+					title={`Storlek${titleText}`}
+					arrow
+				>
 					<i>
 						<StraightenOutlined />
 					</i>
@@ -49,7 +69,12 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			)
 		case 'tillagning':
 			return (
-				<Tooltip placement='bottom' title={`Tillagning${titleText}`}>
+				<Tooltip
+					disableFocusListener
+					placement='bottom'
+					title={`Tillagning${titleText}`}
+					arrow
+				>
 					<i>
 						<LocalDiningOutlined />
 					</i>
@@ -57,7 +82,12 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			)
 		case 'tillstand':
 			return (
-				<Tooltip placement='bottom' title={`Fysiskt tillstånd${titleText}`}>
+				<Tooltip
+					disableFocusListener
+					placement='bottom'
+					title={`Fysiskt tillstånd${titleText}`}
+					arrow
+				>
 					<i>
 						<AcUnitOutlined />
 					</i>
