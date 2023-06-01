@@ -56,6 +56,10 @@
 				white-space: nowrap;
 				text-overflow: ellipsis;
 			}
+			i {
+				display: flex;
+				align-items: center;
+			}
 			svg {
 				color: var(--accent);
 				height: 1.5em;
