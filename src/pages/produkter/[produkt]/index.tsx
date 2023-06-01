@@ -15,8 +15,10 @@ import PageHeader from '@/components/PageHeader'
 import PageContent from '@/components/PageContent'
 import ImageViewer from '@/components/ImageViewer'
 import InfoIcon from '@/components/InfoIcon'
+import Button from '@/components/Button'
 
 const ProductPage = ({ shopName, product }: any) => {
+	const [variantId, setVariantId] = useState(product.variants.edges[0].node.id)
 	const [priceState, setPriceState] = useState(
 		product.priceRange.minVariantPrice.amount
 	)
@@ -45,11 +47,36 @@ const ProductPage = ({ shopName, product }: any) => {
 
 	console.log(product)
 
+	const handleVariantSelect = (variant: any) => {
+		setVariantId(variant.id)
+		setPriceState(variant.price.amount)
+		setComparePriceState(
+			variant.compareAtPrice?.amount ? variant.compareAtPrice?.amount : '0.0'
+		)
+		setWeightState(variant)
+	}
+
 	const ctaContent = () => {
 		return (
 			<>
-				<div>Variants</div>
-				<div>Buy CTA</div>
+				{product.variants?.edges?.length > 1 ? (
+					<div className={styles.variants_container}>
+						{product.variants.edges.map((variant: any) => (
+							<div
+								key={variant.node.id}
+								className={styles.variant}
+								onClick={() => handleVariantSelect(variant.node)}
+							>
+								{variant.node.weight}
+							</div>
+						))}
+					</div>
+				) : null}
+				<div className={styles.buy_container}>
+					<Button primary clickCallback={() => console.log('buy', variantId)}>
+						Lägg i varukorg
+					</Button>
+				</div>
 			</>
 		)
 	}
@@ -75,7 +102,7 @@ const ProductPage = ({ shopName, product }: any) => {
 						addon={addon}
 					/>
 					<div
-						className={`${layout.two_column_grid} ${styles.wrapped_container} ${styles.cta_mobile}`}
+						className={`${styles.cta_container} ${styles.wrapped_container} ${styles.cta_mobile}`}
 					>
 						{ctaContent()}
 					</div>
@@ -83,10 +110,7 @@ const ProductPage = ({ shopName, product }: any) => {
 						<div>
 							<div className={styles.product_price}>
 								<h3>{price}</h3>
-								{product.compareAtPriceRange.minVariantPrice.amount !==
-								'0.0' ? (
-									<h4>{comparePrice}</h4>
-								) : null}
+								{comparePriceState !== '0.0' ? <h4>{comparePrice}</h4> : null}
 							</div>
 							{collection !== 'paket' ? <h4>{weight}</h4> : null}
 						</div>
@@ -103,7 +127,7 @@ const ProductPage = ({ shopName, product }: any) => {
 			</div>
 			<div className={`${layout.container} ${layout.no_top_margin}`}>
 				<div
-					className={`${layout.two_column_grid} ${styles.wrapped_container} ${styles.cta_desktop}`}
+					className={`${styles.cta_container} ${styles.wrapped_container} ${styles.cta_desktop}`}
 				>
 					{ctaContent()}
 				</div>

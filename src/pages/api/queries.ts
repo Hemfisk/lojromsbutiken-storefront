@@ -71,6 +71,9 @@ variants(first: 10) {
       price {
         amount
       }
+      compareAtPrice {
+        amount
+      }
     }
   }
 }
