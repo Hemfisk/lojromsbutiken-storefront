@@ -6,6 +6,7 @@ import styles from '@/styles/Product.module.scss'
 import { parsePrice, parseWeight } from '@/utils/utils'
 import Button from './Button'
 import { addonBanner, addonRound } from './Addons'
+import InfoIcon from './InfoIcon'
 
 interface Props {
 	product: any
@@ -25,6 +26,16 @@ const Product = ({ product }: Props) => {
 	const addon = product.node.addonType
 		? { type: product.node.addonType.value, text: product.node.addonText.value }
 		: null
+	const infoData = [
+		{ type: 'latin', value: productData.infoLatin?.value },
+		{ type: 'fangst', value: productData.infoFangst?.value },
+		{ type: 'tillstand', value: productData.infoTillstand?.value },
+		{ type: 'storlek', value: productData.infoStorlek?.value },
+		{ type: 'hallbarhet', value: productData.infoHallbarhet?.value },
+		{ type: 'tillagning', value: productData.infoTillagning?.value },
+	]
+		.filter((info) => info.value !== undefined)
+		.slice(0, 3)
 
 	return (
 		<div className={styles.product}>
@@ -55,6 +66,11 @@ const Product = ({ product }: Props) => {
 					{collection !== 'paket' ? <h4>{weight}</h4> : null}
 					{addonBanner(addon)}
 				</div>
+			</div>
+			<div className={styles.product_info_icons}>
+				{infoData.map((info) => (
+					<InfoIcon key={info.type} type={info.type} title={info.value} />
+				))}
 			</div>
 			<h4 className={styles.product_price}>{price}</h4>
 			<Button

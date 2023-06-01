@@ -8,43 +8,45 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
 interface Props {
 	type: string
+	title?: string
 }
 
-const InfoIcon = ({ type }: Props) => {
+const InfoIcon = ({ type, title = '' }: Props) => {
+	const titleText = title.length > 0 ? `: ${title}` : ''
 	switch (type) {
 		case 'fangst':
 			return (
-				<i title='Fångstzon'>
+				<i title={`Fångstzon${titleText}`}>
 					<PublicOutlined />
 				</i>
 			)
 		case 'hallbarhet':
 			return (
-				<i title='Hållbarhet'>
+				<i title={`Hållbarhet${titleText}`}>
 					<AccessTimeOutlined />
 				</i>
 			)
 		case 'latin':
 			return (
-				<i title='Latinskt namn'>
+				<i title={`Latinskt namn${titleText}`}>
 					<LocalOfferOutlined />
 				</i>
 			)
 		case 'storlek':
 			return (
-				<i title='Storlek'>
+				<i title={`Storlek${titleText}`}>
 					<StraightenOutlined />
 				</i>
 			)
 		case 'tillagning':
 			return (
-				<i title='Tillagning'>
+				<i title={`Tillagning${titleText}`}>
 					<LocalDiningOutlined />
 				</i>
 			)
 		case 'tillstand':
 			return (
-				<i title='Fysiskt tillstånd'>
+				<i title={`Fysiskt tillstånd${titleText}`}>
 					<AcUnitOutlined />
 				</i>
 			)

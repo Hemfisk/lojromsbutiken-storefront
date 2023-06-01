@@ -78,7 +78,7 @@ const RecipePage = ({ shopName, product }: any) => {
 						<div className={styles.info_container}>
 							{infoData.map((info) => (
 								<div key={info.type}>
-									{<InfoIcon type={info.type} />}{' '}
+									<InfoIcon type={info.type} />{' '}
 									<span title={info.value}>{info.value}</span>
 								</div>
 							))}

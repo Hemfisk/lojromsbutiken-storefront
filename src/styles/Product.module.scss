@@ -70,6 +70,22 @@
 			filter: grayscale(0);
 		}
 	}
+	.product_info_icons {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		gap: 1em;
+		justify-content: center;
+		color: var(--accent-variant);
+		i {
+			display: flex;
+			justify-content: center;
+			svg {
+				height: 1.2em;
+				width: 1.2em;
+			}
+		}
+	}
 	.product_price {
 		text-align: center;
 		line-height: 1;
