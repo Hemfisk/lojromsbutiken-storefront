@@ -18,24 +18,21 @@ import InfoIcon from '@/components/InfoIcon'
 import Button from '@/components/Button'
 
 const ProductPage = ({ shopName, product }: any) => {
-	const [variantId, setVariantId] = useState(product.variants.edges[0].node.id)
-	const [priceState, setPriceState] = useState(
-		product.priceRange.minVariantPrice.amount
-	)
-	const [comparePriceState, setComparePriceState] = useState(
-		product.compareAtPriceRange.minVariantPrice.amount
-	)
-	const [weightState, setWeightState] = useState(product.variants.edges[0].node)
+	const [variant, setVariant] = useState(product.variants.edges[0].node)
 
 	const title = `${shopName} | Produkter - ${product.title}`
 
 	const collection = product.collections.nodes[0].handle
-	const price = parsePrice(priceState, 'fullPrice', weightState)
-	const comparePrice = parsePrice(comparePriceState, 'fullPrice', weightState)
+	const price = parsePrice(variant.price.amount, 'fullPrice', variant)
+	const comparePrice = parsePrice(
+		variant.compareAtPrice?.amount,
+		'fullPrice',
+		variant
+	)
 	const addon = product.addonType
 		? { type: product.addonType.value, text: product.addonText.value }
 		: null
-	const weight = parseWeight(weightState).replace('.', ',')
+	const weight = parseWeight(variant).replace('.', ',')
 	const infoData = [
 		{ type: 'latin', value: product.infoLatin?.value },
 		{ type: 'fangst', value: product.infoFangst?.value },
@@ -47,15 +44,6 @@ const ProductPage = ({ shopName, product }: any) => {
 
 	console.log(product)
 
-	const handleVariantSelect = (variant: any) => {
-		setVariantId(variant.id)
-		setPriceState(variant.price.amount)
-		setComparePriceState(
-			variant.compareAtPrice?.amount ? variant.compareAtPrice?.amount : '0.0'
-		)
-		setWeightState(variant)
-	}
-
 	const ctaContent = () => {
 		return (
 			<>
@@ -65,7 +53,7 @@ const ProductPage = ({ shopName, product }: any) => {
 							<div
 								key={variant.node.id}
 								className={styles.variant}
-								onClick={() => handleVariantSelect(variant.node)}
+								onClick={() => setVariant(variant.node)}
 							>
 								{variant.node.weight}
 							</div>
@@ -73,7 +61,7 @@ const ProductPage = ({ shopName, product }: any) => {
 					</div>
 				) : null}
 				<div className={styles.buy_container}>
-					<Button primary clickCallback={() => console.log('buy', variantId)}>
+					<Button primary clickCallback={() => console.log('buy', variant.id)}>
 						Lägg i varukorg
 					</Button>
 				</div>
@@ -110,7 +98,10 @@ const ProductPage = ({ shopName, product }: any) => {
 						<div>
 							<div className={styles.product_price}>
 								<h3>{price}</h3>
-								{comparePriceState !== '0.0' ? <h4>{comparePrice}</h4> : null}
+								{variant.compareAtPrice?.amount &&
+								variant.compareAtPrice?.amount !== '0.0' ? (
+									<h4>{comparePrice}</h4>
+								) : null}
 							</div>
 							{collection !== 'paket' ? <h4>{weight}</h4> : null}
 						</div>
