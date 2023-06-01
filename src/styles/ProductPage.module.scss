@@ -7,9 +7,13 @@
 
 .additional_info {
 	background-color: var(--accent-variant);
-	border-top-right-radius: $cardPadding;
+	border-bottom-right-radius: $cardPadding;
 	padding: $cardPadding;
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: var(--gap-horizontal);
 	.product_price {
 		display: flex;
 		flex-direction: row;
@@ -36,5 +40,28 @@
 	h4 {
 		letter-spacing: var(--font-spacing);
 		font-size: var(--font-size);
+	}
+	.info_container {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+		gap: calc(var(--gap-horizontal) * 0.5);
+		div {
+			color: var(--text-variant);
+			font-size: 0.9em;
+			display: flex;
+			align-items: center;
+			span {
+				display: inline-block;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			svg {
+				color: var(--accent);
+				height: 1.5em;
+				width: 1.5em;
+				margin-right: 1em;
+			}
+		}
 	}
 }

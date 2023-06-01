@@ -17,6 +17,7 @@
 		max-width: var(--max-width);
 		margin: 0 auto;
 		.page_content {
+			color: var(--text);
 			max-width: $breakpoint-laptop;
 			margin: 0 auto;
 			padding-bottom: var(--gap-vertical);

@@ -76,11 +76,27 @@ variants(first: 10) {
 }
 addonType: metafield(namespace: "addon", key: "type") {
   value
-  key
 }
 addonText: metafield(namespace: "addon", key: "text") {
   value
-  key
+}
+infoTillstand: metafield(namespace: "info", key: "tillstand") {
+  value
+}
+infoTillagning: metafield(namespace: "info", key: "tillagning") {
+  value
+}
+infoHallbarhet: metafield(namespace: "info", key: "hallbarhet") {
+  value
+}
+infoStorlek: metafield(namespace: "info", key: "storlek") {
+  value
+}
+infoFangst: metafield(namespace: "info", key: "fangst") {
+  value
+}
+infoLatin: metafield(namespace: "info", key: "latin") {
+  value
 }
 collections(first: 1) {
   nodes{

@@ -13,6 +13,7 @@ import styles from '@/styles/ProductPage.module.scss'
 import PageHeader from '@/components/PageHeader'
 import PageContent from '@/components/PageContent'
 import ImageViewer from '@/components/ImageViewer'
+import InfoIcon from '@/components/InfoIcon'
 
 const RecipePage = ({ shopName, product }: any) => {
 	const title = `${shopName} | Produkter - ${product.title}`
@@ -32,7 +33,16 @@ const RecipePage = ({ shopName, product }: any) => {
 		? { type: product.addonType.value, text: product.addonText.value }
 		: null
 	const weight = parseWeight(product.variants.edges[0].node)
-	console.log(product)
+	const infoData = [
+		{ type: 'latin', value: product.infoLatin?.value },
+		{ type: 'fangst', value: product.infoFangst?.value },
+		{ type: 'storlek', value: product.infoStorlek?.value },
+		{ type: 'hallbarhet', value: product.infoHallbarhet?.value },
+		{ type: 'tillagning', value: product.infoTillagning?.value },
+		{ type: 'tillstand', value: product.infoTillstand?.value },
+	].filter((info) => info.value !== undefined)
+
+	console.log(product, infoData)
 
 	return (
 		<>
@@ -55,13 +65,24 @@ const RecipePage = ({ shopName, product }: any) => {
 						addon={addon}
 					/>
 					<div className={styles.additional_info}>
-						<div className={styles.product_price}>
-							<h3>{price}</h3>
-							{product.compareAtPriceRange.minVariantPrice.amount !== '0.0' ? (
-								<h4>{comparePrice}</h4>
-							) : null}
+						<div>
+							<div className={styles.product_price}>
+								<h3>{price}</h3>
+								{product.compareAtPriceRange.minVariantPrice.amount !==
+								'0.0' ? (
+									<h4>{comparePrice}</h4>
+								) : null}
+							</div>
+							{collection !== 'paket' ? <h4>{weight}</h4> : null}
 						</div>
-						{collection !== 'paket' ? <h4>{weight}</h4> : null}
+						<div className={styles.info_container}>
+							{infoData.map((info) => (
+								<div key={info.type}>
+									{<InfoIcon type={info.type} />}{' '}
+									<span title={info.value}>{info.value}</span>
+								</div>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
