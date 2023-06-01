@@ -5,6 +5,7 @@ import StraightenOutlined from '@mui/icons-material/StraightenOutlined'
 import LocalDiningOutlined from '@mui/icons-material/LocalDiningOutlined'
 import AcUnitOutlined from '@mui/icons-material/AcUnitOutlined'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import { Tooltip } from '@mui/material'
 
 interface Props {
 	type: string
@@ -16,39 +17,51 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 	switch (type) {
 		case 'fangst':
 			return (
-				<i title={`Fångstzon${titleText}`}>
-					<PublicOutlined />
-				</i>
+				<Tooltip placement='bottom' title={`Fångstzon${titleText}`}>
+					<i>
+						<PublicOutlined />
+					</i>
+				</Tooltip>
 			)
 		case 'hallbarhet':
 			return (
-				<i title={`Hållbarhet${titleText}`}>
-					<AccessTimeOutlined />
-				</i>
+				<Tooltip placement='bottom' title={`Hållbarhet${titleText}`}>
+					<i>
+						<AccessTimeOutlined />
+					</i>
+				</Tooltip>
 			)
 		case 'latin':
 			return (
-				<i title={`Latinskt namn${titleText}`}>
-					<LocalOfferOutlined />
-				</i>
+				<Tooltip placement='bottom' title={`Latinskt namn${titleText}`}>
+					<i>
+						<LocalOfferOutlined />
+					</i>
+				</Tooltip>
 			)
 		case 'storlek':
 			return (
-				<i title={`Storlek${titleText}`}>
-					<StraightenOutlined />
-				</i>
+				<Tooltip placement='bottom' title={`Storlek${titleText}`}>
+					<i>
+						<StraightenOutlined />
+					</i>
+				</Tooltip>
 			)
 		case 'tillagning':
 			return (
-				<i title={`Tillagning${titleText}`}>
-					<LocalDiningOutlined />
-				</i>
+				<Tooltip placement='bottom' title={`Tillagning${titleText}`}>
+					<i>
+						<LocalDiningOutlined />
+					</i>
+				</Tooltip>
 			)
 		case 'tillstand':
 			return (
-				<i title={`Fysiskt tillstånd${titleText}`}>
-					<AcUnitOutlined />
-				</i>
+				<Tooltip placement='bottom' title={`Fysiskt tillstånd${titleText}`}>
+					<i>
+						<AcUnitOutlined />
+					</i>
+				</Tooltip>
 			)
 		default:
 			return <CloseOutlinedIcon />
