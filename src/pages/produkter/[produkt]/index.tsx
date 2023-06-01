@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Head from 'next/head'
 
 import { gqlShopify } from '@/pages/api/graphql'
@@ -15,24 +16,24 @@ import PageContent from '@/components/PageContent'
 import ImageViewer from '@/components/ImageViewer'
 import InfoIcon from '@/components/InfoIcon'
 
-const RecipePage = ({ shopName, product }: any) => {
+const ProductPage = ({ shopName, product }: any) => {
+	const [priceState, setPriceState] = useState(
+		product.priceRange.minVariantPrice.amount
+	)
+	const [comparePriceState, setComparePriceState] = useState(
+		product.compareAtPriceRange.minVariantPrice.amount
+	)
+	const [weightState, setWeightState] = useState(product.variants.edges[0].node)
+
 	const title = `${shopName} | Produkter - ${product.title}`
 
 	const collection = product.collections.nodes[0].handle
-	const price = parsePrice(
-		product.priceRange.minVariantPrice.amount,
-		collection,
-		product.variants.edges[0].node
-	)
-	const comparePrice = parsePrice(
-		product.compareAtPriceRange.minVariantPrice.amount,
-		collection,
-		product.variants.edges[0].node
-	)
+	const price = parsePrice(priceState, 'fullPrice', weightState)
+	const comparePrice = parsePrice(comparePriceState, 'fullPrice', weightState)
 	const addon = product.addonType
 		? { type: product.addonType.value, text: product.addonText.value }
 		: null
-	const weight = parseWeight(product.variants.edges[0].node)
+	const weight = parseWeight(weightState).replace('.', ',')
 	const infoData = [
 		{ type: 'latin', value: product.infoLatin?.value },
 		{ type: 'fangst', value: product.infoFangst?.value },
@@ -42,7 +43,16 @@ const RecipePage = ({ shopName, product }: any) => {
 		{ type: 'tillstand', value: product.infoTillstand?.value },
 	].filter((info) => info.value !== undefined)
 
-	console.log(product, infoData)
+	console.log(product)
+
+	const ctaContent = () => {
+		return (
+			<>
+				<div>Variants</div>
+				<div>Buy CTA</div>
+			</>
+		)
+	}
 
 	return (
 		<>
@@ -64,6 +74,11 @@ const RecipePage = ({ shopName, product }: any) => {
 						productTitle={product.title}
 						addon={addon}
 					/>
+					<div
+						className={`${layout.two_column_grid} ${styles.wrapped_container} ${styles.cta_mobile}`}
+					>
+						{ctaContent()}
+					</div>
 					<div className={styles.additional_info}>
 						<div>
 							<div className={styles.product_price}>
@@ -87,7 +102,11 @@ const RecipePage = ({ shopName, product }: any) => {
 				</div>
 			</div>
 			<div className={`${layout.container} ${layout.no_top_margin}`}>
-				<div className={styles.wrapped_container}>asd</div>
+				<div
+					className={`${layout.two_column_grid} ${styles.wrapped_container} ${styles.cta_desktop}`}
+				>
+					{ctaContent()}
+				</div>
 			</div>
 			<PageContent contentOnly content={product.descriptionHtml} />
 		</>
@@ -114,4 +133,4 @@ export const getServerSideProps = async (context: any) => {
 	}
 }
 
-export default RecipePage
+export default ProductPage

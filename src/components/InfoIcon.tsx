@@ -31,7 +31,7 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			return (
 				<Tooltip
 					disableFocusListener
-					placement='bottom'
+					placement='top'
 					title={`Fångstzon${titleText}`}
 					onClose={handleTooltipClose}
 					open={open}
@@ -46,7 +46,7 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			return (
 				<Tooltip
 					disableFocusListener
-					placement='bottom'
+					placement='top'
 					title={`Hållbarhet${titleText}`}
 					onClose={handleTooltipClose}
 					open={open}
@@ -61,7 +61,7 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			return (
 				<Tooltip
 					disableFocusListener
-					placement='bottom'
+					placement='top'
 					title={`Latinskt namn${titleText}`}
 					onClose={handleTooltipClose}
 					open={open}
@@ -76,7 +76,7 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			return (
 				<Tooltip
 					disableFocusListener
-					placement='bottom'
+					placement='top'
 					title={`Storlek${titleText}`}
 					onClose={handleTooltipClose}
 					open={open}
@@ -91,7 +91,7 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			return (
 				<Tooltip
 					disableFocusListener
-					placement='bottom'
+					placement='top'
 					title={`Tillagning${titleText}`}
 					onClose={handleTooltipClose}
 					open={open}
@@ -106,7 +106,7 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 			return (
 				<Tooltip
 					disableFocusListener
-					placement='bottom'
+					placement='top'
 					title={`Fysiskt tillstånd${titleText}`}
 					onClose={handleTooltipClose}
 					open={open}

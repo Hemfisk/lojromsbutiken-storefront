@@ -6,7 +6,7 @@
 }
 
 .additional_info {
-	background-color: var(--accent-variant);
+	background-color: var(--accent-variant-light);
 	border-bottom-right-radius: $cardPadding;
 	padding: $cardPadding;
 	overflow: hidden;
@@ -23,17 +23,20 @@
 		h3 {
 			color: var(--price);
 			letter-spacing: var(--font-spacing);
-			font-size: calc(var(--font-size) * 1.5);
+			font-size: calc(var(--font-size) * 1.7);
 		}
 		h4 {
 			color: var(--accent);
 			letter-spacing: var(--font-spacing);
-			font-size: var(--font-size);
+			font-size: calc(var(--font-size) * 1.2);
 			text-decoration: line-through;
 		}
 		@media screen and (max-width: $breakpoint-mobileBig) {
 			h3 {
-				font-size: calc(var(--font-size) * 1.2);
+				font-size: calc(var(--font-size) * 1.4);
+			}
+			h4 {
+				font-size: var(--font-size);
 			}
 		}
 	}
@@ -67,5 +70,22 @@
 				width: 1.5em;
 			}
 		}
+	}
+}
+
+.cta_desktop {
+	margin-top: var(--gap-horizontal);
+	margin-bottom: var(--gap-horizontal);
+	display: grid;
+	@media screen and (max-width: $breakpoint-mobileBig) {
+		display: none;
+	}
+}
+
+.cta_mobile {
+	margin: var(--gap-horizontal);
+	display: none;
+	@media screen and (max-width: $breakpoint-mobileBig) {
+		display: grid;
 	}
 }

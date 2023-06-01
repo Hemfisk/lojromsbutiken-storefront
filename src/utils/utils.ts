@@ -40,6 +40,9 @@ export const parsePrice = (
 		case 'paket':
 			return `${parseAmount(amount)} KR/ST`
 
+		case 'fullPrice':
+			return `${parseAmount(amount)} KR`
+
 		default:
 			switch (weightData.weightUnit) {
 				case 'KILOGRAMS':

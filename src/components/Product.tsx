@@ -21,7 +21,10 @@ const Product = ({ product }: Props) => {
 		collection,
 		productData.variants.edges[0].node
 	)
-	const weight = parseWeight(productData.variants.edges[0].node)
+	const weight = parseWeight(productData.variants.edges[0].node).replace(
+		'.',
+		','
+	)
 	const imageSrc = productData.images.edges[0].node.transformedSrc
 	const addon = product.node.addonType
 		? { type: product.node.addonType.value, text: product.node.addonText.value }
