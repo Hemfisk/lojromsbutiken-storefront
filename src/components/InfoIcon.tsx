@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import PublicOutlined from '@mui/icons-material/PublicOutlined'
 import AccessTimeOutlined from '@mui/icons-material/AccessTimeOutlined'
 import LocalOfferOutlined from '@mui/icons-material/LocalOfferOutlined'
@@ -13,6 +15,16 @@ interface Props {
 }
 
 const InfoIcon = ({ type, title = '' }: Props) => {
+	const [open, setOpen] = useState(false)
+
+	const handleTooltipClose = () => {
+		setOpen(false)
+	}
+
+	const handleTooltipOpen = () => {
+		setOpen(true)
+	}
+
 	const titleText = title.length > 0 ? `: ${title}` : ''
 	switch (type) {
 		case 'fangst':
@@ -21,9 +33,11 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 					disableFocusListener
 					placement='bottom'
 					title={`Fångstzon${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
 					arrow
 				>
-					<i>
+					<i onClick={handleTooltipOpen}>
 						<PublicOutlined />
 					</i>
 				</Tooltip>
@@ -34,9 +48,11 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 					disableFocusListener
 					placement='bottom'
 					title={`Hållbarhet${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
 					arrow
 				>
-					<i>
+					<i onClick={handleTooltipOpen}>
 						<AccessTimeOutlined />
 					</i>
 				</Tooltip>
@@ -47,9 +63,11 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 					disableFocusListener
 					placement='bottom'
 					title={`Latinskt namn${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
 					arrow
 				>
-					<i>
+					<i onClick={handleTooltipOpen}>
 						<LocalOfferOutlined />
 					</i>
 				</Tooltip>
@@ -60,9 +78,11 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 					disableFocusListener
 					placement='bottom'
 					title={`Storlek${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
 					arrow
 				>
-					<i>
+					<i onClick={handleTooltipOpen}>
 						<StraightenOutlined />
 					</i>
 				</Tooltip>
@@ -73,9 +93,11 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 					disableFocusListener
 					placement='bottom'
 					title={`Tillagning${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
 					arrow
 				>
-					<i>
+					<i onClick={handleTooltipOpen}>
 						<LocalDiningOutlined />
 					</i>
 				</Tooltip>
@@ -86,9 +108,11 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 					disableFocusListener
 					placement='bottom'
 					title={`Fysiskt tillstånd${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
 					arrow
 				>
-					<i>
+					<i onClick={handleTooltipOpen}>
 						<AcUnitOutlined />
 					</i>
 				</Tooltip>
