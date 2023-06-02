@@ -17,7 +17,7 @@ const Product = ({ product }: Props) => {
 
 	const collection = product.node.collections.nodes[0].handle
 	const price = parsePrice(
-		productData.priceRange.minVariantPrice.amount,
+		productData.variants.edges[0].node.price.amount,
 		collection,
 		productData.variants.edges[0].node
 	)
@@ -75,7 +75,10 @@ const Product = ({ product }: Props) => {
 					<InfoIcon key={info.type} type={info.type} title={info.value} />
 				))}
 			</div>
-			<h4 className={styles.product_price}>{price}</h4>
+			<h4 className={styles.product_price}>
+				<span>från </span>
+				{price}
+			</h4>
 			<Button
 				clickCallback={() =>
 					console.log('buy', productData.variants.edges[0].node.id)

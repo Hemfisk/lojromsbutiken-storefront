@@ -14,16 +14,16 @@ export const generateImageSrcFromString = (
 	return { src: null, alt: null }
 }
 
-export const parseWeight = (weightData: any): string => {
-	switch (weightData.weightUnit) {
+export const parseWeight = (variantData: any): string => {
+	switch (variantData.weightUnit) {
 		case 'KILOGRAMS':
-			return `${weightData.weight} KG`
+			return `${variantData.weight} KG`
 
 		case 'GRAMS':
-			return `${weightData.weight} g`
+			return `${variantData.weight} g`
 
 		default:
-			return `${weightData.weight} KG`
+			return `${variantData.weight} KG`
 	}
 }
 
@@ -34,28 +34,30 @@ export const parseAmount = (price: number): number => {
 export const parsePrice = (
 	amount: number,
 	collection: string,
-	weightData: any
+	variantData: any
 ): string => {
 	switch (collection) {
 		case 'paket':
+			if (variantData.amount) {
+				return `${parseAmount(
+					amount / parseInt(variantData.amount.value)
+				)} KR/ST`
+			}
 			return `${parseAmount(amount)} KR/ST`
 
 		case 'fullPrice':
 			return `${parseAmount(amount)} KR`
 
 		default:
-			switch (weightData.weightUnit) {
+			switch (variantData.weightUnit) {
 				case 'KILOGRAMS':
-					return `${parseAmount(amount / weightData.weight)} KR/KG`
+					return `${parseAmount(amount / variantData.weight)} KR/KG`
+
+				case 'GRAMS':
+					return `${parseAmount(amount / (variantData.weight / 100))} KR/HG`
 
 				default:
 					return `${parseAmount(amount)} KR/ST`
-
-				/* case 'GRAMS':
-					return `${parseAmount(amount)} KR/${weightData.weight} g`
-
-				default:
-					return `${parseAmount(amount / weightData.weight)} KR/KG` */
 			}
 	}
 }

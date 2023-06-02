@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import RadioButtonUncheckedOutlined from '@mui/icons-material/RadioButtonUncheckedOutlined'
+import RadioButtonCheckedOutlined from '@mui/icons-material/RadioButtonCheckedOutlined'
 
 import { gqlShopify } from '@/pages/api/graphql'
 import {
@@ -18,21 +20,23 @@ import InfoIcon from '@/components/InfoIcon'
 import Button from '@/components/Button'
 
 const ProductPage = ({ shopName, product }: any) => {
-	const [variant, setVariant] = useState(product.variants.edges[0].node)
+	const [variantState, setVariantState] = useState(
+		product.variants.edges[0].node
+	)
 
 	const title = `${shopName} | Produkter - ${product.title}`
 
 	const collection = product.collections.nodes[0].handle
-	const price = parsePrice(variant.price.amount, 'fullPrice', variant)
+	const price = parsePrice(variantState.price.amount, 'fullPrice', variantState)
 	const comparePrice = parsePrice(
-		variant.compareAtPrice?.amount,
+		variantState.compareAtPrice?.amount,
 		'fullPrice',
-		variant
+		variantState
 	)
 	const addon = product.addonType
 		? { type: product.addonType.value, text: product.addonText.value }
 		: null
-	const weight = parseWeight(variant).replace('.', ',')
+	const weight = parseWeight(variantState).replace('.', ',')
 	const infoData = [
 		{ type: 'latin', value: product.infoLatin?.value },
 		{ type: 'fangst', value: product.infoFangst?.value },
@@ -42,26 +46,49 @@ const ProductPage = ({ shopName, product }: any) => {
 		{ type: 'tillstand', value: product.infoTillstand?.value },
 	].filter((info) => info.value !== undefined)
 
-	console.log(product)
-
 	const ctaContent = () => {
 		return (
 			<>
 				{product.variants?.edges?.length > 1 ? (
 					<div className={styles.variants_container}>
-						{product.variants.edges.map((variant: any) => (
-							<div
-								key={variant.node.id}
-								className={styles.variant}
-								onClick={() => setVariant(variant.node)}
-							>
-								{variant.node.weight}
-							</div>
-						))}
+						{product.variants.edges.map((variant: any) => {
+							const selected = variant.node.id === variantState.id
+							return (
+								<div
+									key={variant.node.id}
+									className={`${styles.variant} ${
+										selected ? styles.selected : ''
+									}`}
+									onClick={() => setVariantState(variant.node)}
+								>
+									<div className={styles.description_container}>
+										{selected ? (
+											<RadioButtonCheckedOutlined />
+										) : (
+											<RadioButtonUncheckedOutlined />
+										)}
+										<h4>{variant.node.title}</h4>
+										{variant.node.description ? (
+											<span>{variant.node.description.value}</span>
+										) : null}
+									</div>
+									<div className={styles.price}>
+										{parsePrice(
+											variant.node.price.amount,
+											collection,
+											variant.node
+										)}
+									</div>
+								</div>
+							)
+						})}
 					</div>
 				) : null}
 				<div className={styles.buy_container}>
-					<Button primary clickCallback={() => console.log('buy', variant.id)}>
+					<Button
+						primary
+						clickCallback={() => console.log('buy', variantState.id)}
+					>
 						Lägg i varukorg
 					</Button>
 				</div>
@@ -97,13 +124,17 @@ const ProductPage = ({ shopName, product }: any) => {
 					<div className={styles.additional_info}>
 						<div>
 							<div className={styles.product_price}>
-								<h3>{price}</h3>
-								{variant.compareAtPrice?.amount &&
-								variant.compareAtPrice?.amount !== '0.0' ? (
-									<h4>{comparePrice}</h4>
+								<h2>{price}</h2>
+								{variantState.compareAtPrice?.amount &&
+								variantState.compareAtPrice?.amount !== '0.0' ? (
+									<h3>{comparePrice}</h3>
 								) : null}
 							</div>
-							{collection !== 'paket' ? <h4>{weight}</h4> : null}
+							{collection !== 'paket' ? (
+								<h4>{weight}</h4>
+							) : (
+								<h4>{variantState.title}</h4>
+							)}
 						</div>
 						<div className={styles.info_container}>
 							{infoData.map((info) => (

@@ -93,11 +93,20 @@
 		font-size: var(--font-size);
 		color: var(--price);
 		font-weight: 700;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 		@media screen and (max-width: $breakpoint-mobile) {
 			font-size: calc(var(--font-size) * 0.8);
 		}
 		@media screen and (max-width: $breakpoint-mobileSmall) {
 			font-size: var(--font-size);
+		}
+		span {
+			color: var(--accent);
+			font-size: 0.6em;
+			margin-bottom: 0.5em;
+			text-transform: uppercase;
 		}
 	}
 }

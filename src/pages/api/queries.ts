@@ -52,20 +52,11 @@ images(first: 4) {
     }
   }
 }
-priceRange {
-  minVariantPrice {
-    amount
-  }
-}
-compareAtPriceRange {
-  minVariantPrice {
-    amount
-  }
-}
 variants(first: 10) {
   edges {
     node {
       id
+      title
       weight
       weightUnit
       price {
@@ -73,6 +64,12 @@ variants(first: 10) {
       }
       compareAtPrice {
         amount
+      }
+      description: metafield(namespace: "variant", key: "description") {
+        value
+      }
+      amount: metafield(namespace: "variant", key: "antal") {
+        value
       }
     }
   }
