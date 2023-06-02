@@ -132,9 +132,9 @@ const ProductPage = ({ shopName, product }: any) => {
 							</div>
 							{collection !== 'paket' ? (
 								<h4>{weight}</h4>
-							) : (
+							) : product.variants?.edges?.length > 1 ? (
 								<h4>{variantState.title}</h4>
-							)}
+							) : null}
 						</div>
 						<div className={styles.info_container}>
 							{infoData.map((info) => (
