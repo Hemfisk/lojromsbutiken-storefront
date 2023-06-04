@@ -6,13 +6,21 @@ import styles from '@/styles/ImageViewer.module.scss'
 import { addonBanner, addonRound } from './Addons'
 
 interface Props {
-	images: any
+	images?: any
+	imageSrc?: string
 	productTitle: string
-	addon: { type: string; text: string } | null
+	addon?: { type: string; text: string } | null
 }
 
-const ImageViewer = ({ images, productTitle, addon = null }: Props) => {
-	const [image, setImage] = useState(images?.edges[0]?.node?.transformedSrc)
+const ImageViewer = ({
+	images,
+	imageSrc = '',
+	productTitle,
+	addon = null,
+}: Props) => {
+	const [image, setImage] = useState(
+		imageSrc || images?.edges[0]?.node?.transformedSrc
+	)
 
 	const imageSelector = () => {
 		if (images?.edges?.length > 1) {

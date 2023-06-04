@@ -175,3 +175,11 @@ query getProduct ($handle: String!) {
   }
 }
 `
+
+export const GET_PRODUCT_BY_ID = `
+query getProductById ($id: ID!) {
+  product(id: $id) {
+    ${productContent}
+  }
+}
+`

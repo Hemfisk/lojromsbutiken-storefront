@@ -67,6 +67,8 @@ type HtmlNode = {
 	children: HtmlNode[]
 	listType?: string
 	value?: string
+	bold?: boolean
+	italic?: boolean
 }
 
 export const parseHtml = (data: HtmlNode): string => {
@@ -74,6 +76,15 @@ export const parseHtml = (data: HtmlNode): string => {
 		?.map((node: HtmlNode) => {
 			switch (node.type) {
 				case 'text': {
+					if (node.bold && !node.italic) {
+						return `<b>${node.value}</b>`
+					}
+					if (node.italic && !node.bold) {
+						return `<i>${node.value}</i>`
+					}
+					if (node.bold && node.italic) {
+						return `<b><i>${node.value}</i></b>`
+					}
 					return node.value
 				}
 				case 'paragraph': {

@@ -1,0 +1,28 @@
+@import './utils.scss';
+
+.wrapped_container {
+	max-width: $breakpoint-laptop;
+	margin: 0 auto;
+}
+
+.ingredients_container {
+	background-color: var(--accent-variant-light);
+	border-bottom-right-radius: $cardPadding;
+	padding: $cardPadding;
+	overflow: hidden;
+	font-size: calc(var(--font-size) * 0.8);
+	p {
+		font-size: 1em;
+	}
+	ul,
+	ol {
+		list-style-position: inside;
+		margin-bottom: 1em;
+	}
+	h4 {
+		letter-spacing: var(--font-spacing);
+		font-size: var(--font-size);
+		font-weight: 500;
+		margin-bottom: 1em;
+	}
+}

@@ -65,7 +65,7 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 	const productsGrid = (productsToDisplay: any[]) => (
 		<div className={layout.grid_container}>
 			{productsToDisplay.map((product: any) => (
-				<Product key={product.node.handle} product={product} />
+				<Product key={product.node.handle} productData={product.node} />
 			))}
 		</div>
 	)

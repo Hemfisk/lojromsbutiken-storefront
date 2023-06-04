@@ -9,13 +9,11 @@ import { addonBanner, addonRound } from './Addons'
 import InfoIcon from './InfoIcon'
 
 interface Props {
-	product: any
+	productData: any
 }
 
-const Product = ({ product }: Props) => {
-	const productData = product.node
-
-	const collection = product.node.collections.nodes[0].handle
+const Product = ({ productData }: Props) => {
+	const collection = productData.collections.nodes[0].handle
 	const price = parsePrice(
 		productData.variants.edges[0].node.price.amount,
 		collection,
@@ -26,8 +24,8 @@ const Product = ({ product }: Props) => {
 		','
 	)
 	const imageSrc = productData.images.edges[0].node.transformedSrc
-	const addon = product.node.addonType
-		? { type: product.node.addonType.value, text: product.node.addonText.value }
+	const addon = productData.addonType
+		? { type: productData.addonType.value, text: productData.addonText.value }
 		: null
 	const infoData = [
 		{ type: 'latin', value: productData.infoLatin?.value },
@@ -45,7 +43,7 @@ const Product = ({ product }: Props) => {
 			{addonRound(addon)}
 			<div className={styles.product_container}>
 				<Link
-					href={`produkter/${productData.handle}`}
+					href={`/produkter/${productData.handle}`}
 					className={styles.product_image_container}
 				>
 					<Image

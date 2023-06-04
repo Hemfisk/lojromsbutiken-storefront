@@ -36,7 +36,7 @@ const ProductPage = ({ shopName, product }: any) => {
 	const addon = product.addonType
 		? { type: product.addonType.value, text: product.addonText.value }
 		: null
-	const weight = parseWeight(variantState).replace('.', ',')
+	const weight = parseWeight(variantState)
 	const infoData = [
 		{ type: 'latin', value: product.infoLatin?.value },
 		{ type: 'fangst', value: product.infoFangst?.value },
