@@ -18,9 +18,10 @@ import Product from '@/components/Product'
 
 const RecipePage = ({ shopName, recipe, products }: any) => {
 	const title = `${shopName} | Recept - ${recipe.title}`
-	const ingredients = parseHtml(JSON.parse(recipe.ingredients?.value))
+	const ingredients = recipe.ingredients?.value
+		? parseHtml(JSON.parse(recipe.ingredients?.value))
+		: ''
 
-	console.log(products)
 	return (
 		<>
 			<Head>
@@ -52,19 +53,25 @@ const RecipePage = ({ shopName, recipe, products }: any) => {
 			</div>
 			<PageContent contentOnly content={recipe.contentHtml} />
 			<div className={`${layout.container} ${layout.no_top_margin}`}>
-				<div className={styles.wrapped_container}>
-					<PageHeader noPadding heading='h2'>
-						Relaterade produkter
-					</PageHeader>
-				</div>
-				<div className={`${layout.grid_container} ${styles.wrapped_container}`}>
-					{products.map((productData: any) => (
-						<Product
-							key={productData.product.handle}
-							productData={productData.product}
-						/>
-					))}
-				</div>
+				{products ? (
+					<>
+						<div className={styles.wrapped_container}>
+							<PageHeader noPadding heading='h2'>
+								Relaterade produkter
+							</PageHeader>
+						</div>
+						<div
+							className={`${layout.grid_container} ${styles.wrapped_container}`}
+						>
+							{products?.map((productData: any) => (
+								<Product
+									key={productData.product.handle}
+									productData={productData.product}
+								/>
+							))}
+						</div>
+					</>
+				) : null}
 			</div>
 		</>
 	)
@@ -75,11 +82,15 @@ export const getServerSideProps = async (context: any) => {
 
 	const recipe = await gqlShopify(GET_RECIPE, { handle: recept })
 
-	const allProducts = await Promise.all(
-		JSON.parse(recipe.blog.articleByHandle.products?.value).map(
-			(productId: string) => gqlShopify(GET_PRODUCT_BY_ID, { id: productId })
-		)
-	)
+	console.log(recipe)
+	const allProducts = recipe.blog.articleByHandle?.products?.value
+		? await Promise.all(
+				JSON.parse(recipe.blog.articleByHandle.products?.value).map(
+					(productId: string) =>
+						gqlShopify(GET_PRODUCT_BY_ID, { id: productId })
+				)
+		  )
+		: null
 
 	const shop = await gqlShopify(GET_SHOP_NAME, {})
 
