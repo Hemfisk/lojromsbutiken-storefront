@@ -10,3 +10,27 @@
 	@include contentPadding;
 	width: 100%;
 }
+
+.select_modal_container {
+	left: 0;
+	top: 0;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(10px);
+	position: fixed;
+	z-index: 99;
+	width: 100vw;
+	height: 100vh;
+	.select_modal {
+		position: fixed;
+		display: flex;
+		gap: var(--gap-horizontal);
+		align-items: center;
+		@media screen and (max-width: $breakpoint-mobileBig) {
+			flex-direction: column;
+		}
+	}
+}

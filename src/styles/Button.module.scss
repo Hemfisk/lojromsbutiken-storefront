@@ -16,6 +16,9 @@
 	border: 1px solid var(--accent-variant);
 	background: none;
 	outline: none;
+	&.background {
+		background-color: var(--background);
+	}
 	&.primary {
 		border: none;
 		color: var(--background);

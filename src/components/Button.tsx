@@ -5,6 +5,7 @@ import styles from '@/styles/Button.module.scss'
 interface Props {
 	children: React.ReactNode
 	primary?: boolean
+	background?: boolean
 	type?: 'button' | 'submit' | 'reset' | undefined
 	disabled?: boolean
 	clickCallback?: () => void
@@ -13,6 +14,7 @@ interface Props {
 const Button = ({
 	children,
 	primary = false,
+	background = false,
 	type = 'button',
 	disabled = false,
 	clickCallback,
@@ -25,7 +27,13 @@ const Button = ({
 			}}
 			type={type}
 			disabled={disabled}
-			className={primary ? `${styles.button} ${styles.primary}` : styles.button}
+			className={
+				primary
+					? `${styles.button} ${styles.primary}`
+					: background
+					? `${styles.button} ${styles.background}`
+					: styles.button
+			}
 		>
 			{children}
 		</button>

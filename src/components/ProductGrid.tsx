@@ -13,6 +13,7 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 	const [selectedCollection, setSelectedCollection] = useState<string | null>(
 		null
 	)
+	const [showSelectModal, setShowSelectModal] = useState(false)
 	const [productSearch, setProductSearch] = useState<string>('')
 
 	const productsByCollection = collections.map((collection: any) => {
@@ -24,6 +25,41 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 
 	const toggleCollection = (handle: string | null) => {
 		setSelectedCollection(handle)
+	}
+
+	const SelectModal = () => {
+		return (
+			<div
+				className={styles.select_modal_container}
+				onClick={() => setShowSelectModal(false)}
+			>
+				<div className={styles.select_modal}>
+					<Button
+						primary={!selectedCollection}
+						background={!!selectedCollection}
+						clickCallback={() => {
+							toggleCollection(null)
+							setShowSelectModal(false)
+						}}
+					>
+						Alla produkter
+					</Button>
+					{collections.map((collection: any) => (
+						<Button
+							primary={selectedCollection === collection.node.handle}
+							background={selectedCollection !== collection.node.handle}
+							key={collection.node.handle}
+							clickCallback={() => {
+								toggleCollection(collection.node.handle)
+								setShowSelectModal(false)
+							}}
+						>
+							{collection.node.title}
+						</Button>
+					))}
+				</div>
+			</div>
+		)
 	}
 
 	const productsGrid = (productsToDisplay: any[]) => (
@@ -110,7 +146,12 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 			<div className={`${layout.flex_row} ${layout.gap_large}`}>
 				<div className={`${layout.flex_row} ${layout.collapse_mobile}`}>
 					{width <= 960 ? (
-						<Button primary>Alla produkter</Button>
+						<>
+							<Button primary clickCallback={() => setShowSelectModal(true)}>
+								{selectedCollection || 'Alla produkter'}
+							</Button>
+							{showSelectModal ? <SelectModal /> : null}
+						</>
 					) : (
 						<>
 							<Button
