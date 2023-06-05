@@ -4,7 +4,7 @@ import { gqlShopify } from '@/pages/api/graphql'
 import { GET_PAYMENT_METHODS, GET_SHOP_NAME } from '@/pages/api/queries'
 
 import layout from '@/styles/Layout.module.scss'
-import styles from '@/styles/Cart.module.scss'
+//import styles from '@/styles/Cart.module.scss'
 import PageHeader from '@/components/PageHeader'
 import { useCart } from '@/context/state'
 
