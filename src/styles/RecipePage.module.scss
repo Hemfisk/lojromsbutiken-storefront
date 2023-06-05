@@ -1,10 +1,5 @@
 @import './utils.scss';
 
-.wrapped_container {
-	max-width: $breakpoint-laptop;
-	margin: 0 auto;
-}
-
 .ingredients_container {
 	background-color: var(--accent-variant-light);
 	border-bottom-right-radius: $cardPadding;

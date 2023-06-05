@@ -7,12 +7,16 @@ import { parsePrice, parseWeight } from '@/utils/utils'
 import Button from './Button'
 import { addonBanner, addonRound } from './Addons'
 import InfoIcon from './InfoIcon'
+import { useCart } from '@/context/state'
+import { addToCart } from '@/utils/cartUtils'
 
 interface Props {
 	productData: any
 }
 
 const Product = ({ productData }: Props) => {
+	const { cartId, items, updateCartId, updateCartItems } = useCart()
+
 	const collection = productData.collections.nodes[0].handle
 	const price = parsePrice(
 		productData.variants.edges[0].node.price.amount,
@@ -79,7 +83,13 @@ const Product = ({ productData }: Props) => {
 			</h4>
 			<Button
 				clickCallback={() =>
-					console.log('buy', productData.variants.edges[0].node.id)
+					addToCart(
+						productData.variants.edges[0].node.id,
+						cartId,
+						items,
+						updateCartId,
+						updateCartItems
+					)
 				}
 			>
 				Köp

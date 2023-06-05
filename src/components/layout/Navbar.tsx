@@ -8,6 +8,8 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
 import styles from '@/styles/Navigation.module.scss'
+import { useCart } from '@/context/state'
+import { getCart } from '@/utils/cartUtils'
 
 interface Props {
 	fontFamily: NextFont
@@ -46,17 +48,24 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 	const [active, setActive] = useState(currentPage || '')
 	const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false)
 
+	const { items, updateCartId, updateCartItems } = useCart()
+
 	const router = useRouter()
 
 	useEffect(() => {
-		router.events.on('routeChangeComplete', () => {
+		router.events.on('routeChangeComplete', () =>
 			setMobileNavigationOpen(false)
-		})
+		)
 	}, [router.events])
 
 	useEffect(() => {
 		setActive(currentPage)
 	}, [currentPage])
+
+	useEffect(() => {
+		getCart(updateCartId, updateCartItems)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const mobileNavigation = () => {
 		if (!mobileNavigationOpen) {
@@ -130,13 +139,12 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 						))}
 					</nav>
 					<div className={styles.cart_container}>
-						<div
-							tabIndex={0}
-							onClick={() => console.log('cart click')}
-							className={styles.cart_button}
-						>
+						<Link tabIndex={0} href='/kundvagn' className={styles.cart_button}>
+							{items && items > 0 ? (
+								<div className={styles.cart_number}>{items}</div>
+							) : null}
 							<ShoppingCartOutlinedIcon />
-						</div>
+						</Link>
 					</div>
 				</div>
 			</div>

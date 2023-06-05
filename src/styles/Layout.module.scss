@@ -63,3 +63,8 @@
 		width: 100%;
 	}
 }
+
+.wrapped_container {
+	max-width: $breakpoint-laptop;
+	margin: 0 auto;
+}
