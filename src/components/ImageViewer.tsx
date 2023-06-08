@@ -10,6 +10,7 @@ interface Props {
 	imageSrc?: string
 	productTitle: string
 	addon?: { type: string; text: string } | null
+	certs?: React.ReactNode
 }
 
 const ImageViewer = ({
@@ -17,6 +18,7 @@ const ImageViewer = ({
 	imageSrc = '',
 	productTitle,
 	addon = null,
+	certs = null,
 }: Props) => {
 	const [image, setImage] = useState(
 		imageSrc || images?.edges[0]?.node?.transformedSrc
@@ -64,6 +66,7 @@ const ImageViewer = ({
 					sizes='(min-width: 60em) 24vw, (min-width: 28em) 45vw, 100vw'
 				/>
 				{addonBanner(addon, { right: '-34%', bottom: '16%' })}
+				{certs ? certs : null}
 			</div>
 			{imageSelector()}
 		</div>

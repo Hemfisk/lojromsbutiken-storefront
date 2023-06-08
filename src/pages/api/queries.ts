@@ -98,6 +98,18 @@ infoFangst: metafield(namespace: "info", key: "fangst") {
 infoLatin: metafield(namespace: "info", key: "latin") {
   value
 }
+certProduct: metafield(namespace: "certs", key: "product_logo") {
+  value
+}
+certASC: metafield(namespace: "certs", key: "asc") {
+  value
+}
+certKrav: metafield(namespace: "certs", key: "krav") {
+  value
+}
+certMSC: metafield(namespace: "certs", key: "msc") {
+  value
+}
 collections(first: 1) {
   nodes{
     handle

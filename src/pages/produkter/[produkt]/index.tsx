@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 import RadioButtonUncheckedOutlined from '@mui/icons-material/RadioButtonUncheckedOutlined'
 import RadioButtonCheckedOutlined from '@mui/icons-material/RadioButtonCheckedOutlined'
 
@@ -21,10 +22,15 @@ import Button from '@/components/Button'
 import { useCart } from '@/context/state'
 import { addToCart } from '@/utils/cartUtils'
 
+import asc from '@/static/asc_logo.png'
+import krav from '@/static/krav_logo.png'
+import msc from '@/static/msc_logo.png'
+
 const ProductPage = ({ shopName, product }: any) => {
 	const [variantState, setVariantState] = useState(
 		product.variants.edges[0].node
 	)
+	console.log(product)
 
 	const { cartId, items, updateCartId, updateCartItems } = useCart()
 
@@ -49,6 +55,12 @@ const ProductPage = ({ shopName, product }: any) => {
 		{ type: 'tillagning', value: product.infoTillagning?.value },
 		{ type: 'tillstand', value: product.infoTillstand?.value },
 	].filter((info) => info.value !== undefined)
+
+	const certs = [
+		{ type: 'msc', value: product.certMSC?.value, src: msc },
+		{ type: 'krav', value: product.certKrav?.value, src: krav },
+		{ type: 'asc', value: product.certASC?.value, src: asc },
+	].filter((cert) => cert.value === 'true')
 
 	const ctaContent = () => {
 		return (
@@ -127,6 +139,22 @@ const ProductPage = ({ shopName, product }: any) => {
 						images={product.images}
 						productTitle={product.title}
 						addon={addon}
+						certs={
+							<div className={styles.certs_container}>
+								{certs.map((cert) => (
+									<div key={cert.type}>
+										<Image
+											src={cert.src}
+											alt={`${cert.type} logotyp`}
+											sizes='(min-width: 60em) 24vw,
+												(min-width: 28em) 45vw,
+												100vw'
+											priority
+										/>
+									</div>
+								))}
+							</div>
+						}
 					/>
 					<div
 						className={`${styles.cta_container} ${layout.wrapped_container} ${styles.cta_mobile}`}

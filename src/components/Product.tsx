@@ -10,6 +10,9 @@ import InfoIcon from './InfoIcon'
 import { useCart } from '@/context/state'
 import { addToCart } from '@/utils/cartUtils'
 
+import asc from '@/static/asc_logo.png'
+import krav from '@/static/krav_logo.png'
+import msc from '@/static/msc_logo.png'
 interface Props {
 	productData: any
 }
@@ -42,6 +45,18 @@ const Product = ({ productData }: Props) => {
 		.filter((info) => info.value !== undefined)
 		.slice(0, 3)
 
+	const certs = productData.certProduct?.value
+		? [
+				{ type: 'msc', value: productData.certMSC?.value, src: msc },
+				{ type: 'krav', value: productData.certKrav?.value, src: krav },
+				{ type: 'asc', value: productData.certASC?.value, src: asc },
+		  ].filter(
+				(cert) =>
+					cert.type ===
+					JSON.parse(productData.certProduct?.value)[0].toLowerCase()
+		  )
+		: []
+
 	return (
 		<div className={styles.product}>
 			{addonRound(addon)}
@@ -70,6 +85,19 @@ const Product = ({ productData }: Props) => {
 					</h3>
 					{collection !== 'paket' ? <h4>{weight}</h4> : null}
 					{addonBanner(addon)}
+					<div className={styles.certs_container}>
+						{certs.map((cert) => (
+							<Image
+								src={cert.src}
+								alt={`${cert.type} logotyp`}
+								key={cert.type}
+								sizes='(min-width: 60em) 24vw,
+												(min-width: 28em) 45vw,
+												100vw'
+								priority
+							/>
+						))}
+					</div>
 				</div>
 			</div>
 			<div className={styles.product_info_icons}>
