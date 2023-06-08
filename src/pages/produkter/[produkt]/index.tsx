@@ -30,7 +30,6 @@ const ProductPage = ({ shopName, product }: any) => {
 	const [variantState, setVariantState] = useState(
 		product.variants.edges[0].node
 	)
-	console.log(product)
 
 	const { cartId, items, updateCartId, updateCartItems } = useCart()
 
@@ -103,8 +102,8 @@ const ProductPage = ({ shopName, product }: any) => {
 				<div className={styles.buy_container}>
 					<Button
 						primary
-						clickCallback={() =>
-							addToCart(
+						clickCallback={async () =>
+							await addToCart(
 								variantState.id,
 								cartId,
 								items,

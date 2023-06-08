@@ -195,3 +195,69 @@ query getProductById ($id: ID!) {
   }
 }
 `
+
+const cartDetails = `
+cart {
+  id
+  createdAt
+  updatedAt
+  totalQuantity
+  # The estimated total cost of all merchandise that the customer will pay at checkout.
+  cost {
+    totalAmount {
+      amount
+    }
+    # The estimated amount, before taxes and discounts, for the customer to pay at checkout.
+    subtotalAmount {
+      amount
+    }
+    # The estimated tax amount for the customer to pay at checkout.
+    totalTaxAmount {
+      amount
+    }
+    # The estimated duty amount for the customer to pay at checkout.
+    totalDutyAmount {
+      amount
+    }
+  }
+}
+`
+
+export const CREATE_CART = `
+mutation createCart ($id: ID!) {
+  cartCreate(
+    input: {
+      lines: [
+        {
+          quantity: 1
+          merchandiseId: $id
+        }
+      ],
+    }
+  ) {
+    ${cartDetails}
+  }
+}
+`
+
+export const ADD_TO_CART = `
+mutation addToCart ($cartId: ID!, $id: ID!) {
+  cartLinesAdd(
+    cartId: $cartId
+    lines: {
+      quantity: 1 
+      merchandiseId: $id
+    }
+  ) {
+    ${cartDetails}
+  }
+}
+`
+
+export const GET_CHECKOUT_URL = `
+query getCheckoutUrl ($id: ID!) {
+  cart(id: $id) {
+    checkoutUrl
+  }
+}
+`

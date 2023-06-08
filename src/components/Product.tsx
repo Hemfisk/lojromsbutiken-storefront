@@ -110,8 +110,8 @@ const Product = ({ productData }: Props) => {
 				{price}
 			</h4>
 			<Button
-				clickCallback={() =>
-					addToCart(
+				clickCallback={async () =>
+					await addToCart(
 						productData.variants.edges[0].node.id,
 						cartId,
 						items,

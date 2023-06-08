@@ -1,4 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import { gqlShopify } from '@/pages/api/graphql'
+import { ADD_TO_CART, CREATE_CART, GET_CHECKOUT_URL } from '@/pages/api/queries'
+
 export const getCart = (updateCartId: any, updateCartItems: any) => {
 	const cart = localStorage.getItem('cart')
 	if (cart) {
@@ -25,7 +27,7 @@ export const updateCart = (
 	return null
 }
 
-export const addToCart = (
+export const addToCart = async (
 	variantId: string,
 	cartId: string | null,
 	items: number | null,
@@ -33,22 +35,30 @@ export const addToCart = (
 	updateCartItems: any
 ) => {
 	if (items && items > 0) {
-		console.log(
-			'add to cart',
-			variantId,
-			cartId,
-			items,
-			updateCartId,
-			updateCartItems
-		)
+		const updatedCart = await gqlShopify(ADD_TO_CART, {
+			cartId: cartId,
+			id: variantId,
+		})
+		if (updatedCart) {
+			updateCart(updateCartId, updateCartItems, {
+				cartId: updatedCart.cartLinesAdd?.cart?.id,
+				items: updatedCart.cartLinesAdd?.cart?.totalQuantity,
+			})
+		}
 	} else {
-		console.log(
-			'create cart',
-			variantId,
-			cartId,
-			items,
-			updateCartId,
-			updateCartItems
-		)
+		const createCart = await gqlShopify(CREATE_CART, { id: variantId })
+		if (createCart) {
+			updateCart(updateCartId, updateCartItems, {
+				cartId: createCart.cartCreate?.cart?.id,
+				items: createCart.cartCreate?.cart?.totalQuantity,
+			})
+		}
+	}
+}
+
+export const getCheckoutUrl = async (cartId: string) => {
+	const checkoutUrl = await gqlShopify(GET_CHECKOUT_URL, { id: cartId })
+	if (checkoutUrl) {
+		console.log(checkoutUrl)
 	}
 }
