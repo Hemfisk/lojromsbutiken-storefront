@@ -34,9 +34,7 @@ const RecipePage = ({ shopName, recipe, products }: any) => {
 						{recipe.title}
 					</PageHeader>
 				</div>
-				<div
-					className={`${layout.two_column_grid} ${layout.wrapped_container}`}
-				>
+				<div className={`${layout.three_column_grid} ${layout.big_left}`}>
 					<ImageViewer
 						imageSrc={recipe.image.transformedSrc}
 						productTitle={recipe.title}
@@ -51,7 +49,7 @@ const RecipePage = ({ shopName, recipe, products }: any) => {
 					</div>
 				</div>
 			</div>
-			<PageContent contentOnly content={recipe.contentHtml} />
+			<PageContent contentOnly maxWidth content={recipe.contentHtml} />
 			<div className={`${layout.container} ${layout.no_top_margin}`}>
 				{products ? (
 					<>

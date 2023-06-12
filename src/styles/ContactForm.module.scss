@@ -6,8 +6,7 @@
 	@include contentPadding;
 	.contact_container {
 		width: 100%;
-		margin: 0 auto;
-		max-width: $breakpoint-laptop;
+		@include maxWidthContainer;
 		padding-bottom: var(--gap-vertical);
 		input {
 			@include inputStyles;

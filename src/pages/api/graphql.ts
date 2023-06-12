@@ -12,16 +12,30 @@ export const gqlShopify = async (query: string, variables?: {}) =>
 		.then((response) => response.json())
 		.then((response) => response.data)
 
+const getResult = (response: any, key: string | string[]) => {
+	let gqlResult = response
+	if (typeof key === 'string') {
+		gqlResult = response[key]
+	} else {
+		key.forEach((k) => {
+			gqlResult = gqlResult[k]
+		})
+	}
+	return gqlResult
+}
+
 export const getAllGqlShopify = async (
-	key: string,
+	key: string | string[],
 	query: string,
 	variables?: {}
 ): Promise<any[]> => {
 	let hasNextPage = false
 	const result: any[] = []
 	await gqlShopify(query, variables).then((res) => {
-		result.push(...res[key].edges)
-		hasNextPage = res[key].pageInfo.hasNextPage
+		const gqlResult = getResult(res, key)
+
+		result.push(...gqlResult.edges)
+		hasNextPage = gqlResult.pageInfo.hasNextPage
 	})
 
 	while (hasNextPage) {
@@ -29,8 +43,10 @@ export const getAllGqlShopify = async (
 			...variables,
 			cursor: result[result.length - 1].cursor,
 		}).then((res) => {
-			result.push(...res[key].edges)
-			hasNextPage = res[key].pageInfo.hasNextPage
+			const gqlResult = getResult(res, key)
+
+			result.push(...gqlResult.edges)
+			hasNextPage = gqlResult.pageInfo.hasNextPage
 		})
 	}
 

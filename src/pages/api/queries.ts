@@ -197,28 +197,25 @@ query getProductById ($id: ID!) {
 `
 
 const cartDetails = `
-cart {
-  id
-  createdAt
-  updatedAt
-  totalQuantity
-  # The estimated total cost of all merchandise that the customer will pay at checkout.
-  cost {
-    totalAmount {
-      amount
-    }
-    # The estimated amount, before taxes and discounts, for the customer to pay at checkout.
-    subtotalAmount {
-      amount
-    }
-    # The estimated tax amount for the customer to pay at checkout.
-    totalTaxAmount {
-      amount
-    }
-    # The estimated duty amount for the customer to pay at checkout.
-    totalDutyAmount {
-      amount
-    }
+id
+createdAt
+updatedAt
+totalQuantity
+buyerIdentity {
+  countryCode
+}
+# The estimated total cost of all merchandise that the customer will pay at checkout.
+cost {
+  totalAmount {
+    amount
+  }
+  # The estimated amount, before taxes and discounts, for the customer to pay at checkout.
+  subtotalAmount {
+    amount
+  }
+  # The estimated tax amount for the customer to pay at checkout.
+  totalTaxAmount {
+    amount
   }
 }
 `
@@ -227,6 +224,9 @@ export const CREATE_CART = `
 mutation createCart ($id: ID!) {
   cartCreate(
     input: {
+      buyerIdentity: {
+        countryCode: SE
+      }
       lines: [
         {
           quantity: 1
@@ -235,7 +235,9 @@ mutation createCart ($id: ID!) {
       ],
     }
   ) {
-    ${cartDetails}
+    cart {
+      ${cartDetails}
+    }
   }
 }
 `
@@ -249,7 +251,88 @@ mutation addToCart ($cartId: ID!, $id: ID!) {
       merchandiseId: $id
     }
   ) {
+    cart {
+      ${cartDetails}
+    }
+  }
+}
+`
+
+export const UPDATE_CART_ITEM = `
+mutation updateCartItem ($cartId: ID!, $id: ID!, $quantity: Int) {
+  cartLinesUpdate(
+    cartId: $cartId
+    lines: {
+      quantity: $quantity 
+      id: $id
+    }
+  ) {
+    cart {
+      ${cartDetails}
+    }
+  }
+}
+`
+
+export const REMOVE_CART_ITEM = `
+mutation removeCartItem ($cartId: ID!, $id: ID!) {
+  cartLinesRemove(
+    cartId: $cartId
+    lineIds: [$id]
+  ) {
+    cart {
+      ${cartDetails}
+    }
+  }
+}
+`
+
+export const GET_CART = `
+query getCart ($cartId: ID!) {
+  cart(id: $cartId) {
     ${cartDetails}
+  }
+}
+`
+export const GET_CART_ITEMS = `
+query getCart ($cartId: ID!, $amount: Int!, $cursor: String) {
+  cart(id: $cartId) {
+    lines(first: $amount, after: $cursor) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        cursor
+        node {
+          id
+          quantity
+          merchandise {
+            ... on ProductVariant {
+              id
+              title
+              weight
+              weightUnit
+              price {
+                amount
+              }
+              compareAtPrice {
+                amount
+              }
+              description: metafield(namespace: "variant", key: "description") {
+                value
+              }
+              amount: metafield(namespace: "variant", key: "antal") {
+                value
+              }
+              product {
+                ${productContent}
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 `

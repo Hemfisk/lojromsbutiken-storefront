@@ -72,12 +72,35 @@
 .cta_container {
 	flex-direction: row;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	gap: var(--gap-horizontal);
-	&.cta_desktop {
-		margin-top: var(--gap-horizontal);
+	&.cta_big_screen {
+		margin-top: 0;
 		margin-bottom: var(--gap-horizontal);
 		display: flex;
+		flex-direction: column;
+		@media screen and (max-width: $breakpoint-laptop) {
+			margin-top: var(--gap-horizontal);
+			justify-content: center;
+			flex-direction: row;
+		}
+		@media screen and (max-width: $breakpoint-laptop) {
+			display: none;
+		}
+
+		.buy_container {
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
+	&.cta_desktop {
+		justify-content: center;
+		margin-top: var(--gap-horizontal);
+		margin-bottom: var(--gap-horizontal);
+		display: none;
+		@media screen and (max-width: $breakpoint-laptop) {
+			display: flex;
+		}
 		@media screen and (max-width: $breakpoint-mobileBig) {
 			display: none;
 		}
@@ -108,8 +131,11 @@
 	.variants_container {
 		width: 100%;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
 		gap: var(--gap-horizontal);
+		grid-template-columns: repeat(1, 1fr);
+		@media screen and (max-width: $breakpoint-laptop) {
+			grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+		}
 		@media screen and (max-width: $breakpoint-mobile) {
 			grid-template-columns: repeat(1, 1fr);
 		}

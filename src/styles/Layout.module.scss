@@ -64,7 +64,32 @@
 	}
 }
 
+.three_column_grid {
+	@include maxWidthContainer;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-column-gap: var(--gap-horizontal);
+	grid-row-gap: var(--gap-horizontal);
+	@media screen and (max-width: $breakpoint-laptop) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media screen and (max-width: $breakpoint-mobileBig) {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	&.big_left {
+		grid-template-columns: repeat(1, 2fr 1fr);
+		@media screen and (max-width: $breakpoint-laptop) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@media screen and (max-width: $breakpoint-mobileBig) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+	> div {
+		width: 100%;
+	}
+}
+
 .wrapped_container {
-	max-width: $breakpoint-laptop;
-	margin: 0 auto;
+	@include maxWidthContainer;
 }
