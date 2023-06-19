@@ -89,8 +89,10 @@ const CartItem = ({ item }: any) => {
 					<Link href={`/produkter/${merchandise.product.handle}`}>
 						<h3>{merchandise.product.title}</h3>
 					</Link>
-					<h4>{merchandise.title}</h4>
 					<h5>{price}</h5>
+					{merchandise.product.variants.edges.length > 1 ? (
+						<h4>{merchandise.title}</h4>
+					) : null}
 					<div className={`${styles.quantity_container}  ${styles.mobile}`}>
 						{quantitySelector}
 					</div>
@@ -174,7 +176,7 @@ const Cart = ({ shopName }: any) => {
 							className={`${layout.wrapped_container} ${styles.cart_details}`}
 						>
 							<h3>
-								Summa: <span>{totalPrice}</span>
+								Summa produkter: <span>{totalPrice}</span>
 							</h3>
 							<span>Moms ingår och frakt beräknas i kassan</span>
 						</div>
