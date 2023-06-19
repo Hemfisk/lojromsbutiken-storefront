@@ -15,6 +15,7 @@
 	.page_container {
 		width: 100%;
 		max-width: var(--max-width);
+		word-wrap: break-word;
 		margin: 0 auto;
 		.page_content {
 			color: var(--text);
