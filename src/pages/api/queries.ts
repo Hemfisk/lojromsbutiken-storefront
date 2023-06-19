@@ -6,6 +6,28 @@ export const GET_SHOP_NAME = `
   }
 `
 
+export const GET_POLICY = `
+  query {
+    shop {
+      privacyPolicy {
+        body
+      }
+      refundPolicy {
+        body
+      }
+      shippingPolicy {
+        body
+      }
+      subscriptionPolicy {
+        body
+      }
+      termsOfService {
+        body
+      }
+    }
+  }
+`
+
 export const GET_PAYMENT_METHODS = `
   query {
     shop {

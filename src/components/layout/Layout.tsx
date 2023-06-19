@@ -27,9 +27,8 @@ const navigation = [
 ]
 
 const footerNavigation = [
-	{ title: 'Integritetspolicy', handle: 'link7' },
-	{ title: 'Köpvillkor', handle: 'link8' },
-	{ title: 'Leveransvillkor', handle: 'link9' },
+	{ title: 'Integritetspolicy', handle: '/integritetspolicy' },
+	{ title: 'Leverans- och köpvillkor', handle: '/leverans-och-kopvillkor' },
 ]
 
 const Layout = ({ children, paymentMethods }: Props) => {
