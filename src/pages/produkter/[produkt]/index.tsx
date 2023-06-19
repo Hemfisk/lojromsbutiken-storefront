@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import RadioButtonUncheckedOutlined from '@mui/icons-material/RadioButtonUncheckedOutlined'
 import RadioButtonCheckedOutlined from '@mui/icons-material/RadioButtonCheckedOutlined'
+import { CircularProgress } from '@mui/material'
 
 import { gqlShopify } from '@/pages/api/graphql'
 import {
@@ -30,6 +31,7 @@ const ProductPage = ({ shopName, product }: any) => {
 	const [variantState, setVariantState] = useState(
 		product.variants.edges[0].node
 	)
+	const [loading, setLoading] = useState(false)
 
 	const { cartId, items, updateCartId, updateCartItems } = useCart()
 
@@ -99,21 +101,33 @@ const ProductPage = ({ shopName, product }: any) => {
 						})}
 					</div>
 				) : null}
-				<div className={styles.buy_container}>
+				<div
+					className={`${styles.buy_container} ${loading ? styles.loading : ''}`}
+				>
 					<Button
 						primary
-						clickCallback={async () =>
-							await addToCart(
+						clickCallback={async () => {
+							setLoading(true)
+
+							addToCart(
 								variantState.id,
 								cartId,
 								items,
 								updateCartId,
 								updateCartItems
-							)
-						}
+							).then(() => {
+								setLoading(false)
+							})
+						}}
+						disabled={loading}
 					>
 						Lägg i varukorg
 					</Button>
+					{loading ? (
+						<div className={styles.load_container}>
+							<CircularProgress disableShrink />
+						</div>
+					) : null}
 				</div>
 			</>
 		)

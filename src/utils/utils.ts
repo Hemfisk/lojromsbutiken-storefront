@@ -34,7 +34,7 @@ export const parseAmount = (price: number): number => {
 export const parsePrice = (
 	amount: number,
 	collection: string,
-	variantData: any
+	variantData?: any
 ): string => {
 	switch (collection) {
 		case 'paket':

@@ -87,11 +87,6 @@
 		@media screen and (max-width: $breakpoint-laptop) {
 			display: none;
 		}
-
-		.buy_container {
-			display: flex;
-			justify-content: flex-end;
-		}
 	}
 	&.cta_desktop {
 		justify-content: center;
@@ -104,11 +99,6 @@
 		@media screen and (max-width: $breakpoint-mobileBig) {
 			display: none;
 		}
-
-		.buy_container {
-			display: flex;
-			justify-content: flex-end;
-		}
 	}
 	&.cta_mobile {
 		gap: calc(var(--gap-horizontal) * 2);
@@ -119,14 +109,21 @@
 		@media screen and (max-width: $breakpoint-mobileBig) {
 			display: flex;
 		}
-
-		.buy_container {
-			display: flex;
-			justify-content: center;
-		}
 	}
 	.buy_container {
+		position: relative;
 		flex-shrink: 0;
+		display: flex;
+		justify-content: center;
+		&.loading {
+			button {
+				opacity: 0.2;
+			}
+		}
+		.load_container {
+			position: absolute;
+			top: -2px;
+		}
 	}
 	.variants_container {
 		width: 100%;

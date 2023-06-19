@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CircularProgress } from '@mui/material'
 
 import styles from '@/styles/Product.module.scss'
 import { parsePrice, parseWeight } from '@/utils/utils'
@@ -18,6 +19,8 @@ interface Props {
 }
 
 const Product = ({ productData }: Props) => {
+	const [loading, setLoading] = useState(false)
+
 	const { cartId, items, updateCartId, updateCartItems } = useCart()
 
 	const collection = productData.collections.nodes[0].handle
@@ -110,18 +113,28 @@ const Product = ({ productData }: Props) => {
 				{price}
 			</h4>
 			<Button
-				clickCallback={async () =>
-					await addToCart(
+				clickCallback={async () => {
+					setLoading(true)
+
+					addToCart(
 						productData.variants.edges[0].node.id,
 						cartId,
 						items,
 						updateCartId,
 						updateCartItems
-					)
-				}
+					).then(() => {
+						setLoading(false)
+					})
+				}}
+				disabled={loading}
 			>
 				Köp
 			</Button>
+			{loading ? (
+				<div className={styles.load_container}>
+					<CircularProgress disableShrink />
+				</div>
+			) : null}
 		</div>
 	)
 }

@@ -118,9 +118,12 @@ const Cart = ({ shopName }: any) => {
 	const [cartDetails, setCartDetails] = useState<any>(null)
 	const [cartItems, setCartItems] = useState<any[]>([])
 
-	console.log(cartDetails, cartItems)
-
 	const { cartId, items } = useCart()
+
+	const totalPrice = parsePrice(
+		cartDetails?.cost?.subtotalAmount?.amount,
+		'fullPrice'
+	)
 
 	const cartLoading =
 		cartId && items === null
@@ -167,7 +170,14 @@ const Cart = ({ shopName }: any) => {
 								<CartItem key={item.id} item={item} />
 							))}
 						</div>
-
+						<div
+							className={`${layout.wrapped_container} ${styles.cart_details}`}
+						>
+							<h3>
+								Summa: <span>{totalPrice}</span>
+							</h3>
+							<span>Moms ingår och frakt beräknas i kassan</span>
+						</div>
 						<div
 							className={`${layout.wrapped_container} ${styles.cart_buttons}`}
 						>
