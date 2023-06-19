@@ -10,7 +10,10 @@ const Hero = ({ deliveryContent, heroContent, heroImage }: any) => {
 		<>
 			<section className={styles.hero_section}>
 				<div className={styles.delivery_container}>
-					<div className={styles.delivery_content}>
+					<div
+						className={styles.delivery_content}
+						style={{ backgroundImage: `url("/sweden.svg")` }}
+					>
 						<h2>{deliveryContent.title}</h2>
 						<div
 							className={styles.content}

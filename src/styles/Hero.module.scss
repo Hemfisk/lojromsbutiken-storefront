@@ -39,6 +39,12 @@
 				(var(--max-width) * 0.5) - 6em +
 					max(4rem, env(safe-area-inset-left), env(safe-area-inset-right))
 			);
+			background-repeat: no-repeat;
+			background-position: center 80%;
+			background-size: 80% 80%;
+			@media screen and (max-width: $breakpoint-mobileBig) {
+				background-position: center;
+			}
 		}
 	}
 	.hero_image {
