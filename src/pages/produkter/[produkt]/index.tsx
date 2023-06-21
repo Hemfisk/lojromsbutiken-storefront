@@ -9,6 +9,7 @@ import { gqlShopify } from '@/pages/api/graphql'
 import {
 	GET_PAYMENT_METHODS,
 	GET_PRODUCT,
+	GET_PRODUCT_BY_ID,
 	GET_SHOP_NAME,
 } from '@/pages/api/queries'
 import { parsePrice, parseWeight } from '@/utils/utils'
@@ -20,6 +21,7 @@ import PageContent from '@/components/PageContent'
 import ImageViewer from '@/components/ImageViewer'
 import InfoIcon from '@/components/InfoIcon'
 import Button from '@/components/Button'
+import Product from '@/components/Product'
 import { useCart } from '@/context/state'
 import { addToCart } from '@/utils/cartUtils'
 
@@ -27,7 +29,7 @@ import asc from '@/static/asc_logo.png'
 import krav from '@/static/krav_logo.png'
 import msc from '@/static/msc_logo.png'
 
-const ProductPage = ({ shopName, product }: any) => {
+const ProductPage = ({ shopName, product, relatedProducts }: any) => {
 	const [variantState, setVariantState] = useState(
 		product.variants.edges[0].node
 	)
@@ -209,6 +211,27 @@ const ProductPage = ({ shopName, product }: any) => {
 				</div>
 			</div>
 			<PageContent contentOnly maxWidth content={product.descriptionHtml} />
+			<div className={`${layout.container} ${layout.no_top_margin}`}>
+				{relatedProducts ? (
+					<>
+						<div className={layout.wrapped_container}>
+							<PageHeader noPadding heading='h2'>
+								Andra har också köpt
+							</PageHeader>
+						</div>
+						<div
+							className={`${layout.grid_container} ${layout.wrapped_container}`}
+						>
+							{relatedProducts?.map((productData: any) => (
+								<Product
+									key={productData.product.handle}
+									productData={productData.product}
+								/>
+							))}
+						</div>
+					</>
+				) : null}
+			</div>
 		</>
 	)
 }
@@ -218,6 +241,15 @@ export const getServerSideProps = async (context: any) => {
 
 	const product = await gqlShopify(GET_PRODUCT, { handle: produkt })
 
+	const relatedProducts = product.productByHandle?.relatedProducts?.value
+		? await Promise.all(
+				JSON.parse(product.productByHandle?.relatedProducts?.value).map(
+					(productId: string) =>
+						gqlShopify(GET_PRODUCT_BY_ID, { id: productId })
+				)
+		  )
+		: null
+
 	const shop = await gqlShopify(GET_SHOP_NAME, {})
 
 	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
@@ -225,6 +257,7 @@ export const getServerSideProps = async (context: any) => {
 	const gqlData = {
 		shopName: shop.shop.name,
 		product: product.productByHandle,
+		relatedProducts,
 		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 

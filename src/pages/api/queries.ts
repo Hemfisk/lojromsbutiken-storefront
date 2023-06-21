@@ -132,6 +132,9 @@ certKrav: metafield(namespace: "certs", key: "krav") {
 certMSC: metafield(namespace: "certs", key: "msc") {
   value
 }
+relatedProducts: metafield(namespace: "products", key: "related") {
+  value
+}
 collections(first: 1) {
   nodes{
     handle
