@@ -30,15 +30,15 @@ const ImageViewer = ({
 	const [video, setVideo] = useState<any>(null)
 
 	useEffect(() => {
-		setImage(images?.edges[0]?.node?.transformedSrc)
-	}, [images])
+		setImage(imageSrc || images?.edges[0]?.node?.transformedSrc)
+	}, [images, imageSrc])
 
 	const videos = media?.edges
 		.filter((edge: any) => edge.node.mediaContentType !== 'IMAGE')
 		.map((edge: any) => edge.node)
 
 	const imageSelector = () => {
-		if (images?.edges?.length > 1 || videos.length > 0) {
+		if (images?.edges?.length > 1 || videos?.length > 0) {
 			return (
 				<div className={styles.image_selector}>
 					{images.edges.map((edge: any, index: number) => {

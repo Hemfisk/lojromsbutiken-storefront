@@ -107,3 +107,10 @@ export const parseHtml = (data: HtmlNode): string => {
 		})
 		.join('\n')
 }
+
+export const getPageDescription = (content: string) => {
+	const n = 150
+	const string = content.replace(/<\/?[^>]+(>|$)/g, '')
+
+	return string.length > n ? string.slice(0, n - 3) + '...' : string
+}
