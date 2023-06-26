@@ -52,7 +52,7 @@ export const getServerSideProps = async () => {
 		handle: 'hero-image',
 	})
 
-	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 3 })
+	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 4 })
 
 	const allProducts = await getAllGqlShopify('products', GET_PRODUCTS, {
 		amount: 20,

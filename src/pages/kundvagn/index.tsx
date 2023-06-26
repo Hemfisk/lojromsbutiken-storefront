@@ -18,7 +18,7 @@ import styles from '@/styles/Cart.module.scss'
 import PageHeader from '@/components/PageHeader'
 import { useCart } from '@/context/state'
 import Button from '@/components/Button'
-import { getCheckoutUrl, updateCartItem } from '@/utils/cartUtils'
+import { getCheckoutUrl, updateCart, updateCartItem } from '@/utils/cartUtils'
 import { parsePrice } from '@/utils/utils'
 
 const CartItem = ({ item }: any) => {
@@ -120,7 +120,7 @@ const Cart = ({ shopName }: any) => {
 	const [cartDetails, setCartDetails] = useState<any>(null)
 	const [cartItems, setCartItems] = useState<any[]>([])
 
-	const { cartId, items } = useCart()
+	const { cartId, items, updateCartId, updateCartItems } = useCart()
 
 	const totalPrice = parsePrice(
 		cartDetails?.cost?.subtotalAmount?.amount,
@@ -137,19 +137,23 @@ const Cart = ({ shopName }: any) => {
 	useEffect(() => {
 		if (items && items > 0) {
 			gqlShopify(GET_CART, { cartId: cartId }).then(async (result) => {
-				setCartDetails(result.cart)
-				const cartLines = await getAllGqlShopify(
-					['cart', 'lines'],
-					GET_CART_ITEMS,
-					{
-						cartId: cartId,
-						amount: 2,
-					}
-				)
-				setCartItems(cartLines.map((line) => line.node))
+				if (result.cart.totalQuantity > 0) {
+					setCartDetails(result.cart)
+					const cartLines = await getAllGqlShopify(
+						['cart', 'lines'],
+						GET_CART_ITEMS,
+						{
+							cartId: cartId,
+							amount: 2,
+						}
+					)
+					setCartItems(cartLines.map((line) => line.node))
+				} else {
+					updateCart(updateCartId, updateCartItems)
+				}
 			})
 		}
-	}, [cartId, items])
+	}, [cartId, items, updateCartId, updateCartItems])
 
 	const title = `${shopName} | Din kundvagn`
 

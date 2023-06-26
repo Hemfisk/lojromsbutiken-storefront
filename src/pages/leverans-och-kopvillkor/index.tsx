@@ -21,8 +21,6 @@ const AboutUs = ({ shopName, policyContent }: any) => {
 
 	const policies = Object.keys(Object.assign(policyOrder, policyContent))
 
-	console.log(policies)
-
 	return (
 		<>
 			<Head>

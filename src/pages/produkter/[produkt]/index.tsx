@@ -49,7 +49,7 @@ const ProductPage = ({ shopName, product, relatedProducts }: any) => {
 	const addon = product.addonType
 		? { type: product.addonType.value, text: product.addonText.value }
 		: null
-	const weight = parseWeight(variantState)
+	const weight = parseWeight(variantState).replace('.', ',')
 	const infoData = [
 		{ type: 'latin', value: product.infoLatin?.value },
 		{ type: 'fangst', value: product.infoFangst?.value },
@@ -86,7 +86,7 @@ const ProductPage = ({ shopName, product, relatedProducts }: any) => {
 										) : (
 											<RadioButtonUncheckedOutlined />
 										)}
-										<h4>{variant.node.title}</h4>
+										<h4>{variant.node.title.replace('.', ',')}</h4>
 										{variant.node.description ? (
 											<span>{variant.node.description.value}</span>
 										) : null}
@@ -150,6 +150,7 @@ const ProductPage = ({ shopName, product, relatedProducts }: any) => {
 				<div className={layout.three_column_grid}>
 					<ImageViewer
 						images={product.images}
+						media={product.media}
 						productTitle={product.title}
 						addon={addon}
 						certs={

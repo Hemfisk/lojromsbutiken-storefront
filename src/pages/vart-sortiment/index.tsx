@@ -29,7 +29,7 @@ const Products = ({ shopName, collections, allProducts }: any) => {
 export const getServerSideProps = async () => {
 	const shop = await gqlShopify(GET_SHOP_NAME, {})
 
-	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 3 })
+	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 4 })
 
 	const allProducts = await getAllGqlShopify('products', GET_PRODUCTS, {
 		amount: 20,

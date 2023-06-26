@@ -18,21 +18,47 @@ interface Props {
 	productData: any
 }
 
+const getCheapestVariant = (variants: any[]) => {
+	const weightPrices: any = []
+	variants.forEach((variant) => {
+		switch (variant.weightUnit) {
+			case 'KILOGRAMS':
+				weightPrices.push(
+					parseInt(variant.node.price.amount) / variant.node.weight
+				)
+				break
+			case 'GRAMS':
+				weightPrices.push(
+					parseInt(variant.node.price.amount) / (variant.node.weight / 1000)
+				)
+				break
+			default:
+				weightPrices.push(
+					parseInt(variant.node.price.amount) / variant.node.weight
+				)
+				break
+		}
+	})
+	const minimum = Math.min(...weightPrices)
+	return weightPrices.indexOf(minimum)
+}
+
 const Product = ({ productData }: Props) => {
 	const [loading, setLoading] = useState(false)
 
 	const { cartId, items, updateCartId, updateCartItems } = useCart()
 
+	const cheapestVariant = getCheapestVariant(productData.variants.edges)
+
 	const collection = productData.collections.nodes[0].handle
 	const price = parsePrice(
-		productData.variants.edges[0].node.price.amount,
+		productData.variants.edges[cheapestVariant].node.price.amount,
 		collection,
-		productData.variants.edges[0].node
+		productData.variants.edges[cheapestVariant].node
 	)
-	const weight = parseWeight(productData.variants.edges[0].node).replace(
-		'.',
-		','
-	)
+	const weight = parseWeight(
+		productData.variants.edges[cheapestVariant].node
+	).replace('.', ',')
 	const imageSrc = productData.images.edges[0].node.transformedSrc
 	const addon = productData.addonType
 		? { type: productData.addonType.value, text: productData.addonText.value }
@@ -79,14 +105,6 @@ const Product = ({ productData }: Props) => {
 					/>
 				</Link>
 				<div className={styles.product_info_container}>
-					<h3
-						style={
-							addon && addon.type === 'round' ? { width: '65%' } : undefined
-						}
-					>
-						{productData.title}
-					</h3>
-					{collection !== 'paket' ? <h4>{weight}</h4> : null}
 					{addonBanner(addon)}
 					<div className={styles.certs_container}>
 						{certs.map((cert) => (
@@ -103,6 +121,10 @@ const Product = ({ productData }: Props) => {
 					</div>
 				</div>
 			</div>
+			<div className={styles.title_container}>
+				<h3>{productData.title}</h3>
+				{collection !== 'paket' ? <h4>{weight}</h4> : null}
+			</div>
 			<div className={styles.product_info_icons}>
 				{infoData.map((info) => (
 					<InfoIcon key={info.type} type={info.type} title={info.value} />
@@ -117,7 +139,7 @@ const Product = ({ productData }: Props) => {
 					setLoading(true)
 
 					addToCart(
-						productData.variants.edges[0].node.id,
+						productData.variants.edges[cheapestVariant].node.id,
 						cartId,
 						items,
 						updateCartId,

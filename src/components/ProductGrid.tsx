@@ -145,7 +145,7 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 		<div className={layout.container}>
 			<div className={`${layout.flex_row} ${layout.gap_large}`}>
 				<div className={`${layout.flex_row} ${layout.collapse_mobile}`}>
-					{width <= 960 ? (
+					{width <= 1024 ? (
 						<>
 							<Button primary clickCallback={() => setShowSelectModal(true)}>
 								{selectedCollection || 'Alla produkter'}

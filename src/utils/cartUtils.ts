@@ -97,7 +97,6 @@ export const updateCartItem = async (
 				})
 			}
 		} else {
-			console.log('test', items)
 			const updatedCart = await gqlShopify(REMOVE_CART_ITEM, {
 				cartId: cartId,
 				id: lineId,

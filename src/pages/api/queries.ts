@@ -67,10 +67,34 @@ const productContent = `
 handle
 title
 descriptionHtml
-images(first: 4) {
+images(first: 10) {
   edges {
     node {
       transformedSrc
+    }
+  }
+}
+media(first: 10) {
+  edges {
+    node {
+      previewImage {
+        transformedSrc
+        altText
+      }
+      mediaContentType
+      ... on Video {
+        id
+        alt
+        sources {
+          url
+          format
+        }
+      }
+      ... on ExternalVideo {
+        id
+        alt
+        embedUrl
+      }
     }
   }
 }
@@ -145,7 +169,7 @@ collections(first: 1) {
 
 export const GET_PRODUCTS = `
 query getProducts ($amount: Int!, $cursor: String) {
-  products(first: $amount, after: $cursor) {
+  products(first: $amount, after: $cursor, sortKey: UPDATED_AT) {
     pageInfo {
       hasNextPage
       hasPreviousPage
