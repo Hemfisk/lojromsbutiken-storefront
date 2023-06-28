@@ -8,12 +8,12 @@
 	gap: var(--gap-horizontal);
 	.title_container {
 		width: 100%;
-		height: 3em;
+		height: 2.6em;
 		display: flex;
 		flex-direction: column;
 		h3,
 		h4 {
-			line-height: 1;
+			line-height: 1.2;
 			letter-spacing: var(--font-spacing);
 		}
 		h3 {

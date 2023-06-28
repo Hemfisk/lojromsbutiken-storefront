@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { CircularProgress } from '@mui/material'
 
 import styles from '@/styles/Product.module.scss'
-import { parsePrice, parseWeight } from '@/utils/utils'
+import { parsePrice } from '@/utils/utils'
 import Button from './Button'
 import { addonBanner, addonRound } from './Addons'
 import InfoIcon from './InfoIcon'
@@ -56,12 +56,9 @@ const Product = ({ productData }: Props) => {
 		collection,
 		productData.variants.edges[cheapestVariant].node
 	)
-	const weight = parseWeight(
-		productData.variants.edges[cheapestVariant].node
-	).replace('.', ',')
 	const imageSrc = productData.images.edges[0].node.transformedSrc
 	const addon = productData.addonType
-		? { type: productData.addonType.value, text: productData.addonText.value }
+		? { type: productData.addonType?.value, text: productData.addonText?.value }
 		: null
 	const infoData = [
 		{ type: 'latin', value: productData.infoLatin?.value },
@@ -123,7 +120,6 @@ const Product = ({ productData }: Props) => {
 			</div>
 			<div className={styles.title_container}>
 				<h3>{productData.title}</h3>
-				{collection !== 'paket' ? <h4>{weight}</h4> : null}
 			</div>
 			<div className={styles.product_info_icons}>
 				{infoData.map((info) => (

@@ -397,3 +397,15 @@ query getCheckoutUrl ($id: ID!) {
   }
 }
 `
+
+export const GET_FILES = `
+query {
+  files(first:25) {
+    edges {
+      node {
+        alt
+      }
+    }
+  }
+}
+`
