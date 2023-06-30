@@ -7,12 +7,14 @@ interface Props {
 	content: any
 	contentOnly?: boolean
 	maxWidth?: boolean
+	noMargin?: boolean
 }
 
 const PageContent = ({
 	content,
 	contentOnly = false,
 	maxWidth = false,
+	noMargin = false,
 }: Props) => {
 	const { page } = content
 	return (
@@ -26,7 +28,9 @@ const PageContent = ({
 				<div className={styles.page_container}>
 					{contentOnly ? null : <PageHeader>{page.title}</PageHeader>}
 					<div
-						className={styles.page_content}
+						className={`${styles.page_content} ${
+							noMargin ? styles.no_margin : ''
+						}`}
 						dangerouslySetInnerHTML={{
 							__html: contentOnly ? content : page.body,
 						}}

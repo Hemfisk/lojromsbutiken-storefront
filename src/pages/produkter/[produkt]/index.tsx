@@ -12,7 +12,12 @@ import {
 	GET_PRODUCT_BY_ID,
 	GET_SHOP_NAME,
 } from '@/pages/api/queries'
-import { getPageDescription, parsePrice, parseWeight } from '@/utils/utils'
+import {
+	getPageDescription,
+	parseHtml,
+	parsePrice,
+	parseWeight,
+} from '@/utils/utils'
 
 import layout from '@/styles/Layout.module.scss'
 import styles from '@/styles/ProductPage.module.scss'
@@ -64,6 +69,27 @@ const ProductPage = ({ shopInfo, product, relatedProducts }: any) => {
 		{ type: 'krav', value: product.certKrav?.value, src: krav },
 		{ type: 'asc', value: product.certASC?.value, src: asc },
 	].filter((cert) => cert.value === 'true')
+
+	const nutritionalContent = product.nutritionalContent?.value
+
+	const NutritionalContent = () => {
+		if (nutritionalContent) {
+			return (
+				<div className={`${layout.container} ${layout.no_top_margin}`}>
+					<details className={styles.details}>
+						<summary>Näringsinnehåll</summary>
+						<div
+							className={styles.details_content}
+							dangerouslySetInnerHTML={{
+								__html: parseHtml(JSON.parse(nutritionalContent)),
+							}}
+						/>
+					</details>
+				</div>
+			)
+		}
+		return null
+	}
 
 	const ctaContent = () => {
 		return (
@@ -219,7 +245,13 @@ const ProductPage = ({ shopInfo, product, relatedProducts }: any) => {
 					{ctaContent()}
 				</div>
 			</div>
-			<PageContent contentOnly maxWidth content={product.descriptionHtml} />
+			<PageContent
+				contentOnly
+				maxWidth
+				noMargin={nutritionalContent}
+				content={product.descriptionHtml}
+			/>
+			<NutritionalContent />
 			<div className={`${layout.container} ${layout.no_top_margin}`}>
 				{relatedProducts ? (
 					<>

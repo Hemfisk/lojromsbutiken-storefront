@@ -22,11 +22,12 @@ const navigation = [
 	{ title: 'Om oss', handle: '/om-oss' },
 	{ title: 'Vårt sortiment', handle: '/vart-sortiment' },
 	{ title: 'Recept', handle: '/recept' },
-	{ title: 'Jobba hos oss', handle: '/jobba-hos-oss' },
+	// { title: 'Jobba hos oss', handle: '/jobba-hos-oss' },
 	{ title: 'Kontakt', handle: '/kontakt' },
 ]
 
 const footerNavigation = [
+	{ title: 'Vanliga frågor', handle: '/faq' },
 	{ title: 'Integritetspolicy', handle: '/integritetspolicy' },
 	{ title: 'Leverans- och köpvillkor', handle: '/leverans-och-kopvillkor' },
 ]

@@ -202,3 +202,23 @@
 		}
 	}
 }
+
+.details {
+	font-size: var(--font-size);
+	summary {
+		font-weight: 600;
+		cursor: pointer;
+		padding-bottom: 0.5em;
+		font-size: 1em;
+	}
+	.details_content {
+		background-color: var(--accent-variant-light);
+		padding: var(--gap-horizontal);
+		p,
+		ol,
+		ul {
+			font-size: 0.9em;
+			list-style: none;
+		}
+	}
+}

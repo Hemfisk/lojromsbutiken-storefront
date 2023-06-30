@@ -1,0 +1,16 @@
+.faq {
+	details {
+		font-size: var(--font-size);
+		border: 1px solid var(--accent-variant);
+		padding: 1em;
+		summary {
+			cursor: pointer;
+			font-weight: 600;
+			font-size: 1em;
+		}
+		p {
+			margin-top: 1em;
+			font-size: 0.9em;
+		}
+	}
+}
