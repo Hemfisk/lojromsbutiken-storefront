@@ -79,7 +79,7 @@ const ProductPage = ({ shopInfo, product, relatedProducts }: any) => {
 			return (
 				<div className={`${layout.container} ${layout.no_top_margin}`}>
 					<details className={styles.details}>
-						<summary>Näringsinnehåll</summary>
+						<summary>Näringsinnehåll / Övrig information</summary>
 						<div
 							className={styles.details_content}
 							dangerouslySetInnerHTML={{
