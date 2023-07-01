@@ -68,6 +68,7 @@ const Product = ({ productData }: Props) => {
 		{ type: 'hallbarhet', value: productData.infoHallbarhet?.value },
 		{ type: 'tillagning', value: productData.infoTillagning?.value },
 		{ type: 'benfri', value: productData.infoBenfri?.value },
+		{ type: 'leverans', value: productData.infoLeverans?.value },
 	]
 		.filter((info) => info.value !== undefined)
 		.slice(0, 3)

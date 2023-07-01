@@ -151,6 +151,9 @@ infoLatin: metafield(namespace: "info", key: "latin") {
 infoBenfri: metafield(namespace: "info", key: "benfri") {
   value
 }
+infoLeverans: metafield(namespace: "info", key: "leverans") {
+  value
+}
 nutritionalContent: metafield(namespace: "custom", key: "nutritional") {
   value
 }

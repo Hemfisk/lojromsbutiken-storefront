@@ -7,6 +7,7 @@ import StraightenOutlined from '@mui/icons-material/StraightenOutlined'
 import LocalDiningOutlined from '@mui/icons-material/LocalDiningOutlined'
 import AcUnitOutlined from '@mui/icons-material/AcUnitOutlined'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 import { Tooltip } from '@mui/material'
 
 import FishBone from './FishBone'
@@ -131,6 +132,21 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 				>
 					<i onClick={handleTooltipOpen}>
 						<FishBone />
+					</i>
+				</Tooltip>
+			)
+		case 'leverans':
+			return (
+				<Tooltip
+					disableFocusListener
+					placement='top'
+					title={`Leverans${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
+					arrow
+				>
+					<i onClick={handleTooltipOpen}>
+						<LocalShippingOutlinedIcon />
 					</i>
 				</Tooltip>
 			)
