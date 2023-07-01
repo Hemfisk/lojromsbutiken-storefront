@@ -3,7 +3,13 @@ import React from 'react'
 const FishBone = () => {
 	return (
 		<svg
-			className='MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root'
+			style={{
+				display: 'inline-block',
+				fill: 'currentColor',
+				fontSize: '1.5rem',
+				flexShrink: 0,
+				userSelect: 'none',
+			}}
 			version='1.1'
 			x='0px'
 			y='0px'
