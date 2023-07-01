@@ -62,6 +62,7 @@ const ProductPage = ({ shopInfo, product, relatedProducts }: any) => {
 		{ type: 'hallbarhet', value: product.infoHallbarhet?.value },
 		{ type: 'tillagning', value: product.infoTillagning?.value },
 		{ type: 'tillstand', value: product.infoTillstand?.value },
+		{ type: 'benfri', value: product.infoBenfri?.value },
 	].filter((info) => info.value !== undefined)
 
 	const certs = [

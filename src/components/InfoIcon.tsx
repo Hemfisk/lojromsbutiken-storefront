@@ -9,6 +9,8 @@ import AcUnitOutlined from '@mui/icons-material/AcUnitOutlined'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { Tooltip } from '@mui/material'
 
+import FishBone from './FishBone'
+
 interface Props {
 	type: string
 	title?: string
@@ -114,6 +116,21 @@ const InfoIcon = ({ type, title = '' }: Props) => {
 				>
 					<i onClick={handleTooltipOpen}>
 						<AcUnitOutlined />
+					</i>
+				</Tooltip>
+			)
+		case 'benfri':
+			return (
+				<Tooltip
+					disableFocusListener
+					placement='top'
+					title={`Ben- /skinfri${titleText}`}
+					onClose={handleTooltipClose}
+					open={open}
+					arrow
+				>
+					<i onClick={handleTooltipOpen}>
+						<FishBone />
 					</i>
 				</Tooltip>
 			)
