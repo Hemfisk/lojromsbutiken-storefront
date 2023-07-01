@@ -55,7 +55,7 @@ query getPageByHandle($handle: String!) {
 
 export const GET_COLLECTIONS = `
 query getCollections ($amount: Int) {
-  collections(first: $amount) {
+  collections(first: $amount, sortKey: TITLE) {
     edges {
       node {
         id
@@ -69,6 +69,7 @@ query getCollections ($amount: Int) {
 
 const productContent = `
 handle
+id
 title
 descriptionHtml
 images(first: 10) {
@@ -172,7 +173,7 @@ certMSC: metafield(namespace: "certs", key: "msc") {
 relatedProducts: metafield(namespace: "products", key: "related") {
   value
 }
-collections(first: 1) {
+collections(first: 5) {
   nodes{
     handle
     title
@@ -181,16 +182,18 @@ collections(first: 1) {
 `
 
 export const GET_PRODUCTS = `
-query getProducts ($amount: Int!, $cursor: String) {
-  products(first: $amount, after: $cursor, sortKey: UPDATED_AT) {
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-    }
-    edges {
-      cursor
-      node {
-        ${productContent}
+query getProducts ($collectionId: ID!, $amount: Int!, $cursor: String) {
+  collection(id: $collectionId) {
+    products(first: $amount, after: $cursor, sortKey: MANUAL) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        cursor
+        node {
+          ${productContent}
+        }
       }
     }
   }

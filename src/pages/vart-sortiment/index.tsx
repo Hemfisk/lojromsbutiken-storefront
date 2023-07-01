@@ -33,18 +33,28 @@ const Products = ({ shopInfo, collections, allProducts }: any) => {
 export const getServerSideProps = async () => {
 	const shop = await gqlShopify(GET_SHOP_NAME, {})
 
-	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 4 })
+	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 5 })
 
-	const allProducts = await getAllGqlShopify('products', GET_PRODUCTS, {
-		amount: 20,
-	})
+	const allProducts = await Promise.all(
+		allCollections.collections.edges.map((collection: any) => {
+			return getAllGqlShopify(['collection', 'products'], GET_PRODUCTS, {
+				collectionId: collection.node.id,
+				amount: 20,
+			})
+		})
+	)
 
 	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
 
 	const gqlData = {
 		shopInfo: shop.shop,
 		collections: allCollections.collections.edges,
-		allProducts: allProducts,
+		allProducts: []
+			.concat(...allProducts)
+			.filter(
+				(v: any, i, a) =>
+					a.findIndex((v2: any) => v2.node.id === v.node.id) === i
+			),
 		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 

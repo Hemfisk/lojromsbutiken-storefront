@@ -55,11 +55,16 @@ export const getServerSideProps = async () => {
 		handle: 'hero-image',
 	})
 
-	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 4 })
+	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 5 })
 
-	const allProducts = await getAllGqlShopify('products', GET_PRODUCTS, {
-		amount: 20,
-	})
+	const allProducts = await Promise.all(
+		allCollections.collections.edges.map((collection: any) => {
+			return getAllGqlShopify(['collection', 'products'], GET_PRODUCTS, {
+				collectionId: collection.node.id,
+				amount: 20,
+			})
+		})
+	)
 
 	const gordonZipCodes = await readFileFromUrl(
 		'https://cdn.shopify.com/s/files/1/0751/0743/4787/files/gordon_postnr.csv'
@@ -78,7 +83,12 @@ export const getServerSideProps = async () => {
 		heroImage: generateImageSrcFromString(heroImage.page.body),
 		zipCodes: { gordonZipCodes, dalafiskZipCodes },
 		collections: allCollections.collections.edges,
-		allProducts: allProducts,
+		allProducts: []
+			.concat(...allProducts)
+			.filter(
+				(v: any, i, a) =>
+					a.findIndex((v2: any) => v2.node.id === v.node.id) === i
+			),
 		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 

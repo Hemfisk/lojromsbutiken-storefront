@@ -10,15 +10,18 @@ import Product from './Product'
 
 const ProductGrid = ({ collections, allProducts }: any) => {
 	const [width] = useWindowSize()
-	const [selectedCollection, setSelectedCollection] = useState<string | null>(
-		null
+	const [selectedCollection, setSelectedCollection] = useState(
+		collections[0].node.handle
 	)
+
 	const [showSelectModal, setShowSelectModal] = useState(false)
 	const [productSearch, setProductSearch] = useState<string>('')
 
 	const productsByCollection = collections.map((collection: any) => {
 		collection.products = allProducts?.filter((product: any) => {
-			return product.node.collections.nodes[0].handle === collection.node.handle
+			return product.node.collections.nodes.some(
+				(node: any) => node.handle === collection.node.handle
+			)
 		})
 		return collection
 	})
@@ -34,16 +37,6 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 				onClick={() => setShowSelectModal(false)}
 			>
 				<div className={styles.select_modal}>
-					<Button
-						primary={!selectedCollection}
-						background={!!selectedCollection}
-						clickCallback={() => {
-							toggleCollection(null)
-							setShowSelectModal(false)
-						}}
-					>
-						Alla produkter
-					</Button>
 					{collections.map((collection: any) => (
 						<Button
 							primary={selectedCollection === collection.node.handle}
@@ -148,18 +141,12 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 					{width <= 1024 ? (
 						<>
 							<Button primary clickCallback={() => setShowSelectModal(true)}>
-								{selectedCollection || 'Alla produkter'}
+								{selectedCollection}
 							</Button>
 							{showSelectModal ? <SelectModal /> : null}
 						</>
 					) : (
 						<>
-							<Button
-								primary={!selectedCollection}
-								clickCallback={() => toggleCollection(null)}
-							>
-								Alla produkter
-							</Button>
 							{collections.map((collection: any) => (
 								<Button
 									primary={selectedCollection === collection.node.handle}
