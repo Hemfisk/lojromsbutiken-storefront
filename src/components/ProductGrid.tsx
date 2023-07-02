@@ -141,7 +141,12 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 					{width <= 1024 ? (
 						<>
 							<Button primary clickCallback={() => setShowSelectModal(true)}>
-								{selectedCollection}
+								{
+									collections.find(
+										(collection: any) =>
+											collection.node.handle === selectedCollection
+									).node.title
+								}
 							</Button>
 							{showSelectModal ? <SelectModal /> : null}
 						</>

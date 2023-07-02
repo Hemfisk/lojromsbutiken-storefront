@@ -67,11 +67,11 @@ export const getServerSideProps = async () => {
 	)
 
 	const gordonZipCodes = await readFileFromUrl(
-		'https://cdn.shopify.com/s/files/1/0751/0743/4787/files/gordon_postnr.csv'
+		`https://cdn.shopify.com/s/files/1/0751/0743/4787/files/gordon_postnr.csv?v=${Date.now()}`
 	)
 
 	const dalafiskZipCodes = await readFileFromUrl(
-		'https://cdn.shopify.com/s/files/1/0751/0743/4787/files/dalafisk_postnr.csv'
+		`https://cdn.shopify.com/s/files/1/0751/0743/4787/files/dalafisk_postnr.csv?v=${Date.now()}`
 	)
 
 	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})

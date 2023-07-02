@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 import styles from '@/styles/Hero.module.scss'
 import Button from './Button'
-import PageHeader from './PageHeader'
 
 const partOfInterval = (zipCode: string, intervalZipCodes: string[]): boolean =>
 	intervalZipCodes.some((interval) => {
@@ -122,7 +121,6 @@ const Hero = ({ deliveryContent, heroContent, heroImage, zipCodes }: any) => {
 				) : null}
 			</section>
 			<section className={styles.hero_content}>
-				<PageHeader noPadding>{heroContent.title}</PageHeader>
 				<div
 					className={styles.content}
 					dangerouslySetInnerHTML={{ __html: heroContent.body }}
