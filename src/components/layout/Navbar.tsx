@@ -9,7 +9,9 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
 import styles from '@/styles/Navigation.module.scss'
 import { useCart } from '@/context/state'
-import { getCart } from '@/utils/cartUtils'
+import { getCart, updateCart } from '@/utils/cartUtils'
+import { gqlShopify } from '@/pages/api/graphql'
+import { GET_CART } from '@/pages/api/queries'
 
 interface Props {
 	fontFamily: NextFont
@@ -48,7 +50,7 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 	const [active, setActive] = useState(currentPage || '')
 	const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false)
 
-	const { items, updateCartId, updateCartItems } = useCart()
+	const { items, cartId, updateCartId, updateCartItems } = useCart()
 
 	const router = useRouter()
 
@@ -64,8 +66,17 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 
 	useEffect(() => {
 		getCart(updateCartId, updateCartItems)
+
+		if (items && items > 0) {
+			gqlShopify(GET_CART, { cartId: cartId }).then(async (result) => {
+				if (!result.cart || result.cart.totalQuantity === 0) {
+					updateCart(updateCartId, updateCartItems)
+				}
+			})
+		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [cartId, items, updateCartId, updateCartItems])
 
 	const mobileNavigation = () => {
 		if (!mobileNavigationOpen) {

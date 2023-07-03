@@ -137,7 +137,7 @@ const Cart = ({ shopInfo }: any) => {
 	useEffect(() => {
 		if (items && items > 0) {
 			gqlShopify(GET_CART, { cartId: cartId }).then(async (result) => {
-				if (result.cart.totalQuantity > 0) {
+				if (result.cart?.totalQuantity > 0) {
 					setCartDetails(result.cart)
 					const cartLines = await getAllGqlShopify(
 						['cart', 'lines'],
