@@ -157,7 +157,7 @@ const Cart = ({ shopInfo, cartInfo }: any) => {
 	}, [cartId, items, updateCartId, updateCartItems])
 
 	const title = `${shopInfo.name} - ${shopInfo.brand.slogan} | Din kundvagn`
-	console.log(cartInfo)
+
 	return (
 		<>
 			<Head>
