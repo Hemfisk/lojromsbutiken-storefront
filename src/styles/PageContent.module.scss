@@ -41,6 +41,9 @@
 			&.no_margin {
 				padding-bottom: var(--gap-horizontal);
 			}
+			img {
+				max-width: 100%;
+			}
 		}
 	}
 	&.max_width .page_content {
