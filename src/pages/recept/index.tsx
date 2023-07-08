@@ -1,11 +1,7 @@
 import Head from 'next/head'
 
 import { getAllGqlShopify, gqlShopify } from '@/pages/api/graphql'
-import {
-	GET_PAYMENT_METHODS,
-	GET_RECIPES,
-	GET_SHOP_NAME,
-} from '@/pages/api/queries'
+import { GET_RECIPES, GET_SHOP_NAME } from '@/pages/api/queries'
 
 import layout from '@/styles/Layout.module.scss'
 import PageHeader from '@/components/PageHeader'
@@ -43,12 +39,9 @@ export const getServerSideProps = async () => {
 		amount: 20,
 	})
 
-	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
-
 	const gqlData = {
 		shopInfo: shop.shop,
 		allRecipies: allRecipies,
-		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {

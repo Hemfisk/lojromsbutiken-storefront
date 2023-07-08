@@ -1,11 +1,7 @@
 import Head from 'next/head'
 
 import { gqlShopify } from '@/pages/api/graphql'
-import {
-	GET_PAGE_CONTENT,
-	GET_PAYMENT_METHODS,
-	GET_SHOP_NAME,
-} from '@/pages/api/queries'
+import { GET_PAGE_CONTENT, GET_SHOP_NAME } from '@/pages/api/queries'
 
 import layout from '@/styles/Layout.module.scss'
 import styles from '@/styles/FAQ.module.scss'
@@ -59,12 +55,9 @@ export const getServerSideProps = async () => {
 		handle: 'faq',
 	})
 
-	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
-
 	const gqlData = {
 		shopInfo: shop.shop,
 		faqContent,
-		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {

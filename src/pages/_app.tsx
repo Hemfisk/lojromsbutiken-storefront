@@ -5,10 +5,23 @@ import Layout from '@/components/layout/Layout'
 import '@/styles/globals.scss'
 import { CartProvider } from '@/context/state'
 
-const App = ({ Component, pageProps }: AppProps) => {
+import { gqlShopify } from './api/graphql'
+import { GET_PAGE_CONTENT, GET_PAYMENT_METHODS } from './api/queries'
+
+type InitialProps = {
+	paymentMethods: any
+	contactInfo: any
+}
+
+const App = ({
+	Component,
+	pageProps,
+	paymentMethods,
+	contactInfo,
+}: AppProps & InitialProps) => {
 	return (
 		<CartProvider>
-			<Layout paymentMethods={pageProps.paymentMethods}>
+			<Layout paymentMethods={paymentMethods} contactInfo={contactInfo}>
 				<Head>
 					<meta
 						name='viewport'
@@ -49,6 +62,19 @@ const App = ({ Component, pageProps }: AppProps) => {
 			</Layout>
 		</CartProvider>
 	)
+}
+
+App.getInitialProps = async () => {
+	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
+
+	const contactInfo = await gqlShopify(GET_PAGE_CONTENT, {
+		handle: 'kontaktinfo',
+	})
+
+	return {
+		paymentMethods: paymentMethods.shop.paymentSettings,
+		contactInfo: contactInfo.page,
+	}
 }
 
 export default App

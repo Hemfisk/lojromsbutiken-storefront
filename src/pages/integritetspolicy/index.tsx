@@ -1,11 +1,7 @@
 import Head from 'next/head'
 
 import { gqlShopify } from '@/pages/api/graphql'
-import {
-	GET_PAYMENT_METHODS,
-	GET_POLICY,
-	GET_SHOP_NAME,
-} from '@/pages/api/queries'
+import { GET_POLICY, GET_SHOP_NAME } from '@/pages/api/queries'
 
 import PageContent from '@/components/PageContent'
 import PageHeader from '@/components/PageHeader'
@@ -34,12 +30,9 @@ export const getServerSideProps = async () => {
 
 	const policyContent = await gqlShopify(GET_POLICY, {})
 
-	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
-
 	const gqlData = {
 		shopInfo: shop.shop,
 		policyContent: policyContent.shop,
-		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {

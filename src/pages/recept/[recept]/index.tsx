@@ -2,7 +2,6 @@ import Head from 'next/head'
 
 import { gqlShopify } from '@/pages/api/graphql'
 import {
-	GET_PAYMENT_METHODS,
 	GET_PRODUCT_BY_ID,
 	GET_RECIPE,
 	GET_SHOP_NAME,
@@ -94,14 +93,11 @@ export const getServerSideProps = async (context: any) => {
 
 	const shop = await gqlShopify(GET_SHOP_NAME, {})
 
-	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
-
 	const gqlData = {
 		shopInfo: shop.shop,
 		recipe: recipe.blog.articleByHandle,
 		products:
 			allProducts && allProducts[0]?.product !== null ? allProducts : null,
-		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {

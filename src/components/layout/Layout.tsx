@@ -15,6 +15,7 @@ const poppins = Poppins({
 interface Props {
 	children: React.ReactNode
 	paymentMethods: any
+	contactInfo: any
 }
 
 const navigation = [
@@ -32,7 +33,7 @@ const footerNavigation = [
 	{ title: 'Leverans- och köpvillkor', handle: '/leverans-och-kopvillkor' },
 ]
 
-const Layout = ({ children, paymentMethods }: Props) => {
+const Layout = ({ children, paymentMethods, contactInfo }: Props) => {
 	const router = useRouter()
 
 	return (
@@ -54,6 +55,7 @@ const Layout = ({ children, paymentMethods }: Props) => {
 				fontFamily={poppins}
 				navigation={footerNavigation}
 				paymentMethods={paymentMethods}
+				contactInfo={contactInfo}
 			/>
 		</>
 	)

@@ -10,7 +10,6 @@ import {
 	GET_CART,
 	GET_CART_ITEMS,
 	GET_PAGE_CONTENT,
-	GET_PAYMENT_METHODS,
 	GET_SHOP_NAME,
 } from '@/pages/api/queries'
 
@@ -225,8 +224,6 @@ const Cart = ({ shopInfo, cartInfo }: any) => {
 export const getServerSideProps = async () => {
 	const shop = await gqlShopify(GET_SHOP_NAME, {})
 
-	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
-
 	const cartInfo = await gqlShopify(GET_PAGE_CONTENT, {
 		handle: 'kassainfo',
 	})
@@ -234,7 +231,6 @@ export const getServerSideProps = async () => {
 	const gqlData = {
 		shopInfo: shop.shop,
 		cartInfo: cartInfo.page,
-		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {

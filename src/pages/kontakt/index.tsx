@@ -1,11 +1,7 @@
 import Head from 'next/head'
 
 import { gqlShopify } from '@/pages/api/graphql'
-import {
-	GET_PAGE_CONTENT,
-	GET_PAYMENT_METHODS,
-	GET_SHOP_NAME,
-} from '@/pages/api/queries'
+import { GET_PAGE_CONTENT, GET_SHOP_NAME } from '@/pages/api/queries'
 
 import PageContent from '@/components/PageContent'
 import ContactForm from '@/components/ContactForm'
@@ -36,12 +32,9 @@ export const getServerSideProps = async () => {
 		handle: 'kontakt',
 	})
 
-	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
-
 	const gqlData = {
 		shopInfo: shop.shop,
 		contactContent,
-		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {

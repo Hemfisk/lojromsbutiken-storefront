@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { getAllGqlShopify, gqlShopify } from '@/pages/api/graphql'
 import {
 	GET_COLLECTIONS,
-	GET_PAYMENT_METHODS,
 	GET_PRODUCTS,
 	GET_SHOP_NAME,
 } from '@/pages/api/queries'
@@ -44,8 +43,6 @@ export const getServerSideProps = async () => {
 		})
 	)
 
-	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
-
 	const gqlData = {
 		shopInfo: shop.shop,
 		collections: allCollections.collections.edges,
@@ -55,7 +52,6 @@ export const getServerSideProps = async () => {
 				(v: any, i, a) =>
 					a.findIndex((v2: any) => v2.node.id === v.node.id) === i
 			),
-		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 
 	return {
