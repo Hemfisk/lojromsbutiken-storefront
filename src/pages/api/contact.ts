@@ -9,11 +9,11 @@ const mailAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 			user: process.env.NEXT_PUBLIC_MAIL_USER,
 			pass: process.env.NEXT_PUBLIC_MAIL_PASS,
 		},
-		secure: true,
+		secure: false,
 	})
 	const mailData = {
-		from: process.env.NEXT_PUBLIC_MAIL_USER,
-		to: process.env.NEXT_PUBLIC_MAIL_USER,
+		from: 'info@dalafisk.se',
+		to: 'info@dalafisk.se',
 		subject: `Meddelande från ${req.body.name} via Dalafisk.se`,
 		text: `${req.body.message} | Skickat från: ${req.body.name} (${req.body.email} Telefon nr: ${req.body.phone})`,
 		html: `<div>${req.body.message.replace(
