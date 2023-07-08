@@ -17,10 +17,10 @@ const FAQ = ({ shopInfo, faqContent }: any) => {
 	let faqHTML = ''
 
 	const faqList = faqContent.page.body
+		.replace('<meta charset="utf-8">', '')
 		.replaceAll('\n', '')
 		.replaceAll('<ul>', '')
 		.replaceAll('</ul>', '')
-		.replace('<meta charset="utf-8">', '')
 		.split('<li>')
 		.filter((item: string) => item.length)
 

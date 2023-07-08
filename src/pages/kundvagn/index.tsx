@@ -9,6 +9,7 @@ import { getAllGqlShopify, gqlShopify } from '@/pages/api/graphql'
 import {
 	GET_CART,
 	GET_CART_ITEMS,
+	GET_PAGE_CONTENT,
 	GET_PAYMENT_METHODS,
 	GET_SHOP_NAME,
 } from '@/pages/api/queries'
@@ -116,7 +117,7 @@ const CartItem = ({ item }: any) => {
 	return null
 }
 
-const Cart = ({ shopInfo }: any) => {
+const Cart = ({ shopInfo, cartInfo }: any) => {
 	const [cartDetails, setCartDetails] = useState<any>(null)
 	const [cartItems, setCartItems] = useState<any[]>([])
 
@@ -156,7 +157,7 @@ const Cart = ({ shopInfo }: any) => {
 	}, [cartId, items, updateCartId, updateCartItems])
 
 	const title = `${shopInfo.name} - ${shopInfo.brand.slogan} | Din kundvagn`
-
+	console.log(cartInfo)
 	return (
 		<>
 			<Head>
@@ -182,23 +183,31 @@ const Cart = ({ shopInfo }: any) => {
 						<div
 							className={`${layout.wrapped_container} ${styles.cart_details}`}
 						>
-							<h3>
-								Summa produkter: <span>{totalPrice}</span>
-							</h3>
-							<span>Moms ingår och frakt beräknas i kassan</span>
-						</div>
-						<div
-							className={`${layout.wrapped_container} ${styles.cart_buttons}`}
-						>
-							<Button
-								primary
-								clickCallback={async () => {
-									const url = await getCheckoutUrl(cartId)
-									url ? (window.location.href = url) : null
-								}}
-							>
-								Gå till kassan
-							</Button>
+							<div className={styles.cart_info}>
+								<div
+									className={styles.cart_info_content}
+									dangerouslySetInnerHTML={{ __html: cartInfo.body }}
+								/>
+							</div>
+							<div className={styles.cart_summary}>
+								<h3>
+									Summa produkter: <span>{totalPrice}</span>
+								</h3>
+								<span>Moms ingår och frakt beräknas i kassan</span>
+								<div
+									className={`${layout.wrapped_container} ${styles.cart_buttons}`}
+								>
+									<Button
+										primary
+										clickCallback={async () => {
+											const url = await getCheckoutUrl(cartId)
+											url ? (window.location.href = url) : null
+										}}
+									>
+										Gå till kassan
+									</Button>
+								</div>
+							</div>
 						</div>
 					</>
 				) : (
@@ -218,8 +227,13 @@ export const getServerSideProps = async () => {
 
 	const paymentMethods = await gqlShopify(GET_PAYMENT_METHODS, {})
 
+	const cartInfo = await gqlShopify(GET_PAGE_CONTENT, {
+		handle: 'kassainfo',
+	})
+
 	const gqlData = {
 		shopInfo: shop.shop,
+		cartInfo: cartInfo.page,
 		paymentMethods: paymentMethods.shop.paymentSettings,
 	}
 

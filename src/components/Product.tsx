@@ -40,10 +40,7 @@ const getCheapestVariant = (variants: any[]) => {
 		}
 	})
 	const minimum = Math.min(...weightPrices)
-	console.log(
-		weightPrices.indexOf(minimum) >= 0 ? weightPrices.indexOf(minimum) : 0,
-		weightPrices
-	)
+
 	return weightPrices.indexOf(minimum) >= 0 ? weightPrices.indexOf(minimum) : 0
 }
 
