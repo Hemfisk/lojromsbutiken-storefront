@@ -27,6 +27,10 @@ const App = ({
 						name='viewport'
 						content='width=device-width, initial-scale=1.0, maximum-scale=1", viewport-fit=cover'
 					/>
+					<meta
+						name='format-detection'
+						content='telephone=no, date=no, email=no, address=no'
+					/>
 					<link rel='shortcut icon' href='/favicons/favicon.ico' />
 					<link
 						rel='apple-touch-icon'
