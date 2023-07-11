@@ -28,13 +28,13 @@ const Home = ({
 				<title>{`${shopInfo.name} - ${shopInfo.brand.slogan}`}</title>
 				<meta name='description' content={shopInfo.brand.shortDescription} />
 			</Head>
-			<Hero
+			<Hero heroContent={heroContent} heroImage={heroImage} />
+			<ProductGrid
+				collections={collections}
+				allProducts={allProducts}
 				deliveryContent={deliveryContent}
-				heroContent={heroContent}
-				heroImage={heroImage}
 				zipCodes={zipCodes}
 			/>
-			<ProductGrid collections={collections} allProducts={allProducts} />
 		</>
 	)
 }

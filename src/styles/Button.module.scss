@@ -23,12 +23,19 @@
 		border: none;
 		color: var(--background);
 		background-color: var(--primary);
+		&.inverted {
+			color: var(--primary);
+			background-color: var(--background);
+		}
 	}
 	&:hover:not(:disabled),
 	&:focus-visible:not(:disabled) {
 		border-color: var(--accent);
 		&.primary {
 			background-color: var(--primary-variant);
+			&.inverted {
+				background-color: var(--accent-variant);
+			}
 		}
 	}
 }

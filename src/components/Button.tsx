@@ -6,6 +6,7 @@ interface Props {
 	children: React.ReactNode
 	primary?: boolean
 	background?: boolean
+	inverted?: boolean
 	type?: 'button' | 'submit' | 'reset' | undefined
 	disabled?: boolean
 	clickCallback?: () => void
@@ -15,6 +16,7 @@ const Button = ({
 	children,
 	primary = false,
 	background = false,
+	inverted = false,
 	type = 'button',
 	disabled = false,
 	clickCallback,
@@ -28,10 +30,12 @@ const Button = ({
 			type={type}
 			disabled={disabled}
 			className={
-				primary
+				primary && !inverted
 					? `${styles.button} ${styles.primary}`
 					: background
 					? `${styles.button} ${styles.background}`
+					: primary && inverted
+					? `${styles.button} ${styles.primary} ${styles.inverted}`
 					: styles.button
 			}
 		>

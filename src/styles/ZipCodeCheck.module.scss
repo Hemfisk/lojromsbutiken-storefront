@@ -1,0 +1,78 @@
+@import './utils.scss';
+
+.delivery_background {
+	@include maxWidthContainer;
+	background-image: url('/sweden.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center right;
+	.delivery_container {
+		@include contentPadding;
+		display: flex;
+		gap: var(--gap-horizontal);
+		padding-left: min(40vw, calc(var(--max-width) * 0.4));
+		padding-right: min(20vw, calc(var(--max-width) * 0.2));
+		background-color: hsla(var(--primary-values), 20%);
+		padding-top: calc(var(--menu-height) * 2);
+		padding-bottom: var(--menu-height);
+		flex-direction: column;
+		@media screen and (max-width: $breakpoint-tabletBig) {
+			padding-left: 30vw;
+			padding-right: 15vw;
+		}
+		@media screen and (max-width: $breakpoint-tablet) {
+			padding-left: 25vw;
+			padding-right: 15vw;
+		}
+		@media screen and (max-width: $breakpoint-mobileBig) {
+			padding-left: 15vw;
+			padding-right: 15vw;
+		}
+		@media screen and (max-width: $breakpoint-mobile) {
+			padding-left: 2.5em;
+			padding-right: 2.5em;
+		}
+		.delivery_content {
+			margin-left: auto;
+			width: 100%;
+			color: var(--background);
+			h2 {
+				font-size: clamp(1.4rem, 2vw, 1.8rem);
+				font-weight: 600;
+				text-transform: uppercase;
+				line-height: 1.14;
+				margin-bottom: 1em;
+			}
+			.content {
+				margin-bottom: 1em;
+			}
+			.delivery_status {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				text-align: left;
+				padding: 0.5em;
+				margin-top: 2em;
+				color: var(--background);
+				font-size: 0.9rem;
+				height: 3em;
+				line-height: 1;
+				&.result {
+					font-weight: 600;
+				}
+			}
+			.delivery_search {
+				display: flex;
+			}
+			input {
+				@include inputStyles;
+				border-color: transparent;
+				&:hover,
+				&:focus-visible {
+					border-color: var(--text-variant);
+				}
+				margin-right: var(--gap-horizontal);
+			}
+		}
+	}
+}

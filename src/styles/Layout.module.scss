@@ -34,6 +34,7 @@
 .grid_container {
 	@include maxWidthContainer;
 	margin-top: var(--gap-vertical);
+	margin-bottom: var(--gap-vertical);
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-column-gap: var(--gap-horizontal);
@@ -47,7 +48,6 @@
 	@media screen and (max-width: $breakpoint-mobileSmall) {
 		grid-template-columns: repeat(1, 1fr);
 	}
-	margin-bottom: calc(var(--gap-vertical) * 2);
 }
 
 .two_column_grid {

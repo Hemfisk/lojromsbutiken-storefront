@@ -15,9 +15,11 @@
 	--background: hsl(0, 0%, 100%);
 	--text: hsl(0, 0%, 24%);
 	--text-variant: hsl(0, 0%, 38%);
-	--primary: hsl(220, 25%, 15%);
+	--primary-values: 220, 25%, 15%;
+	--primary: hsl(var(--primary-values));
 	--primary-variant: hsl(220, 25%, 25%);
-	--accent: hsl(220, 16%, 76%);
+	--accent-values: 220, 16%, 76%;
+	--accent: hsl(var(--accent-values));
 	--accent-variant: hsl(220, 32%, 93%);
 	--accent-variant-light: hsl(220, 32%, 96%);
 	--price: hsl(0, 54%, 56%);

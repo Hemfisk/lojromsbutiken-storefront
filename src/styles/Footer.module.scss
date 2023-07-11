@@ -56,7 +56,7 @@
 				}
 				.footer_navigation {
 					flex-direction: row;
-					gap: calc(var(--gap-horizontal) / 2) var(--gap-horizontal);
+					gap: 0 var(--gap-horizontal);
 					justify-content: center;
 				}
 			}

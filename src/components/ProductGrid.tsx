@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { debounce } from 'lodash'
 
 import layout from '@/styles/Layout.module.scss'
@@ -7,15 +7,37 @@ import { useWindowSize } from '@/utils/hooks'
 import Button from './Button'
 import Search from './Search'
 import Product from './Product'
+import ZipCodeCheck from './ZipCodeCheck'
 
-const ProductGrid = ({ collections, allProducts }: any) => {
+const ProductGrid = ({
+	collections,
+	allProducts,
+	deliveryContent,
+	zipCodes,
+}: any) => {
 	const [width] = useWindowSize()
 	const [selectedCollection, setSelectedCollection] = useState(
 		collections[0].node.handle
 	)
-
 	const [showSelectModal, setShowSelectModal] = useState(false)
 	const [productSearch, setProductSearch] = useState<string>('')
+	const [productsBeforeZipCodeCheck, setProductsBeforeZipCodeCheck] = useState<
+		number | null
+	>(null)
+
+	useEffect(() => {
+		if (width > 0) {
+			const productsPerRow =
+				width < 960 && width > 768
+					? 3
+					: width < 768 && width > 380
+					? 2
+					: width < 380
+					? 1
+					: 4
+			setProductsBeforeZipCodeCheck(productsPerRow * 3)
+		}
+	}, [width])
 
 	const productsByCollection = collections.map((collection: any) => {
 		collection.products = allProducts?.filter((product: any) => {
@@ -55,13 +77,54 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 		)
 	}
 
-	const productsGrid = (productsToDisplay: any[]) => (
-		<div className={layout.grid_container}>
-			{productsToDisplay.map((product: any) => (
-				<Product key={product.node.handle} productData={product.node} />
-			))}
-		</div>
-	)
+	const productsGrid = (productsToDisplay: any[]) => {
+		if (
+			productsBeforeZipCodeCheck &&
+			productsToDisplay.length > productsBeforeZipCodeCheck
+		) {
+			return (
+				<>
+					<div className={layout.container}>
+						<div className={layout.grid_container}>
+							{productsToDisplay
+								.slice(0, productsBeforeZipCodeCheck)
+								.map((product: any) => (
+									<Product
+										key={product.node.handle}
+										productData={product.node}
+									/>
+								))}
+						</div>
+					</div>
+					<ZipCodeCheck deliveryContent={deliveryContent} zipCodes={zipCodes} />
+					<div className={layout.container}>
+						<div className={layout.grid_container}>
+							{productsToDisplay
+								.slice(productsBeforeZipCodeCheck, productsToDisplay.length)
+								.map((product: any) => (
+									<Product
+										key={product.node.handle}
+										productData={product.node}
+									/>
+								))}
+						</div>
+					</div>
+				</>
+			)
+		}
+		return (
+			<>
+				<div className={layout.container}>
+					<div className={layout.grid_container}>
+						{productsToDisplay.map((product: any) => (
+							<Product key={product.node.handle} productData={product.node} />
+						))}
+					</div>
+				</div>
+				<ZipCodeCheck deliveryContent={deliveryContent} zipCodes={zipCodes} />
+			</>
+		)
+	}
 
 	const productSearchHandler = useRef(
 		debounce((e) => {
@@ -70,104 +133,81 @@ const ProductGrid = ({ collections, allProducts }: any) => {
 	)
 
 	const renderProducts = () => {
-		if (selectedCollection) {
-			if (productSearch) {
-				const filteredProducts = productsByCollection
-					.find(
-						(collection: any) => collection.node.handle === selectedCollection
-					)
-					.products.filter((product: any) =>
-						product.node.title
-							.toLowerCase()
-							.includes(productSearch.toLowerCase())
-					)
-
-				if (filteredProducts?.length) {
-					return productsGrid(filteredProducts)
-				} else {
-					return (
-						<div className={styles.no_products_message}>
-							<h5>Tyvärr, inga produkter matchade din sökning</h5>
-						</div>
-					)
-				}
-			} else {
-				const filteredProducts = productsByCollection.find(
+		if (productSearch) {
+			const filteredProducts = productsByCollection
+				.find(
 					(collection: any) => collection.node.handle === selectedCollection
-				).products
-
-				if (filteredProducts?.length) {
-					return productsGrid(filteredProducts)
-				} else {
-					return (
-						<div className={styles.no_products_message}>
-							<h5>Tyvärr gick det inte att hitta några produkter</h5>
-						</div>
-					)
-				}
-			}
-		} else {
-			if (productSearch) {
-				const filteredProducts = allProducts.filter((product: any) =>
+				)
+				.products.filter((product: any) =>
 					product.node.title.toLowerCase().includes(productSearch.toLowerCase())
 				)
-				if (filteredProducts.length) {
-					return productsGrid(filteredProducts)
-				} else {
-					return (
-						<div className={styles.no_products_message}>
-							<h5>Tyvärr, inga produkter matchade din sökning</h5>
-						</div>
-					)
-				}
+
+			if (filteredProducts?.length) {
+				return productsGrid(filteredProducts)
 			} else {
-				if (allProducts?.length) {
-					return productsGrid(allProducts)
-				} else {
-					return (
-						<div className={styles.no_products_message}>
-							<h5>Tyvärr gick det inte att hitta några produkter</h5>
-						</div>
-					)
-				}
+				return (
+					<div className={styles.no_products_message}>
+						<h5>Tyvärr, inga produkter matchade din sökning</h5>
+					</div>
+				)
+			}
+		} else {
+			const filteredProducts = productsByCollection.find(
+				(collection: any) => collection.node.handle === selectedCollection
+			).products
+
+			if (filteredProducts?.length) {
+				return productsGrid(filteredProducts)
+			} else {
+				return (
+					<div className={styles.no_products_message}>
+						<h5>Tyvärr gick det inte att hitta några produkter</h5>
+					</div>
+				)
 			}
 		}
 	}
 
 	return (
-		<div className={layout.container}>
-			<div className={`${layout.flex_row} ${layout.gap_large}`}>
-				<div className={`${layout.flex_row} ${layout.collapse_mobile}`}>
-					{width <= 1024 ? (
-						<>
-							<Button primary clickCallback={() => setShowSelectModal(true)}>
-								{
-									collections.find(
-										(collection: any) =>
-											collection.node.handle === selectedCollection
-									).node.title
-								}
-							</Button>
-							{showSelectModal ? <SelectModal /> : null}
-						</>
-					) : (
-						<>
-							{collections.map((collection: any) => (
-								<Button
-									primary={selectedCollection === collection.node.handle}
-									key={collection.node.handle}
-									clickCallback={() => toggleCollection(collection.node.handle)}
-								>
-									{collection.node.title}
+		<>
+			<div className={layout.container}>
+				<div className={`${layout.flex_row} ${layout.gap_large}`}>
+					<div className={`${layout.flex_row} ${layout.collapse_mobile}`}>
+						{width <= 1024 ? (
+							<>
+								<Button primary clickCallback={() => setShowSelectModal(true)}>
+									{
+										collections.find(
+											(collection: any) =>
+												collection.node.handle === selectedCollection
+										).node.title
+									}
 								</Button>
-							))}
-						</>
-					)}
+								{showSelectModal ? <SelectModal /> : null}
+							</>
+						) : (
+							<>
+								{collections.map((collection: any) => (
+									<Button
+										primary={selectedCollection === collection.node.handle}
+										key={collection.node.handle}
+										clickCallback={() =>
+											toggleCollection(collection.node.handle)
+										}
+									>
+										{collection.node.title}
+									</Button>
+								))}
+							</>
+						)}
+					</div>
+					<Search
+						changeCallback={(e: any) => productSearchHandler.current(e)}
+					/>
 				</div>
-				<Search changeCallback={(e: any) => productSearchHandler.current(e)} />
 			</div>
 			{renderProducts()}
-		</div>
+		</>
 	)
 }
 

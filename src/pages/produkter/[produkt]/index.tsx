@@ -264,12 +264,15 @@ const ProductPage = ({ shopInfo, product, relatedProducts }: any) => {
 						<div
 							className={`${layout.grid_container} ${layout.wrapped_container}`}
 						>
-							{relatedProducts?.map((productData: any) => (
-								<Product
-									key={productData.product.handle}
-									productData={productData.product}
-								/>
-							))}
+							{relatedProducts?.map(
+								(productData: any) =>
+									productData.product?.handle && (
+										<Product
+											key={productData.product.handle}
+											productData={productData.product}
+										/>
+									)
+							)}
 						</div>
 					</>
 				) : null}
