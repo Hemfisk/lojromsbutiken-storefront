@@ -14,8 +14,9 @@ let xPosition = 0
 
 const Hero = ({ heroContent }: any) => {
 	const [tableIsScrollable, setTableIsScrollable] = useState(false)
-	const [translateX, setTranslateX] = useState(0)
+	const [maxScrollLength, setMaxScrollLength] = useState(0)
 	const [translateXStartPos, setTranslateXStartPos] = useState(0)
+	const [translateX, setTranslateX] = useState(0)
 
 	const tableRef = useRef<HTMLDivElement>(null)
 
@@ -38,6 +39,8 @@ const Hero = ({ heroContent }: any) => {
 			const isTableScrollable = platePositions.some(
 				(node) => node.left < 0 || node.right > window.innerWidth
 			)
+			const padding = (window.innerWidth - platePositions[0].width) / 2
+			setMaxScrollLength(Math.abs(platePositions[0].left) + padding)
 			setTableIsScrollable(isTableScrollable)
 			if (!isTableScrollable) {
 				setTranslateX(0)
@@ -53,12 +56,18 @@ const Hero = ({ heroContent }: any) => {
 
 	const dragMove = (e: Event) => {
 		const event = e as DragEvent
-		setTranslateX(translateXStartPos + event.clientX - xPosition)
+		const translate = translateXStartPos + event.clientX - xPosition
+		if (Math.abs(translate) <= maxScrollLength) {
+			setTranslateX(translate)
+		}
 	}
 
 	const touchMove = (e: Event) => {
 		const event = e as TouchEvent
-		setTranslateX(translateXStartPos + event.touches[0]?.clientX - xPosition)
+		const translate = translateXStartPos + event.touches[0]?.clientX - xPosition
+		if (Math.abs(translate) <= maxScrollLength) {
+			setTranslateX(translate)
+		}
 	}
 
 	const handleTableDrag = (e: React.DragEvent) => {
