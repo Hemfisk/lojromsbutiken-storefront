@@ -34,25 +34,39 @@ const Hero = ({ heroContent }: any) => {
 	}
 
 	useEffect(() => {
+		const initialSetup = () => {
+			const platePositions = getPlatePositions()
+
+			const isTableScrollable = platePositions.some(
+				(node) => node.left < 0 || node.right > window.innerWidth
+			)
+			const padding = (window.innerWidth - platePositions[0].width) / 2
+			setTableIsScrollable(isTableScrollable)
+			windowWidth = window.innerWidth
+			setMaxScrollLength(Math.abs(platePositions[0].left) + padding)
+			if (!isTableScrollable) {
+				setTranslateX(0)
+			}
+		}
+
 		const handleScreenResize = () => {
+			const platePositions = getPlatePositions()
+
+			const isTableScrollable = platePositions.some(
+				(node) => node.left < 0 || node.right > window.innerWidth
+			)
+			const padding = (window.innerWidth - platePositions[0].width) / 2
+			setTableIsScrollable(isTableScrollable)
 			if (windowWidth !== window.innerWidth) {
 				windowWidth = window.innerWidth
-
-				const platePositions = getPlatePositions()
-
-				const isTableScrollable = platePositions.some(
-					(node) => node.left < 0 || node.right > window.innerWidth
-				)
-				const padding = (window.innerWidth - platePositions[0].width) / 2
 				setMaxScrollLength(Math.abs(platePositions[0].left) + padding)
-				setTableIsScrollable(isTableScrollable)
 				if (!isTableScrollable) {
 					setTranslateX(0)
 				}
 			}
 		}
 
-		handleScreenResize()
+		initialSetup()
 
 		window.addEventListener('resize', handleScreenResize)
 
@@ -70,6 +84,7 @@ const Hero = ({ heroContent }: any) => {
 	const touchMove = (e: Event) => {
 		const event = e as TouchEvent
 		const translate = translateXStartPos + event.touches[0]?.clientX - xPosition
+
 		if (Math.abs(translate) <= maxScrollLength) {
 			setTranslateX(translate)
 		}
