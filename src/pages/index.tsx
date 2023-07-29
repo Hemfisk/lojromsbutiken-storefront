@@ -7,7 +7,6 @@ import {
 	GET_PRODUCTS,
 	GET_SHOP_NAME,
 } from '@/pages/api/queries'
-import { generateImageSrcFromString } from '@/utils/utils'
 
 import Hero from '@/components/Hero'
 import ProductGrid from '@/components/ProductGrid'
@@ -17,7 +16,6 @@ const Home = ({
 	shopInfo,
 	deliveryContent,
 	heroContent,
-	heroImage,
 	zipCodes,
 	collections,
 	allProducts,
@@ -28,7 +26,7 @@ const Home = ({
 				<title>{`${shopInfo.name} - ${shopInfo.brand.slogan}`}</title>
 				<meta name='description' content={shopInfo.brand.shortDescription} />
 			</Head>
-			<Hero heroContent={heroContent} heroImage={heroImage} />
+			<Hero heroContent={heroContent} />
 			<ProductGrid
 				collections={collections}
 				allProducts={allProducts}
@@ -48,10 +46,6 @@ export const getServerSideProps = async () => {
 
 	const hero = await gqlShopify(GET_PAGE_CONTENT, {
 		handle: 'hero',
-	})
-
-	const heroImage = await gqlShopify(GET_PAGE_CONTENT, {
-		handle: 'hero-image',
 	})
 
 	const allCollections = await gqlShopify(GET_COLLECTIONS, { amount: 5 })
@@ -77,7 +71,6 @@ export const getServerSideProps = async () => {
 		shopInfo: shop.shop,
 		deliveryContent: delivery.page,
 		heroContent: hero.page,
-		heroImage: generateImageSrcFromString(heroImage.page.body),
 		zipCodes: { gordonZipCodes, dalafiskZipCodes },
 		collections: allCollections.collections.edges,
 		allProducts: []

@@ -1,17 +1,95 @@
 @import './utils.scss';
 
 .hero_section {
-	width: 100vw;
-	height: 40vh;
+	position: relative;
+	@include contentPadding;
+	width: 100%;
+	height: 346px;
+	overflow: hidden;
 	display: flex;
-	.hero_image {
-		flex-shrink: 0;
-		position: relative;
+	background-image: url('/hero/background.jpg');
+	background-position: center;
+	background-size: auto 300px;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+	@media screen and (max-width: $breakpoint-mobileBig) and (orientation: portrait) {
+		height: 60svh;
+	}
+	.hero_background_table {
+		position: absolute;
+		bottom: 0;
+		left: 0;
 		width: 100%;
+		height: 25%;
+		background-image: url('/hero/table.png');
+		background-size: contain;
+		box-shadow: 0px -20px 20px 0px rgba(0, 0, 0, 0.2),
+			inset 50px 0px 50px -50px rgba(46, 36, 26, 0.75),
+			inset -50px 0px 50px -50px rgba(46, 36, 26, 0.75);
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		gap: min(8vw, 8em);
+		padding-bottom: 15px;
+		@media screen and (max-width: $breakpoint-mobileBig) {
+			gap: 0;
+		}
+		.hero_plate {
+			position: relative;
+			flex-shrink: 0;
+			height: 120%;
+			aspect-ratio: 587/240;
+			translate: var(--translate-x) 0;
+			transform: translateY(0) scale(1);
+			transition: transform 0.2s ease-in-out;
+			cursor: pointer;
+			&:hover {
+				transform: translateY(2px) scale(1.03);
+			}
+			img {
+				pointer-events: none;
+			}
+		}
+	}
+	.hero_content {
+		@include maxWidthContainer;
+		width: 100%;
+		position: relative;
+		.hero_image {
+			position: absolute;
+			flex-shrink: 0;
+			&.knives {
+				height: 52%;
+				aspect-ratio: 207/172;
+				right: 0;
+				top: 40px;
+				@media screen and (max-width: $breakpoint-mobileBig) {
+					right: auto;
+					left: 75%;
+				}
+			}
+			&.logo {
+				height: 60%;
+				aspect-ratio: 59 / 50;
+				left: -1%;
+				top: 0;
+				@media screen and (max-width: $breakpoint-tabletBig) {
+					height: 50%;
+					left: -1vw;
+				}
+				@media screen and (max-width: $breakpoint-mobile) and (orientation: landscape) {
+					left: -60px;
+				}
+				@media screen and (max-width: $breakpoint-mobileBig) and (orientation: portrait) {
+					height: 60svw;
+					max-height: 60%;
+					left: -20svw;
+				}
+			}
+		}
 	}
 }
 
-.hero_content {
+.hero_text {
 	text-align: center;
 	h1 {
 		font-size: clamp(1.6rem, 2.5vw, 2rem);

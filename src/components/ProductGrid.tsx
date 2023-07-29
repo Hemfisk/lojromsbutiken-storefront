@@ -9,12 +9,21 @@ import Search from './Search'
 import Product from './Product'
 import ZipCodeCheck from './ZipCodeCheck'
 
+interface Props {
+	collections: any
+	allProducts: any
+	deliveryContent?: any
+	zipCodes?: any
+	initialCollection?: string | null
+}
+
 const ProductGrid = ({
 	collections,
 	allProducts,
 	deliveryContent,
 	zipCodes,
-}: any) => {
+	initialCollection = null,
+}: Props) => {
 	const [width] = useWindowSize()
 	const [selectedCollection, setSelectedCollection] = useState(
 		collections[0].node.handle
@@ -38,6 +47,12 @@ const ProductGrid = ({
 			setProductsBeforeZipCodeCheck(productsPerRow * 3)
 		}
 	}, [width])
+
+	useEffect(() => {
+		if (collections.some((c: any) => c.node.handle === initialCollection)) {
+			setSelectedCollection(initialCollection)
+		}
+	}, [collections, initialCollection])
 
 	const productsByCollection = collections.map((collection: any) => {
 		collection.products = allProducts?.filter((product: any) => {

@@ -20,7 +20,8 @@
 	--primary-variant: hsl(220, 25%, 25%);
 	--accent-values: 220, 16%, 76%;
 	--accent: hsl(var(--accent-values));
-	--accent-variant: hsl(220, 32%, 93%);
+	--accent-variant-values: 220, 32%, 93%;
+	--accent-variant: hsl(var(--accent-variant-values));
 	--accent-variant-light: hsl(220, 32%, 96%);
 	--price: hsl(0, 54%, 56%);
 }

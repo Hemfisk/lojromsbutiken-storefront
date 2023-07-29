@@ -49,6 +49,7 @@ const NavLink = ({
 const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 	const [active, setActive] = useState(currentPage || '')
 	const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false)
+	const [overHero, setOverHero] = useState(true)
 
 	const { items, cartId, updateCartId, updateCartItems } = useCart()
 
@@ -77,6 +78,27 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cartId, items, updateCartId, updateCartItems])
+
+	useEffect(() => {
+		const onScroll = (): void => {
+			const heroSection = document.querySelector('#hero-section')
+			if (heroSection) {
+				const heroSectionRect = heroSection.getBoundingClientRect()
+				if (Math.abs(heroSectionRect.y) < heroSectionRect.height * 0.8) {
+					setOverHero(true)
+				} else {
+					setOverHero(false)
+				}
+			}
+		}
+
+		onScroll()
+
+		window.removeEventListener('scroll', onScroll)
+		window.addEventListener('scroll', onScroll, { passive: true })
+
+		return () => window.removeEventListener('scroll', onScroll)
+	}, [])
 
 	const mobileNavigation = () => {
 		if (!mobileNavigationOpen) {
@@ -115,7 +137,11 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 	return (
 		<>
 			{mobileNavigation()}
-			<div className={`${styles.navigation_container} ${fontFamily.className}`}>
+			<div
+				className={`${styles.navigation_container} ${fontFamily.className} ${
+					currentPage === '/' && overHero ? styles.over_hero : ''
+				}`}
+			>
 				<div className={styles.navigation_content}>
 					<div className={styles.mobile_menu_container}>
 						<div
