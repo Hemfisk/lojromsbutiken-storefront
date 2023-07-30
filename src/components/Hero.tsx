@@ -3,11 +3,34 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from '@/styles/Hero.module.scss'
+import { Plate } from './plates/plateUtils'
+import { FiskPlate, PaketPlate, RomPlate, SkaldjurPlate } from './plates'
 
-const plates = [
-	{ title: 'Fisk', handle: '/vart-sortiment/fisk' },
-	{ title: 'Skaldjur', handle: '/vart-sortiment/skaldjur' },
-	{ title: 'Paket', handle: '/vart-sortiment/paket' },
+const plates: Plate[] = [
+	{
+		title: 'Fisk',
+		handle: '/vart-sortiment/fisk',
+		class: styles.fish,
+		component: <FiskPlate title='Fisk' />,
+	},
+	{
+		title: 'Skaldjur',
+		handle: '/vart-sortiment/skaldjur',
+		class: styles.fish,
+		component: <SkaldjurPlate title='Skaldjur' />,
+	},
+	{
+		title: 'Paket',
+		handle: '/vart-sortiment/paket',
+		class: styles.fish,
+		component: <PaketPlate title='Paket' />,
+	},
+	{
+		title: 'Rom',
+		handle: '/vart-sortiment/rom',
+		class: styles.fish,
+		component: <RomPlate title='Rom' />,
+	},
 ]
 
 let windowWidth = 0
@@ -34,30 +57,15 @@ const Hero = ({ heroContent }: any) => {
 	}
 
 	useEffect(() => {
-		const initialSetup = () => {
+		const handlePlateScrollFromScreenSize = (init: boolean = false) => {
 			const platePositions = getPlatePositions()
 
 			const isTableScrollable = platePositions.some(
 				(node) => node.left < 0 || node.right > window.innerWidth
 			)
-			const padding = (window.innerWidth - platePositions[0].width) / 2
+			const padding = platePositions[0].width / 5
 			setTableIsScrollable(isTableScrollable)
-			windowWidth = window.innerWidth
-			setMaxScrollLength(Math.abs(platePositions[0].left) + padding)
-			if (!isTableScrollable) {
-				setTranslateX(0)
-			}
-		}
-
-		const handleScreenResize = () => {
-			const platePositions = getPlatePositions()
-
-			const isTableScrollable = platePositions.some(
-				(node) => node.left < 0 || node.right > window.innerWidth
-			)
-			const padding = (window.innerWidth - platePositions[0].width) / 2
-			setTableIsScrollable(isTableScrollable)
-			if (windowWidth !== window.innerWidth) {
+			if (windowWidth !== window.innerWidth || init) {
 				windowWidth = window.innerWidth
 				setMaxScrollLength(Math.abs(platePositions[0].left) + padding)
 				if (!isTableScrollable) {
@@ -66,7 +74,11 @@ const Hero = ({ heroContent }: any) => {
 			}
 		}
 
-		initialSetup()
+		const handleScreenResize = () => {
+			handlePlateScrollFromScreenSize()
+		}
+
+		handlePlateScrollFromScreenSize(true)
 
 		window.addEventListener('resize', handleScreenResize)
 
@@ -76,8 +88,15 @@ const Hero = ({ heroContent }: any) => {
 	const dragMove = (e: Event) => {
 		const event = e as DragEvent
 		const translate = translateXStartPos + event.clientX - xPosition
+
 		if (Math.abs(translate) <= maxScrollLength) {
 			setTranslateX(translate)
+		} else {
+			if (translate < 0) {
+				setTranslateX(-maxScrollLength)
+			} else {
+				setTranslateX(maxScrollLength)
+			}
 		}
 	}
 
@@ -87,6 +106,12 @@ const Hero = ({ heroContent }: any) => {
 
 		if (Math.abs(translate) <= maxScrollLength) {
 			setTranslateX(translate)
+		} else {
+			if (translate < 0) {
+				setTranslateX(-maxScrollLength)
+			} else {
+				setTranslateX(maxScrollLength)
+			}
 		}
 	}
 
@@ -96,7 +121,7 @@ const Hero = ({ heroContent }: any) => {
 		xPosition = e.clientX
 
 		if (e.type === 'dragstart') {
-			e.target.addEventListener('dragover', dragMove)
+			e.target.addEventListener('dragover', dragMove, { passive: true })
 		} else {
 			e.target.removeEventListener('dragover', dragMove)
 			setTranslateXStartPos(translateX)
@@ -109,7 +134,7 @@ const Hero = ({ heroContent }: any) => {
 		xPosition = e.touches[0]?.clientX
 
 		if (e.type === 'touchstart') {
-			e.target.addEventListener('touchmove', touchMove)
+			e.target.addEventListener('touchmove', touchMove, { passive: true })
 		} else {
 			e.target.removeEventListener('touchmove', touchMove)
 			setTranslateXStartPos(translateX)
@@ -146,10 +171,6 @@ const Hero = ({ heroContent }: any) => {
 				<div
 					ref={tableRef}
 					className={styles.hero_background_table}
-					onDragStart={(e) => (tableIsScrollable ? handleTableDrag(e) : null)}
-					onDragEnd={(e) => (tableIsScrollable ? handleTableDrag(e) : null)}
-					onTouchStart={(e) => (tableIsScrollable ? handleTableTouch(e) : null)}
-					onTouchEnd={(e) => (tableIsScrollable ? handleTableTouch(e) : null)}
 					style={
 						{
 							'--translate-x': `${tableIsScrollable ? translateX : 0}px`,
@@ -161,17 +182,28 @@ const Hero = ({ heroContent }: any) => {
 							href={plate.handle}
 							key={plate.title}
 							title={plate.title}
-							className={styles.hero_plate}
+							className={`${styles.hero_plate} ${plate.class}`}
+							onDragStart={(e) =>
+								tableIsScrollable ? handleTableDrag(e) : null
+							}
+							onDragEnd={(e) => (tableIsScrollable ? handleTableDrag(e) : null)}
+							onDragLeave={(e) =>
+								tableIsScrollable ? handleTableDrag(e) : null
+							}
+							onDragExit={(e) =>
+								tableIsScrollable ? handleTableDrag(e) : null
+							}
+							onTouchStart={(e) =>
+								tableIsScrollable ? handleTableTouch(e) : null
+							}
+							onTouchEnd={(e) =>
+								tableIsScrollable ? handleTableTouch(e) : null
+							}
+							onTouchCancel={(e) =>
+								tableIsScrollable ? handleTableTouch(e) : null
+							}
 						>
-							<Image
-								src='/hero/plate.png'
-								alt={`${plate.title} tallrik`}
-								fill
-								sizes='(min-width: 60em) 24vw,
-                    (min-width: 28em) 45vw,
-                    100vw'
-								priority
-							/>
+							{plate.component}
 						</Link>
 					))}
 				</div>

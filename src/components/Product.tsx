@@ -86,6 +86,7 @@ const Product = ({ productData }: Props) => {
 		  )
 		: []
 
+	const readMore = true
 	return (
 		<div className={styles.product}>
 			{addonRound(addon)}
@@ -133,24 +134,30 @@ const Product = ({ productData }: Props) => {
 				<span>från </span>
 				{price}
 			</h4>
-			<Button
-				clickCallback={async () => {
-					setLoading(true)
+			{readMore ? (
+				<Link href={`/produkter/${productData.handle}`}>
+					<Button>Läs mer</Button>
+				</Link>
+			) : (
+				<Button
+					clickCallback={async () => {
+						setLoading(true)
 
-					addToCart(
-						productData.variants.edges[cheapestVariant].node.id,
-						cartId,
-						items,
-						updateCartId,
-						updateCartItems
-					).then(() => {
-						setLoading(false)
-					})
-				}}
-				disabled={loading}
-			>
-				Köp
-			</Button>
+						addToCart(
+							productData.variants.edges[cheapestVariant].node.id,
+							cartId,
+							items,
+							updateCartId,
+							updateCartItems
+						).then(() => {
+							setLoading(false)
+						})
+					}}
+					disabled={loading}
+				>
+					Köp
+				</Button>
+			)}
 			{loading ? (
 				<div className={styles.load_container}>
 					<CircularProgress disableShrink />

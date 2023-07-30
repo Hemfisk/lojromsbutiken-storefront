@@ -28,7 +28,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
-		gap: min(8vw, 8em);
+		gap: min(5vw, 5em);
 		padding-bottom: 15px;
 		@media screen and (max-width: $breakpoint-mobileBig) {
 			gap: 0;
@@ -36,17 +36,39 @@
 		.hero_plate {
 			position: relative;
 			flex-shrink: 0;
-			height: 120%;
+			height: 160%;
 			aspect-ratio: 587/240;
 			translate: var(--translate-x) 0;
 			transform: translateY(0) scale(1);
 			transition: transform 0.2s ease-in-out;
 			cursor: pointer;
 			&:hover {
-				transform: translateY(2px) scale(1.03);
+				transform: translateY(3px) scale(1.05);
 			}
 			img {
 				pointer-events: none;
+			}
+			&.fish {
+				aspect-ratio: 828/455;
+			}
+			.sign {
+				position: absolute;
+				height: 90%;
+				aspect-ratio: 493/540;
+				bottom: 50%;
+				left: 25%;
+				background-image: url('/hero/sign.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+				transform-origin: bottom center;
+				.sign_content {
+					position: absolute;
+					top: 5%;
+					left: 5%;
+					width: 88%;
+					height: 52%;
+					overflow: hidden;
+				}
 			}
 		}
 	}
