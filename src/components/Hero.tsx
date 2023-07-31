@@ -167,6 +167,18 @@ const Hero = ({ heroContent }: any) => {
 							priority
 						/>
 					</div>
+					<div className={`${styles.hero_image} ${styles.decor}`}>
+						<Image
+							src='/hero/decor.png'
+							alt='Knivar'
+							fill
+							sizes='(min-width: 60em) 24vw,
+                    (min-width: 28em) 45vw,
+                    100vw'
+							loading='eager'
+							priority
+						/>
+					</div>
 					<div className={`${styles.hero_image} ${styles.logo}`}>
 						<Image
 							src='/LOGO_dalafisk.png'

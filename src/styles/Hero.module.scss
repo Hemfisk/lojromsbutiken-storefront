@@ -89,6 +89,19 @@
 					left: 75%;
 				}
 			}
+			&.decor {
+				height: 65%;
+				aspect-ratio: 128/85;
+				left: 25%;
+				top: 30px;
+				@media screen and (max-width: $breakpoint-laptop) {
+					height: 60%;
+					left: 30%;
+				}
+				@media screen and (max-width: $breakpoint-tabletBig) {
+					display: none;
+				}
+			}
 			&.logo {
 				height: 60%;
 				aspect-ratio: 59 / 50;

@@ -8,7 +8,7 @@ const RomPlate = ({ title }: PlateComponent) => {
 		<>
 			<div
 				className={styles.sign}
-				style={{ transform: 'translateX(5%) rotate(10deg)' }}
+				style={{ transform: 'translateX(5%) rotate(-15deg)' }}
 			>
 				<div className={styles.sign_content}>
 					<Image

@@ -6,7 +6,7 @@ import styles from '@/styles/Hero.module.scss'
 const FiskPlate = ({ title }: PlateComponent) => {
 	return (
 		<>
-			<div className={styles.sign} style={{ transform: 'rotate(20deg)' }}>
+			<div className={styles.sign} style={{ transform: 'rotate(10deg)' }}>
 				<div className={styles.sign_content}>
 					<Image
 						src='/hero/fisk-sign.svg'
