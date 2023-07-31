@@ -8,7 +8,7 @@ const SkaldjurPlate = ({ title }: PlateComponent) => {
 		<>
 			<div
 				className={styles.sign}
-				style={{ transform: 'translateX(-10%) rotate(-5deg)' }}
+				style={{ transform: 'translateX(20%) rotate(-5deg)' }}
 			>
 				<div className={styles.sign_content}>
 					<Image
