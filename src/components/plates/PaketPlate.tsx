@@ -15,17 +15,19 @@ const PaketPlate = ({ title }: PlateComponent) => {
 						sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
+						loading='eager'
 						priority
 					/>
 				</div>
 			</div>
 			<Image
-				src='/hero/fisk-plate.png'
+				src='/hero/paket-plate.png'
 				alt={`${title} tallrik`}
 				fill
 				sizes='(min-width: 60em) 24vw,
-                    (min-width: 28em) 45vw,
-                    100vw'
+				(min-width: 28em) 45vw,
+				100vw'
+				loading='eager'
 				priority
 			/>
 		</>

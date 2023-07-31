@@ -18,17 +18,19 @@ const SkaldjurPlate = ({ title }: PlateComponent) => {
 						sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
+						loading='eager'
 						priority
 					/>
 				</div>
 			</div>
 			<Image
-				src='/hero/fisk-plate.png'
+				src='/hero/skaldjur-plate.png'
 				alt={`${title} tallrik`}
 				fill
 				sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
+				loading='eager'
 				priority
 			/>
 		</>

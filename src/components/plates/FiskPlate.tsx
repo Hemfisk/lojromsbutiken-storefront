@@ -15,6 +15,7 @@ const FiskPlate = ({ title }: PlateComponent) => {
 						sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
+						loading='eager'
 						priority
 					/>
 				</div>
@@ -26,6 +27,7 @@ const FiskPlate = ({ title }: PlateComponent) => {
 				sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
+				loading='eager'
 				priority
 			/>
 		</>

@@ -163,6 +163,7 @@ const Hero = ({ heroContent }: any) => {
 							sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
+							loading='eager'
 							priority
 						/>
 					</div>
@@ -174,6 +175,7 @@ const Hero = ({ heroContent }: any) => {
 							sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
                     100vw'
+							loading='eager'
 							priority
 						/>
 					</div>
