@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -11,25 +11,25 @@ const plates: Plate[] = [
 		title: 'Fisk',
 		handle: '/vart-sortiment/fisk',
 		class: styles.fish,
-		component: <FiskPlate title='Fisk' />,
+		component: <FiskPlate title='Fisk' key='fisk_image' />,
 	},
 	{
 		title: 'Skaldjur',
 		handle: '/vart-sortiment/skaldjur',
 		class: styles.fish,
-		component: <SkaldjurPlate title='Skaldjur' />,
+		component: <SkaldjurPlate title='Skaldjur' key='skaldjur_image' />,
 	},
 	{
 		title: 'Paket',
 		handle: '/vart-sortiment/paket',
 		class: styles.fish,
-		component: <PaketPlate title='Paket' />,
+		component: <PaketPlate title='Paket' key='paket_image' />,
 	},
 	{
 		title: 'Rom',
 		handle: '/vart-sortiment/rom',
 		class: styles.fish,
-		component: <RomPlate title='Rom' />,
+		component: <RomPlate title='Rom' key='rom_image' />,
 	},
 ]
 
@@ -85,61 +85,71 @@ const Hero = ({ heroContent }: any) => {
 		return () => window.removeEventListener('resize', handleScreenResize)
 	}, [])
 
-	const dragMove = (e: Event) => {
-		const event = e as DragEvent
-		const translate = translateXStartPos + event.clientX - xPosition
+	const handleTableDrag = useMemo(
+		() => (e: React.DragEvent) => {
+			e.stopPropagation()
 
-		if (Math.abs(translate) <= maxScrollLength) {
-			setTranslateX(translate)
-		} else {
-			if (translate < 0) {
-				setTranslateX(-maxScrollLength)
-			} else {
-				setTranslateX(maxScrollLength)
+			const dragMove = (e: Event) => {
+				const event = e as DragEvent
+				const translate = Math.round(
+					translateXStartPos + event.clientX - xPosition
+				)
+
+				if (Math.abs(translate) <= maxScrollLength) {
+					setTranslateX(translate)
+				} else {
+					if (translate < 0) {
+						setTranslateX(-maxScrollLength)
+					} else {
+						setTranslateX(maxScrollLength)
+					}
+				}
 			}
-		}
-	}
 
-	const touchMove = (e: Event) => {
-		const event = e as TouchEvent
-		const translate = translateXStartPos + event.touches[0]?.clientX - xPosition
+			xPosition = e.clientX
 
-		if (Math.abs(translate) <= maxScrollLength) {
-			setTranslateX(translate)
-		} else {
-			if (translate < 0) {
-				setTranslateX(-maxScrollLength)
+			if (e.type === 'dragstart') {
+				e.target.addEventListener('dragover', dragMove, { passive: true })
 			} else {
-				setTranslateX(maxScrollLength)
+				e.target.removeEventListener('dragover', dragMove)
+				setTranslateXStartPos(translateX)
 			}
-		}
-	}
+		},
+		[maxScrollLength, translateX, translateXStartPos]
+	)
 
-	const handleTableDrag = (e: React.DragEvent) => {
-		e.stopPropagation()
+	const handleTableTouch = useMemo(
+		() => (e: React.TouchEvent) => {
+			e.stopPropagation()
 
-		xPosition = e.clientX
+			const touchMove = (e: Event) => {
+				const event = e as TouchEvent
+				const translate = Math.round(
+					translateXStartPos + event.touches[0]?.clientX - xPosition
+				)
 
-		if (e.type === 'dragstart') {
-			e.target.addEventListener('dragover', dragMove, { passive: true })
-		} else {
-			e.target.removeEventListener('dragover', dragMove)
-			setTranslateXStartPos(translateX)
-		}
-	}
+				if (Math.abs(translate) <= maxScrollLength) {
+					setTranslateX(translate)
+				} else {
+					if (translate < 0) {
+						setTranslateX(-maxScrollLength)
+					} else {
+						setTranslateX(maxScrollLength)
+					}
+				}
+			}
 
-	const handleTableTouch = (e: React.TouchEvent) => {
-		e.stopPropagation()
+			xPosition = e.touches[0]?.clientX
 
-		xPosition = e.touches[0]?.clientX
-
-		if (e.type === 'touchstart') {
-			e.target.addEventListener('touchmove', touchMove, { passive: true })
-		} else {
-			e.target.removeEventListener('touchmove', touchMove)
-			setTranslateXStartPos(translateX)
-		}
-	}
+			if (e.type === 'touchstart') {
+				e.target.addEventListener('touchmove', touchMove, { passive: true })
+			} else {
+				e.target.removeEventListener('touchmove', touchMove)
+				setTranslateXStartPos(translateX)
+			}
+		},
+		[maxScrollLength, translateX, translateXStartPos]
+	)
 
 	return (
 		<>
@@ -179,8 +189,8 @@ const Hero = ({ heroContent }: any) => {
 				>
 					{plates.map((plate) => (
 						<Link
+							key={`${plate.title}_link`}
 							href={plate.handle}
-							key={plate.title}
 							title={plate.title}
 							className={`${styles.hero_plate} ${plate.class}`}
 							onDragStart={(e) =>
