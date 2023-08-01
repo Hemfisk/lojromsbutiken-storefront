@@ -157,6 +157,8 @@ const Cart = ({ shopInfo, cartInfo }: any) => {
 
 	const title = `${shopInfo.name} - ${shopInfo.brand.slogan} | Din kundvagn`
 
+	const cartDeactivated = true
+
 	return (
 		<>
 			<Head>
@@ -196,15 +198,17 @@ const Cart = ({ shopInfo, cartInfo }: any) => {
 								<div
 									className={`${layout.wrapped_container} ${styles.cart_buttons}`}
 								>
-									<Button
-										primary
-										clickCallback={async () => {
-											const url = await getCheckoutUrl(cartId)
-											url ? (window.location.href = url) : null
-										}}
-									>
-										Gå till kassan
-									</Button>
+									{cartDeactivated ? null : (
+										<Button
+											primary
+											clickCallback={async () => {
+												const url = await getCheckoutUrl(cartId)
+												url ? (window.location.href = url) : null
+											}}
+										>
+											Gå till kassan
+										</Button>
+									)}
 								</div>
 							</div>
 						</div>
