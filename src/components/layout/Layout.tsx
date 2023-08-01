@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 import { Poppins } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 
@@ -38,6 +39,19 @@ const Layout = ({ children, paymentMethods, contactInfo }: Props) => {
 
 	return (
 		<>
+			<Script
+				async
+				src='https://www.googletagmanager.com/gtag/js?id=G-KW4KVV080W'
+			/>
+			<Script id='google-analytics'>
+				{`
+          window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+				 
+					gtag('config', 'G-KW4KVV080W');
+        `}
+			</Script>
 			<ToastContainer
 				style={{
 					fontSize: '0.9rem',
