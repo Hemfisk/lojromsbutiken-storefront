@@ -60,6 +60,11 @@ const Footer = ({
 						Högsta kreditvärdighet
 						<br />
 						Org nr: 556726-3560
+						<br />
+						© Dun & Bradstreet aug 2023
+						<br />
+						<br />
+						Vi har naturligtvis F-skattsedel
 					</div>
 					<div
 						className={styles.footer_contact_info}

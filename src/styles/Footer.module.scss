@@ -25,16 +25,21 @@
 			display: flex;
 			justify-content: center;
 			gap: var(--gap-horizontal) var(--gap-vertical);
-			.footer_navigation,
 			.footer_certification,
+			.footer_navigation,
 			.footer_contact_info {
-				width: fit-content;
+				width: min(100%, 250px);
 				display: flex;
 				flex-direction: column;
 				line-height: var(--gap-horizontal);
 				flex-wrap: wrap;
 			}
+			.footer_navigation,
+			.footer_contact_info {
+				width: min(100%, 200px);
+			}
 			.footer_certification {
+				text-align: center;
 				.certification_image {
 					position: relative;
 					flex-grow: 0;
@@ -50,7 +55,6 @@
 				gap: calc(var(--gap-horizontal) * 1.5);
 				align-items: center;
 				.footer_navigation,
-				.footer_certification,
 				.footer_contact_info {
 					text-align: center;
 				}
