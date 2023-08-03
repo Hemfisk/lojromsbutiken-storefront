@@ -26,6 +26,7 @@ const Footer = ({
 	const paymentMethodsArray = paymentMethods
 		? [
 				...paymentMethods.acceptedCardBrands,
+				'KLARNA',
 				...paymentMethods.supportedDigitalWallets,
 		  ]
 		: []

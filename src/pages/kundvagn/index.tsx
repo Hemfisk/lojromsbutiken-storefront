@@ -157,7 +157,7 @@ const Cart = ({ shopInfo, cartInfo }: any) => {
 
 	const title = `${shopInfo.name} - ${shopInfo.brand.slogan} | Din kundvagn`
 
-	const cartDeactivated = true
+	const cartDeactivated = false
 
 	return (
 		<>
