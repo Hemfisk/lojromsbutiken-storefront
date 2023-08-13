@@ -3,7 +3,7 @@ import { createStorefrontClient } from '@shopify/hydrogen-react'
 const client = createStorefrontClient({
 	privateStorefrontToken: process.env.PRIVATE_STOREFRONT_TOKEN,
 	publicStorefrontToken: process.env.NEXT_PUBLIC_STOREFRONT_TOKEN,
-	storeDomain: 'https://dalafisk.myshopify.com/',
+	storeDomain: process.env.NEXT_PUBLIC_STOREFRONT_URL || '',
 	storefrontApiVersion: '2023-04',
 })
 
