@@ -10,13 +10,11 @@ import {
 
 import Hero from '@/components/Hero'
 import ProductGrid from '@/components/ProductGrid'
-import { readFileFromUrl } from './api/files'
 
 const Home = ({
 	shopInfo,
 	deliveryContent,
 	heroContent,
-	zipCodes,
 	collections,
 	allProducts,
 }: any) => {
@@ -31,7 +29,6 @@ const Home = ({
 				collections={collections}
 				allProducts={allProducts}
 				deliveryContent={deliveryContent}
-				zipCodes={zipCodes}
 			/>
 		</>
 	)
@@ -59,19 +56,10 @@ export const getServerSideProps = async () => {
 		})
 	)
 
-	const gordonZipCodes = await readFileFromUrl(
-		`https://cdn.shopify.com/s/files/1/0751/0743/4787/files/gordon_postnr.csv?v=${Date.now()}`
-	)
-
-	const dalafiskZipCodes = await readFileFromUrl(
-		`https://cdn.shopify.com/s/files/1/0751/0743/4787/files/dalafisk_postnr.csv?v=${Date.now()}`
-	)
-
 	const gqlData = {
 		shopInfo: shop.shop,
 		deliveryContent: delivery.page,
 		heroContent: hero.page,
-		zipCodes: { gordonZipCodes, dalafiskZipCodes },
 		collections: allCollections.collections.edges,
 		allProducts: []
 			.concat(...allProducts)

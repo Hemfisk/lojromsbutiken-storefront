@@ -14,7 +14,7 @@ const mailAPI = async (req: NextApiRequest, res: NextApiResponse) => {
 	const mailData = {
 		from: 'info@dalafisk.se',
 		to: 'info@dalafisk.se',
-		subject: `Meddelande från ${req.body.name} via Dalafisk.se`,
+		subject: `Meddelande från ${req.body.name} via Löjromsbutiken.se`,
 		text: `${req.body.message} | Skickat från: ${req.body.name} (${req.body.email} Telefon nr: ${req.body.phone})`,
 		html: `<div>${req.body.message.replace(
 			/\n/g,

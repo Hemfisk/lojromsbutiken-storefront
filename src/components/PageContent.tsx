@@ -23,7 +23,7 @@ const PageContent = ({
 				className={`${styles.page_section} ${
 					contentOnly ? styles.content_only : ''
 				} ${maxWidth ? styles.max_width : ''}`}
-				style={{ backgroundImage: `url("/logo_dalafisk.svg")` }}
+				style={{ backgroundImage: `url("/logo_lojromsbutiken.svg")` }}
 			>
 				<div className={styles.page_container}>
 					{contentOnly ? null : <PageHeader>{page.title}</PageHeader>}

@@ -153,10 +153,10 @@ const Navbar = ({ fontFamily, navigation, currentPage }: Props) => {
 						</div>
 					</div>
 					<div className={styles.logo_container}>
-						<Link href='/' title='Dalafisk.se'>
+						<Link href='/' title='Löjromsbutiken.se'>
 							<Image
-								src='/LOGO_dalafisk.png'
-								alt='Dalafisk logotyp'
+								src='/LOGO_lojromsbutiken_skylt.png'
+								alt='Löjromsbutiken logotyp'
 								fill
 								sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,

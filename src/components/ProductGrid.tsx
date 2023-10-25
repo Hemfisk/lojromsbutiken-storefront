@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { debounce } from 'lodash'
+import React, { useEffect, useState } from 'react'
 
 import layout from '@/styles/Layout.module.scss'
 import styles from '@/styles/ProductGrid.module.scss'
 import { useWindowSize } from '@/utils/hooks'
-import Button from './Button'
-import Search from './Search'
+//import Button from './Button'
+//import Search from './Search'
 import Product from './Product'
 import ZipCodeCheck from './ZipCodeCheck'
 
@@ -13,7 +12,6 @@ interface Props {
 	collections: any
 	allProducts: any
 	deliveryContent?: any
-	zipCodes?: any
 	initialCollection?: string | null
 }
 
@@ -21,15 +19,14 @@ const ProductGrid = ({
 	collections,
 	allProducts,
 	deliveryContent,
-	zipCodes,
 	initialCollection = null,
 }: Props) => {
 	const [width] = useWindowSize()
 	const [selectedCollection, setSelectedCollection] = useState(
 		collections[0].node.handle
 	)
-	const [showSelectModal, setShowSelectModal] = useState(false)
-	const [productSearch, setProductSearch] = useState<string>('')
+	//const [showSelectModal, setShowSelectModal] = useState(false)
+	//const [productSearch, setProductSearch] = useState<string>('')
 	const [productsBeforeZipCodeCheck, setProductsBeforeZipCodeCheck] = useState<
 		number | null
 	>(null)
@@ -63,11 +60,11 @@ const ProductGrid = ({
 		return collection
 	})
 
-	const toggleCollection = (handle: string | null) => {
+	/* const toggleCollection = (handle: string | null) => {
 		setSelectedCollection(handle)
-	}
+	} */
 
-	const SelectModal = () => {
+	/* const SelectModal = () => {
 		return (
 			<div
 				className={styles.select_modal_container}
@@ -90,7 +87,7 @@ const ProductGrid = ({
 				</div>
 			</div>
 		)
-	}
+	} */
 
 	const productsGrid = (productsToDisplay: any[]) => {
 		if (
@@ -111,7 +108,7 @@ const ProductGrid = ({
 								))}
 						</div>
 					</div>
-					<ZipCodeCheck deliveryContent={deliveryContent} zipCodes={zipCodes} />
+					<ZipCodeCheck deliveryContent={deliveryContent} />
 					<div className={layout.container}>
 						<div className={layout.grid_container}>
 							{productsToDisplay
@@ -136,19 +133,19 @@ const ProductGrid = ({
 						))}
 					</div>
 				</div>
-				<ZipCodeCheck deliveryContent={deliveryContent} zipCodes={zipCodes} />
+				<ZipCodeCheck deliveryContent={deliveryContent} />
 			</>
 		)
 	}
 
-	const productSearchHandler = useRef(
+	/* const productSearchHandler = useRef(
 		debounce((e) => {
 			setProductSearch(e?.target?.value)
 		}, 300)
-	)
+	) */
 
 	const renderProducts = () => {
-		if (productSearch) {
+		/* if (productSearch) {
 			const filteredProducts = productsByCollection
 				.find(
 					(collection: any) => collection.node.handle === selectedCollection
@@ -166,26 +163,26 @@ const ProductGrid = ({
 					</div>
 				)
 			}
-		} else {
-			const filteredProducts = productsByCollection.find(
-				(collection: any) => collection.node.handle === selectedCollection
-			).products
+		} else { */
+		const filteredProducts = productsByCollection.find(
+			(collection: any) => collection.node.handle === selectedCollection
+		).products
 
-			if (filteredProducts?.length) {
-				return productsGrid(filteredProducts)
-			} else {
-				return (
-					<div className={styles.no_products_message}>
-						<h5>Tyvärr gick det inte att hitta några produkter</h5>
-					</div>
-				)
-			}
+		if (filteredProducts?.length) {
+			return productsGrid(filteredProducts)
+		} else {
+			return (
+				<div className={styles.no_products_message}>
+					<h5>Tyvärr gick det inte att hitta några produkter</h5>
+				</div>
+			)
 		}
+		//}
 	}
 
 	return (
 		<>
-			<div className={layout.container}>
+			{/* <div className={layout.container}>
 				<div className={`${layout.flex_row} ${layout.gap_large}`}>
 					<div className={`${layout.flex_row} ${layout.collapse_mobile}`}>
 						{width <= 1024 ? (
@@ -220,7 +217,7 @@ const ProductGrid = ({
 						changeCallback={(e: any) => productSearchHandler.current(e)}
 					/>
 				</div>
-			</div>
+			</div> */}
 			{renderProducts()}
 		</>
 	)

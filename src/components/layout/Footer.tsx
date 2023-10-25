@@ -72,7 +72,7 @@ const Footer = ({
 						dangerouslySetInnerHTML={{ __html: contactInfo.body }}
 					/>
 				</div>
-				Copyright © 2023 www.Dalafisk.se
+				Copyright © 2023 www.Löjromsbutiken.se
 			</div>
 		</div>
 	)

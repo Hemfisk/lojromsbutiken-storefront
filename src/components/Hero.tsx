@@ -4,10 +4,10 @@ import Link from 'next/link'
 
 import styles from '@/styles/Hero.module.scss'
 import { Plate } from './plates/plateUtils'
-import { FiskPlate, PaketPlate, RomPlate, SkaldjurPlate } from './plates'
+import { RomPlate, KaviarPlate } from './plates'
 
 const plates: Plate[] = [
-	{
+	/* {
 		title: 'Fisk',
 		handle: '/vart-sortiment/fisk',
 		class: styles.fish,
@@ -24,12 +24,18 @@ const plates: Plate[] = [
 		handle: '/vart-sortiment/paket',
 		class: styles.fish,
 		component: <PaketPlate title='Paket' key='paket_image' />,
-	},
+	}, */
 	{
 		title: 'Rom',
-		handle: '/vart-sortiment/rom',
+		handle: '/produkter/lojrom-kalix',
 		class: styles.fish,
 		component: <RomPlate title='Rom' key='rom_image' />,
+	},
+	{
+		title: 'Kaviar',
+		handle: '/produkter/lojrom-kalix',
+		class: styles.fish,
+		component: <KaviarPlate title='Kaviar' key='kaviar_image' />,
 	},
 ]
 
@@ -181,8 +187,8 @@ const Hero = ({ heroContent }: any) => {
 					</div>
 					<div className={`${styles.hero_image} ${styles.logo}`}>
 						<Image
-							src='/LOGO_dalafisk.png'
-							alt='Dalafisk logotyp'
+							src='/LOGO_lojromsbutiken_skylt.png'
+							alt='Löjromsbutiken logotyp'
 							fill
 							sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,
