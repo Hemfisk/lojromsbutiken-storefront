@@ -38,7 +38,7 @@ export const parsePrice = (
 					return `${parseAmount(amount / variantData.weight)} KR/KG`
 
 				case 'GRAMS':
-					return `${parseAmount(amount / (variantData.weight / 100))} KR/HG`
+					return `${parseAmount(amount / variantData.weight)} KR/g`
 
 				default:
 					return `${parseAmount(amount)} KR/ST`

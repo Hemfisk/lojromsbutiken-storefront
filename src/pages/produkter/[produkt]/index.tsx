@@ -32,6 +32,7 @@ import { addToCart } from '@/utils/cartUtils'
 import asc from '@/static/asc_logo.png'
 import krav from '@/static/krav_logo.png'
 import msc from '@/static/msc_logo.png'
+import sub from '@/static/sub_logo.png'
 
 const ProductPage = ({ shopInfo, product, relatedProducts }: any) => {
 	const [variantState, setVariantState] = useState(
@@ -69,6 +70,7 @@ const ProductPage = ({ shopInfo, product, relatedProducts }: any) => {
 		{ type: 'msc', value: product.certMSC?.value, src: msc },
 		{ type: 'krav', value: product.certKrav?.value, src: krav },
 		{ type: 'asc', value: product.certASC?.value, src: asc },
+		{ type: 'sub', value: product.certSUB?.value, src: sub },
 	].filter((cert) => cert.value === 'true')
 
 	const nutritionalContent = product.nutritionalContent?.value

@@ -14,6 +14,7 @@ import { addToCart } from '@/utils/cartUtils'
 import asc from '@/static/asc_logo.png'
 import krav from '@/static/krav_logo.png'
 import msc from '@/static/msc_logo.png'
+import sub from '@/static/sub_logo.png'
 interface Props {
 	productData: any
 }
@@ -79,6 +80,7 @@ const Product = ({ productData }: Props) => {
 				{ type: 'msc', value: productData.certMSC?.value, src: msc },
 				{ type: 'krav', value: productData.certKrav?.value, src: krav },
 				{ type: 'asc', value: productData.certASC?.value, src: asc },
+				{ type: 'sub', value: productData.certSUB?.value, src: sub },
 		  ].filter(
 				(cert) =>
 					cert.type ===
