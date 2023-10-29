@@ -40,10 +40,14 @@ export const parsePrice = (
 		default:
 			switch (variantData.weightUnit) {
 				case 'KILOGRAMS':
-					price = parseAmount(amount / (variantData.weight * 10))
+					/* if (variantData.weight <= 1) {
+						price = parseAmount(amount / (variantData.weight * 10))
+						decimal = !!(price % 1)
+						return `${price}${decimal ? '0' : ''} KR/HG`
+					} */
+					price = parseAmount(amount / variantData.weight)
 					decimal = !!(price % 1)
-					// return `${parseAmount(amount / variantData.weight)} KR/KG`
-					return `${price}${decimal ? '0' : ''} KR/HG`
+					return `${price}${decimal ? '0' : ''} KR/KG`
 
 				case 'GRAMS':
 					price = parseAmount(amount / variantData.weight)
