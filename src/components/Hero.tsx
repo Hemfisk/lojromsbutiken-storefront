@@ -33,7 +33,7 @@ const plates: Plate[] = [
 	},
 	{
 		title: 'Kaviar',
-		handle: '/produkter/lojrom-kalix',
+		handle: '/produkter/caviar-oscietra-6-star-30-g',
 		class: styles.fish,
 		component: <KaviarPlate title='Kaviar' key='kaviar_image' />,
 	},
@@ -189,6 +189,30 @@ const Hero = ({ heroContent }: any) => {
 						<Image
 							src='/LOGO_lojromsbutiken_skylt.png'
 							alt='Löjromsbutiken logotyp'
+							fill
+							sizes='(min-width: 60em) 24vw,
+                    (min-width: 28em) 45vw,
+                    100vw'
+							loading='eager'
+							priority
+						/>
+					</div>
+					<div className={`${styles.hero_image} ${styles.kaviar}`}>
+						<Image
+							src='/hero/kaviar.png?id=2'
+							alt='Kaviar'
+							fill
+							sizes='(min-width: 60em) 24vw,
+                    (min-width: 28em) 45vw,
+                    100vw'
+							loading='eager'
+							priority
+						/>
+					</div>
+					<div className={`${styles.hero_image} ${styles.rom}`}>
+						<Image
+							src='/hero/rom_glas.png'
+							alt='Rom glas'
 							fill
 							sizes='(min-width: 60em) 24vw,
                     (min-width: 28em) 45vw,

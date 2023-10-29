@@ -34,6 +34,7 @@
 			gap: 0;
 		}
 		.hero_plate {
+			z-index: 20;
 			position: relative;
 			flex-shrink: 0;
 			height: 160%;
@@ -118,6 +119,31 @@
 					height: 60svw;
 					max-height: 60%;
 					left: -20svw;
+				}
+			}
+			&.rom {
+				z-index: 10;
+				height: 60%;
+				aspect-ratio: 7/15;
+				left: -5%;
+				bottom: 15%;
+			}
+			&.kaviar {
+				z-index: 15;
+				height: 28%;
+				aspect-ratio: 21/20;
+				left: 0;
+				bottom: 10%;
+				@media screen and (max-width: $breakpoint-tabletBig) {
+					left: auto;
+					right: -5%;
+				}
+				@media screen and (max-width: $breakpoint-mobileBig) {
+					z-index: 5;
+					bottom: 20%;
+					height: 22%;
+					right: auto;
+					left: -8vh;
 				}
 			}
 		}

@@ -12,7 +12,7 @@ const KaviarPlate = ({ title }: PlateComponent) => {
 			>
 				<div className={styles.sign_content}>
 					<Image
-						src='/hero/rom-sign.svg'
+						src='/hero/kaviar-sign.svg'
 						alt={`${title} skylt`}
 						fill
 						sizes='(min-width: 60em) 24vw,
@@ -24,7 +24,7 @@ const KaviarPlate = ({ title }: PlateComponent) => {
 				</div>
 			</div>
 			<Image
-				src='/hero/rom-plate.png'
+				src='/hero/kaviar-plate.png?id=4'
 				alt={`${title} tallrik`}
 				fill
 				sizes='(min-width: 60em) 24vw,
