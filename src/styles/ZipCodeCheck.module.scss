@@ -17,11 +17,11 @@
 		padding-bottom: var(--menu-height);
 		flex-direction: column;
 		@media screen and (max-width: $breakpoint-tabletBig) {
-			padding-left: 30vw;
+			padding-left: 35vw;
 			padding-right: 15vw;
 		}
 		@media screen and (max-width: $breakpoint-tablet) {
-			padding-left: 25vw;
+			padding-left: 30vw;
 			padding-right: 15vw;
 		}
 		@media screen and (max-width: $breakpoint-mobileBig) {
