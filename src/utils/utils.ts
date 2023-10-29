@@ -14,7 +14,7 @@ export const parseWeight = (variantData: any): string => {
 export const parseAmount = (price: number): number => {
 	const decimal = !!(price % 1)
 	if (decimal) {
-		return price
+		return Math.round(price * 2) / 2
 	}
 	return Math.ceil(price)
 }
