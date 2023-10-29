@@ -43,6 +43,14 @@
 				line-height: 1.14;
 				margin-bottom: 1em;
 			}
+			h3 {
+				font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+				font-weight: 600;
+				text-transform: uppercase;
+				line-height: 1.14;
+				margin-bottom: 1em;
+				margin-top: 2em;
+			}
 			.content {
 				margin-bottom: 1em;
 			}
